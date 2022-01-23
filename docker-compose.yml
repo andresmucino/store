@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+  postgres:
+    image: "postgres:11.5"
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_DB=store
+    expose:
+      - "5432"
+    ports:
+      - "5432:5432"
+    # volumes:
+    #   - ./postgres_store_data:/var/lib/postgresql/data_store
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+     - PGADMIN_DEFAULT_EMAIL=root@admin.com
+     - PGADMIN_DEFAULT_PASSWORD=root
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres

@@ -1,9 +1,9 @@
 import { FilterableField, IDField } from '@nestjs-query/query-graphql';
 import { ObjectType, GraphQLISODateTime, Field, ID } from '@nestjs/graphql';
 
-@ObjectType('TodoItem')
+@ObjectType('Products')
 export class ProductsDto {
-    @IDField(() => ID)
+  @IDField(() => ID)
   id: string;
 
   @FilterableField()
@@ -21,9 +21,9 @@ export class ProductsDto {
   @FilterableField()
   image: string;
 
-@Field(() => GraphQLISODateTime)
+  @Field(() => GraphQLISODateTime)
   createAt: Date;
 
-@Field(() => GraphQLISODateTime)
+  @Field(() => GraphQLISODateTime)
   updateAt: Date;
 }
