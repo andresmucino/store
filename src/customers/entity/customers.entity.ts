@@ -1,13 +1,13 @@
 import {
-  Entity,
-  PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
   UpdateDateColumn,
-} from 'typeOrm';
+} from 'typeorm';
 
-@Entity({ name: 'products' })
-export class ProductsEntity {
+@Entity({ name: 'customers' })
+export class CustomersEntity {
   @PrimaryGeneratedColumn()
   id: string;
 
@@ -15,16 +15,16 @@ export class ProductsEntity {
   name: string;
 
   @Column()
-  description: string;
+  lastname: string;
 
   @Column()
-  price: number;
+  phone: string;
 
   @Column()
-  stock: number;
+  email: string;
 
   @Column()
-  image: string;
+  direction: string;
 
   @CreateDateColumn()
   createAt: Date;
