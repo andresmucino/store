@@ -26,6 +26,9 @@ export class CustomersEntity {
   @Column()
   direction: string;
 
+  @Column()
+  image: string;
+
   @CreateDateColumn()
   createAt: Date;
 

@@ -8,7 +8,15 @@ import { ProductsDto } from './dto/products.dto';
   imports: [
     NestjsQueryGraphQLModule.forFeature({
       imports: [NestjsQueryTypeOrmModule.forFeature([ProductsEntity])],
-      resolvers: [{ DTOClass: ProductsDto, EntityClass: ProductsEntity }],
+      resolvers: [
+        {
+          DTOClass: ProductsDto,
+          EntityClass: ProductsEntity,
+          enableAggregate: true,
+          enableTotalCount: true,
+          enableSubscriptions: false,
+        },
+      ],
     }),
   ],
 })

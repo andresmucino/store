@@ -8,7 +8,15 @@ import { CustomersEntity } from './entity/customers.entity';
   imports: [
     NestjsQueryGraphQLModule.forFeature({
       imports: [NestjsQueryTypeOrmModule.forFeature([CustomersEntity])],
-      resolvers: [{ DTOClass: CustomersDto, EntityClass: CustomersEntity }],
+      resolvers: [
+        {
+          DTOClass: CustomersDto,
+          EntityClass: CustomersEntity,
+          enableAggregate: true,
+          enableTotalCount: true,
+          enableSubscriptions: false,
+        },
+      ],
     }),
   ],
 })
