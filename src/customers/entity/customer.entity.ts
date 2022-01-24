@@ -1,7 +1,9 @@
+import { OrderEntity } from 'src/orders/entity/order.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -28,6 +30,9 @@ export class CustomerEntity {
 
   @Column()
   image: string;
+
+  @OneToMany(() => OrderEntity, (order) => order.customer, { nullable: true })
+  orders: OrderEntity[];
 
   @CreateDateColumn()
   createAt: Date;
