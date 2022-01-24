@@ -1,12 +1,21 @@
 import {
+  FilterableCursorConnection,
   FilterableField,
   IDField,
   PagingStrategies,
   QueryOptions,
 } from '@nestjs-query/query-graphql';
 import { Field, GraphQLISODateTime, ID, ObjectType } from '@nestjs/graphql';
+import { OrderDto } from 'src/orders/dto/order.dto';
 
 @ObjectType('customer')
+@FilterableCursorConnection('orders', () => OrderDto, {
+  nullable: true,
+  pagingStrategy: PagingStrategies.OFFSET,
+  enableAggregate: true,
+  enableTotalCount: true,
+  maxResultsSize: 1000,
+})
 @QueryOptions({
   pagingStrategy: PagingStrategies.OFFSET,
   enableTotalCount: true,

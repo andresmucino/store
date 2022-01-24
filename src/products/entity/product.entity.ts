@@ -1,3 +1,4 @@
+import { OrderEntity } from 'src/orders/entity/order.entity';
 import { ProviderEntity } from 'src/providers/entity/provider.entity';
 import {
   Entity,
@@ -6,6 +7,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToOne,
+  ManyToOne,
 } from 'typeOrm';
 
 @Entity({ name: 'products' })
@@ -32,6 +34,9 @@ export class ProductEntity {
     nullable: true,
   })
   provider: ProviderEntity;
+
+  @ManyToOne(() => OrderEntity, (order) => order.products, { nullable: true })
+  order: OrderEntity;
 
   @CreateDateColumn()
   createAt: Date;
