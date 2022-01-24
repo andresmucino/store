@@ -1,7 +1,8 @@
 import { FilterableField, IDField } from '@nestjs-query/query-graphql';
-import { Field, GraphQLISODateTime, ID } from '@nestjs/graphql';
+import { Field, GraphQLISODateTime, ID, ObjectType } from '@nestjs/graphql';
 
-export class OrdersDto {
+@ObjectType('order')
+export class OrderDto {
   @IDField(() => ID)
   id: string;
 

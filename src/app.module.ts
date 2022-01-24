@@ -3,10 +3,10 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ProductsModule } from './products/products.module';
-import { CustomersModule } from './customers/customers.module';
-import { ProvidersModule } from './providers/providers.module';
-import { OrdersModule } from './orders/orders.module';
+import { ProductModule } from './products/product.module';
+import { CustomerModule } from './customers/customer.module';
+import { ProviderModule } from './providers/provider.module';
+import { OrderModule } from './orders/order.module';
 
 @Module({
   imports: [
@@ -21,10 +21,10 @@ import { OrdersModule } from './orders/orders.module';
     GraphQLModule.forRoot({
       autoSchemaFile: true,
     }),
-    ProductsModule,
-    CustomersModule,
-    ProvidersModule,
-    OrdersModule,
+    ProductModule,
+    CustomerModule,
+    ProviderModule,
+    OrderModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,17 +1,17 @@
 import { NestjsQueryGraphQLModule } from '@nestjs-query/query-graphql';
 import { NestjsQueryTypeOrmModule } from '@nestjs-query/query-typeorm';
 import { Module } from '@nestjs/common';
-import { CustomersDto } from './dto/customer.dto';
-import { CustomersEntity } from './entity/customers.entity';
+import { OrderDto } from './dto/order.dto';
+import { OrderEntity } from './entity/order.entity';
 
 @Module({
   imports: [
     NestjsQueryGraphQLModule.forFeature({
-      imports: [NestjsQueryTypeOrmModule.forFeature([CustomersEntity])],
+      imports: [NestjsQueryTypeOrmModule.forFeature([OrderEntity])],
       resolvers: [
         {
-          DTOClass: CustomersDto,
-          EntityClass: CustomersEntity,
+          DTOClass: OrderDto,
+          EntityClass: OrderEntity,
           enableAggregate: true,
           enableTotalCount: true,
           enableSubscriptions: false,
@@ -20,4 +20,4 @@ import { CustomersEntity } from './entity/customers.entity';
     }),
   ],
 })
-export class CustomersModule {}
+export class OrderModule {}

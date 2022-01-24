@@ -1,17 +1,17 @@
 import { Module } from '@nestjs/common';
 import { NestjsQueryGraphQLModule } from '@nestjs-query/query-graphql';
 import { NestjsQueryTypeOrmModule } from '@nestjs-query/query-typeorm';
-import { ProductsEntity } from './entity/products.entity';
-import { ProductsDto } from './dto/products.dto';
+import { ProductEntity } from './entity/product.entity';
+import { ProductDto } from './dto/product.dto';
 
 @Module({
   imports: [
     NestjsQueryGraphQLModule.forFeature({
-      imports: [NestjsQueryTypeOrmModule.forFeature([ProductsEntity])],
+      imports: [NestjsQueryTypeOrmModule.forFeature([ProductEntity])],
       resolvers: [
         {
-          DTOClass: ProductsDto,
-          EntityClass: ProductsEntity,
+          DTOClass: ProductDto,
+          EntityClass: ProductEntity,
           enableAggregate: true,
           enableTotalCount: true,
           enableSubscriptions: false,
@@ -20,4 +20,4 @@ import { ProductsDto } from './dto/products.dto';
     }),
   ],
 })
-export class ProductsModule {}
+export class ProductModule {}
