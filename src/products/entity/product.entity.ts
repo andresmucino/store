@@ -9,7 +9,7 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-} from 'typeOrm';
+} from 'typeorm';
 
 @Entity({ name: 'product' })
 export class ProductEntity {
