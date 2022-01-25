@@ -20,9 +20,9 @@ import config from './config';
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      database: 'store',
-      username: 'root',
-      url: '',
+      // database: 'store',
+      // username: 'root',
+      url: process.env.DATABASE_URL,
       autoLoadEntities: true,
       synchronize: true,
       logging: true,
