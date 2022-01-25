@@ -33,6 +33,7 @@ import config from './config';
     GraphQLModule.forRoot({
       autoSchemaFile: true,
       playground: true,
+      introspection: true,
     }),
     ProductModule,
     CustomerModule,
