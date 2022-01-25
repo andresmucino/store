@@ -4,6 +4,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -18,9 +19,17 @@ export class OrderEntity {
   @Column()
   date: Date;
 
+  @Column({
+    nullable: true,
+    name: 'customer_id',
+    type: 'text',
+  })
+  customerId: string;
+
   @ManyToOne(() => CustomerEntity, (customer) => customer.orders, {
     nullable: true,
   })
+  @JoinColumn({ name: 'customer_id' })
   customer: CustomerEntity;
 
   @OneToMany(() => ProductEntity, (product) => product.order, {

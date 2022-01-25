@@ -1,16 +1,17 @@
 import { OrderEntity } from 'src/orders/entity/order.entity';
 import { ProviderEntity } from 'src/providers/entity/provider.entity';
 import {
-  Entity,
-  PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
-  UpdateDateColumn,
-  OneToOne,
+  Entity,
+  JoinColumn,
   ManyToOne,
+  OneToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeOrm';
 
-@Entity({ name: 'products' })
+@Entity({ name: 'product' })
 export class ProductEntity {
   @PrimaryGeneratedColumn()
   id: string;
@@ -35,7 +36,15 @@ export class ProductEntity {
   })
   provider: ProviderEntity;
 
+  @Column({
+    nullable: true,
+    name: 'order_id',
+    type: 'text',
+  })
+  orderId: string;
+
   @ManyToOne(() => OrderEntity, (order) => order.products, { nullable: true })
+  @JoinColumn({ name: 'order_id' })
   order: OrderEntity;
 
   @CreateDateColumn()

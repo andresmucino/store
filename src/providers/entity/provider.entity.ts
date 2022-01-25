@@ -26,6 +26,13 @@ export class ProviderEntity {
   @Column()
   direction: string;
 
+  @Column({
+    nullable: true,
+    name: 'product_id',
+    type: 'text',
+  })
+  productId: string;
+
   @OneToOne(() => ProductEntity, (product) => product.provider, {
     nullable: true,
   })

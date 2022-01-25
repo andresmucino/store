@@ -8,7 +8,7 @@ import {
 import { Field, GraphQLISODateTime, ID, ObjectType } from '@nestjs/graphql';
 import { OrderDto } from 'src/orders/dto/order.dto';
 
-@ObjectType('customer')
+@ObjectType('Customer')
 @FilterableCursorConnection('orders', () => OrderDto, {
   nullable: true,
   pagingStrategy: PagingStrategies.OFFSET,

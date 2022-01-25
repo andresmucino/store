@@ -11,9 +11,9 @@ import { ObjectType, GraphQLISODateTime, Field, ID } from '@nestjs/graphql';
 import { OrderDto } from 'src/orders/dto/order.dto';
 import { ProviderDto } from 'src/providers/dto/provider.dto';
 
-@ObjectType('product')
+@ObjectType('Product')
 @KeySet(['id'])
-@FilterableCursorConnection('provider', () => ProviderDto, {
+@FilterableCursorConnection('providers', () => ProviderDto, {
   nullable: true,
   pagingStrategy: PagingStrategies.OFFSET,
   enableAggregate: true,

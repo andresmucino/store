@@ -10,7 +10,7 @@ import { Field, GraphQLISODateTime, ID, ObjectType } from '@nestjs/graphql';
 import { CustomerDto } from 'src/customers/dto/customer.dto';
 import { ProductDto } from 'src/products/dto/product.dto';
 
-@ObjectType('order')
+@ObjectType('Order')
 @FilterableRelation('customer', () => CustomerDto, { nullable: true })
 @FilterableCursorConnection('products', () => ProductDto, {
   nullable: true,
