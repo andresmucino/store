@@ -26,6 +26,9 @@ import config from './config';
       autoLoadEntities: true,
       synchronize: true,
       logging: true,
+      ssl: {
+        rejectUnauthorized: false,
+      },
     }),
     GraphQLModule.forRoot({
       autoSchemaFile: true,
