@@ -32,6 +32,7 @@ import config from './config';
     }),
     GraphQLModule.forRoot({
       autoSchemaFile: true,
+      playground: true,
     }),
     ProductModule,
     CustomerModule,
