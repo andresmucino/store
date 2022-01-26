@@ -1,4 +1,4 @@
-import { OrderEntity } from 'src/orders/entity/order.entity';
+import { OrderEntity } from 'src/modules/orders/entity/order.entity';
 import {
   Column,
   CreateDateColumn,

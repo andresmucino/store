@@ -3,47 +3,33 @@ import {
   FilterableField,
   FilterableRelation,
   IDField,
-  KeySet,
   PagingStrategies,
   QueryOptions,
 } from '@nestjs-query/query-graphql';
-import { ObjectType, GraphQLISODateTime, Field, ID } from '@nestjs/graphql';
-import { OrderDto } from 'src/orders/dto/order.dto';
-import { ProviderDto } from 'src/providers/dto/provider.dto';
+import { Field, GraphQLISODateTime, ID, ObjectType } from '@nestjs/graphql';
+import { CustomerDto } from 'src/modules/customers/dto/customer.dto';
+import { ProductDto } from 'src/modules/products/dto/product.dto';
 
-@ObjectType('Product')
-@KeySet(['id'])
-@FilterableCursorConnection('providers', () => ProviderDto, {
+@ObjectType('Order')
+@FilterableRelation('customer', () => CustomerDto, { nullable: true })
+@FilterableCursorConnection('products', () => ProductDto, {
   nullable: true,
   pagingStrategy: PagingStrategies.OFFSET,
   enableAggregate: true,
   enableTotalCount: true,
   maxResultsSize: 1000,
 })
-@FilterableRelation('order', () => OrderDto, { nullable: true })
 @QueryOptions({
   pagingStrategy: PagingStrategies.OFFSET,
   enableTotalCount: true,
   maxResultsSize: 1000,
 })
-export class ProductDto {
+export class OrderDto {
   @IDField(() => ID)
   id: string;
 
   @FilterableField()
-  name: string;
-
-  @FilterableField()
-  description: string;
-
-  @FilterableField()
-  price: number;
-
-  @FilterableField()
-  stock: number;
-
-  @FilterableField()
-  image: string;
+  date: Date;
 
   @Field(() => GraphQLISODateTime)
   createAt: Date;

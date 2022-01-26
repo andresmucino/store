@@ -1,15 +1,15 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ProductModule } from './products/product.module';
-import { CustomerModule } from './customers/customer.module';
-import { ProviderModule } from './providers/provider.module';
-import { OrderModule } from './orders/order.module';
-import { ConfigModule } from '@nestjs/config';
-import { enviroments } from './enviroments';
 import config from './config';
+import { enviroments } from './enviroments';
+import { CustomerModule } from './modules/customers/customer.module';
+import { OrderModule } from './modules/orders/order.module';
+import { ProductModule } from './modules/products/product.module';
+import { ProviderModule } from './modules/providers/provider.module';
 
 @Module({
   imports: [
@@ -20,18 +20,18 @@ import config from './config';
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      // database: 'store',
-      // username: 'root',
-      url: process.env.DATABASE_URL,
+      database: 'store',
+      username: 'root',
+      // url: process.env.DATABASE_URL,
       autoLoadEntities: true,
       synchronize: true,
       logging: true,
-      ssl: {
-        rejectUnauthorized: false,
-      },
+      // ssl: {
+      //   rejectUnauthorized: false,
+      // },
     }),
     GraphQLModule.forRoot({
-      autoSchemaFile: true,
+      autoSchemaFile: 'schema.gql',
       playground: true,
       introspection: true,
     }),

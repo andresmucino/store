@@ -6,7 +6,7 @@ import {
   QueryOptions,
 } from '@nestjs-query/query-graphql';
 import { Field, GraphQLISODateTime, ID, ObjectType } from '@nestjs/graphql';
-import { OrderDto } from 'src/orders/dto/order.dto';
+import { OrderDto } from 'src/modules/orders/dto/order.dto';
 
 @ObjectType('Customer')
 @FilterableCursorConnection('orders', () => OrderDto, {

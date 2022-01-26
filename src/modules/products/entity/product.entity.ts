@@ -1,5 +1,5 @@
-import { OrderEntity } from 'src/orders/entity/order.entity';
-import { ProviderEntity } from 'src/providers/entity/provider.entity';
+import { OrderEntity } from 'src/modules/orders/entity/order.entity';
+import { ProviderEntity } from 'src/modules/providers/entity/provider.entity';
 import {
   Column,
   CreateDateColumn,

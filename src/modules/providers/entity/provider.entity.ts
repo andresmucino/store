@@ -1,4 +1,4 @@
-import { ProductEntity } from 'src/products/entity/product.entity';
+import { ProductEntity } from 'src/modules/products/entity/product.entity';
 import {
   Column,
   CreateDateColumn,
