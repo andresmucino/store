@@ -38,4 +38,4 @@ lerna-debug.log*
 
 # database
 /postgres_data
-/yarn.lock
+yarn.lock
