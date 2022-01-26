@@ -2,29 +2,15 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Customer {
+type Provider {
   id: ID!
-  name: String!
-  lastname: String!
-  phone: String!
+  contactname: String!
   email: String!
+  phone: String!
   direction: String!
   createAt: DateTime!
   updateAt: DateTime!
-  ordersAggregate(
-    """Filter to find records to aggregate on"""
-    filter: OrderAggregateFilter
-  ): [CustomerOrdersAggregateResponse!]!
-  orders(
-    """Limit or page results."""
-    paging: OffsetPaging = {limit: 10}
-
-    """Specify to filter the records returned."""
-    filter: OrderFilter = {}
-
-    """Specify to sort results."""
-    sorting: [OrderSort!] = []
-  ): CustomerOrdersConnection
+  product: Product!
 }
 
 """
@@ -32,11 +18,40 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
-input OrderAggregateFilter {
-  and: [OrderAggregateFilter!]
-  or: [OrderAggregateFilter!]
+type Product {
+  id: ID!
+  name: String!
+  description: String!
+  price: Float!
+  stock: Float!
+  image: String!
+  createAt: DateTime!
+  updateAt: DateTime!
+  providersAggregate(
+    """Filter to find records to aggregate on"""
+    filter: ProviderAggregateFilter
+  ): [ProductProvidersAggregateResponse!]!
+  order: Order
+  providers(
+    """Limit or page results."""
+    paging: OffsetPaging = {limit: 10}
+
+    """Specify to filter the records returned."""
+    filter: ProviderFilter = {}
+
+    """Specify to sort results."""
+    sorting: [ProviderSort!] = []
+  ): ProductProvidersConnection
+}
+
+input ProviderAggregateFilter {
+  and: [ProviderAggregateFilter!]
+  or: [ProviderAggregateFilter!]
   id: IDFilterComparison
-  date: DateFieldComparison
+  contactname: StringFieldComparison
+  email: StringFieldComparison
+  phone: StringFieldComparison
+  direction: StringFieldComparison
 }
 
 input IDFilterComparison {
@@ -56,54 +71,6 @@ input IDFilterComparison {
   notIn: [ID!]
 }
 
-input DateFieldComparison {
-  is: Boolean
-  isNot: Boolean
-  eq: DateTime
-  neq: DateTime
-  gt: DateTime
-  gte: DateTime
-  lt: DateTime
-  lte: DateTime
-  in: [DateTime!]
-  notIn: [DateTime!]
-  between: DateFieldComparisonBetween
-  notBetween: DateFieldComparisonBetween
-}
-
-input DateFieldComparisonBetween {
-  lower: DateTime!
-  upper: DateTime!
-}
-
-input OffsetPaging {
-  """Limit the number of records returned"""
-  limit: Int
-
-  """Offset to start returning records from"""
-  offset: Int
-}
-
-input OrderFilter {
-  and: [OrderFilter!]
-  or: [OrderFilter!]
-  id: IDFilterComparison
-  date: DateFieldComparison
-  customer: OrderFilterCustomerFilter
-  products: OrderFilterProductFilter
-}
-
-input OrderFilterCustomerFilter {
-  and: [OrderFilterCustomerFilter!]
-  or: [OrderFilterCustomerFilter!]
-  id: IDFilterComparison
-  name: StringFieldComparison
-  lastname: StringFieldComparison
-  phone: StringFieldComparison
-  email: StringFieldComparison
-  direction: StringFieldComparison
-}
-
 input StringFieldComparison {
   is: Boolean
   isNot: Boolean
@@ -121,9 +88,28 @@ input StringFieldComparison {
   notIn: [String!]
 }
 
-input OrderFilterProductFilter {
-  and: [OrderFilterProductFilter!]
-  or: [OrderFilterProductFilter!]
+input OffsetPaging {
+  """Limit the number of records returned"""
+  limit: Int
+
+  """Offset to start returning records from"""
+  offset: Int
+}
+
+input ProviderFilter {
+  and: [ProviderFilter!]
+  or: [ProviderFilter!]
+  id: IDFilterComparison
+  contactname: StringFieldComparison
+  email: StringFieldComparison
+  phone: StringFieldComparison
+  direction: StringFieldComparison
+  product: ProviderFilterProductFilter
+}
+
+input ProviderFilterProductFilter {
+  and: [ProviderFilterProductFilter!]
+  or: [ProviderFilterProductFilter!]
   id: IDFilterComparison
   name: StringFieldComparison
   description: StringFieldComparison
@@ -152,15 +138,18 @@ input NumberFieldComparisonBetween {
   upper: Float!
 }
 
-input OrderSort {
-  field: OrderSortFields!
+input ProviderSort {
+  field: ProviderSortFields!
   direction: SortDirection!
   nulls: SortNulls
 }
 
-enum OrderSortFields {
+enum ProviderSortFields {
   id
-  date
+  contactname
+  email
+  phone
+  direction
 }
 
 """Sort Directions"""
@@ -218,7 +207,7 @@ input ProductFilter {
   stock: NumberFieldComparison
   image: StringFieldComparison
   order: ProductFilterOrderFilter
-  providers: ProductFilterProviderFilter
+  provider: ProductFilterProviderFilter
 }
 
 input ProductFilterOrderFilter {
@@ -226,6 +215,26 @@ input ProductFilterOrderFilter {
   or: [ProductFilterOrderFilter!]
   id: IDFilterComparison
   date: DateFieldComparison
+}
+
+input DateFieldComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: DateTime
+  neq: DateTime
+  gt: DateTime
+  gte: DateTime
+  lt: DateTime
+  lte: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  between: DateFieldComparisonBetween
+  notBetween: DateFieldComparisonBetween
+}
+
+input DateFieldComparisonBetween {
+  lower: DateTime!
+  upper: DateTime!
 }
 
 input ProductFilterProviderFilter {
@@ -253,67 +262,61 @@ enum ProductSortFields {
   image
 }
 
-type Provider {
+type Customer {
   id: ID!
-  contactname: String!
-  email: String!
+  name: String!
+  lastname: String!
   phone: String!
+  email: String!
   direction: String!
   createAt: DateTime!
   updateAt: DateTime!
-  product: Product!
-}
-
-type Product {
-  id: ID!
-  name: String!
-  description: String!
-  price: Float!
-  stock: Float!
-  image: String!
-  createAt: DateTime!
-  updateAt: DateTime!
-  providersAggregate(
+  ordersAggregate(
     """Filter to find records to aggregate on"""
-    filter: ProviderAggregateFilter
-  ): [ProductProvidersAggregateResponse!]!
-  order: Order
-  providers(
+    filter: OrderAggregateFilter
+  ): [CustomerOrdersAggregateResponse!]!
+  orders(
     """Limit or page results."""
     paging: OffsetPaging = {limit: 10}
 
     """Specify to filter the records returned."""
-    filter: ProviderFilter = {}
+    filter: OrderFilter = {}
 
     """Specify to sort results."""
-    sorting: [ProviderSort!] = []
-  ): ProductProvidersConnection
+    sorting: [OrderSort!] = []
+  ): CustomerOrdersConnection
 }
 
-input ProviderAggregateFilter {
-  and: [ProviderAggregateFilter!]
-  or: [ProviderAggregateFilter!]
+input OrderAggregateFilter {
+  and: [OrderAggregateFilter!]
+  or: [OrderAggregateFilter!]
   id: IDFilterComparison
-  contactname: StringFieldComparison
-  email: StringFieldComparison
+  date: DateFieldComparison
+}
+
+input OrderFilter {
+  and: [OrderFilter!]
+  or: [OrderFilter!]
+  id: IDFilterComparison
+  date: DateFieldComparison
+  customer: OrderFilterCustomerFilter
+  products: OrderFilterProductFilter
+}
+
+input OrderFilterCustomerFilter {
+  and: [OrderFilterCustomerFilter!]
+  or: [OrderFilterCustomerFilter!]
+  id: IDFilterComparison
+  name: StringFieldComparison
+  lastname: StringFieldComparison
   phone: StringFieldComparison
+  email: StringFieldComparison
   direction: StringFieldComparison
 }
 
-input ProviderFilter {
-  and: [ProviderFilter!]
-  or: [ProviderFilter!]
-  id: IDFilterComparison
-  contactname: StringFieldComparison
-  email: StringFieldComparison
-  phone: StringFieldComparison
-  direction: StringFieldComparison
-  product: ProviderFilterProductFilter
-}
-
-input ProviderFilterProductFilter {
-  and: [ProviderFilterProductFilter!]
-  or: [ProviderFilterProductFilter!]
+input OrderFilterProductFilter {
+  and: [OrderFilterProductFilter!]
+  or: [OrderFilterProductFilter!]
   id: IDFilterComparison
   name: StringFieldComparison
   description: StringFieldComparison
@@ -322,18 +325,15 @@ input ProviderFilterProductFilter {
   image: StringFieldComparison
 }
 
-input ProviderSort {
-  field: ProviderSortFields!
+input OrderSort {
+  field: OrderSortFields!
   direction: SortDirection!
   nulls: SortNulls
 }
 
-enum ProviderSortFields {
+enum OrderSortFields {
   id
-  contactname
-  email
-  phone
-  direction
+  date
 }
 
 type DeleteManyResponse {
@@ -341,13 +341,13 @@ type DeleteManyResponse {
   deletedCount: Int!
 }
 
-type ProductDeleteResponse {
+type CustomerDeleteResponse {
   id: ID
   name: String
-  description: String
-  price: Float
-  stock: Float
-  image: String
+  lastname: String
+  phone: String
+  email: String
+  direction: String
   createAt: DateTime
   updateAt: DateTime
 }
@@ -363,6 +363,220 @@ type OffsetPageInfo {
 
   """true if paging backwards and there are more records."""
   hasPreviousPage: Boolean
+}
+
+type CustomerConnection {
+  """Paging information"""
+  pageInfo: OffsetPageInfo!
+
+  """Array of nodes."""
+  nodes: [Customer!]!
+
+  """Fetch total count of records"""
+  totalCount: Int!
+}
+
+type CustomerAggregateGroupBy {
+  id: ID
+  name: String
+  lastname: String
+  phone: String
+  email: String
+  direction: String
+}
+
+type CustomerCountAggregate {
+  id: Int
+  name: Int
+  lastname: Int
+  phone: Int
+  email: Int
+  direction: Int
+}
+
+type CustomerMinAggregate {
+  id: ID
+  name: String
+  lastname: String
+  phone: String
+  email: String
+  direction: String
+}
+
+type CustomerMaxAggregate {
+  id: ID
+  name: String
+  lastname: String
+  phone: String
+  email: String
+  direction: String
+}
+
+type CustomerAggregateResponse {
+  groupBy: CustomerAggregateGroupBy
+  count: CustomerCountAggregate
+  min: CustomerMinAggregate
+  max: CustomerMaxAggregate
+}
+
+type CustomerOrdersConnection {
+  """Paging information"""
+  pageInfo: OffsetPageInfo!
+
+  """Array of nodes."""
+  nodes: [Order!]!
+
+  """Fetch total count of records"""
+  totalCount: Int!
+}
+
+type CustomerOrdersAggregateGroupBy {
+  id: ID
+  date: DateTime
+}
+
+type CustomerOrdersCountAggregate {
+  id: Int
+  date: Int
+}
+
+type CustomerOrdersMinAggregate {
+  id: ID
+  date: DateTime
+}
+
+type CustomerOrdersMaxAggregate {
+  id: ID
+  date: DateTime
+}
+
+type CustomerOrdersAggregateResponse {
+  groupBy: CustomerOrdersAggregateGroupBy
+  count: CustomerOrdersCountAggregate
+  min: CustomerOrdersMinAggregate
+  max: CustomerOrdersMaxAggregate
+}
+
+type OrderDeleteResponse {
+  id: ID
+  date: DateTime
+  createAt: DateTime
+  updateAt: DateTime
+}
+
+type OrderConnection {
+  """Paging information"""
+  pageInfo: OffsetPageInfo!
+
+  """Array of nodes."""
+  nodes: [Order!]!
+
+  """Fetch total count of records"""
+  totalCount: Int!
+}
+
+type OrderAggregateGroupBy {
+  id: ID
+  date: DateTime
+}
+
+type OrderCountAggregate {
+  id: Int
+  date: Int
+}
+
+type OrderMinAggregate {
+  id: ID
+  date: DateTime
+}
+
+type OrderMaxAggregate {
+  id: ID
+  date: DateTime
+}
+
+type OrderAggregateResponse {
+  groupBy: OrderAggregateGroupBy
+  count: OrderCountAggregate
+  min: OrderMinAggregate
+  max: OrderMaxAggregate
+}
+
+type OrderProductsConnection {
+  """Paging information"""
+  pageInfo: OffsetPageInfo!
+
+  """Array of nodes."""
+  nodes: [Product!]!
+
+  """Fetch total count of records"""
+  totalCount: Int!
+}
+
+type OrderProductsAggregateGroupBy {
+  id: ID
+  name: String
+  description: String
+  price: Float
+  stock: Float
+  image: String
+}
+
+type OrderProductsCountAggregate {
+  id: Int
+  name: Int
+  description: Int
+  price: Int
+  stock: Int
+  image: Int
+}
+
+type OrderProductsSumAggregate {
+  price: Float
+  stock: Float
+}
+
+type OrderProductsAvgAggregate {
+  price: Float
+  stock: Float
+}
+
+type OrderProductsMinAggregate {
+  id: ID
+  name: String
+  description: String
+  price: Float
+  stock: Float
+  image: String
+}
+
+type OrderProductsMaxAggregate {
+  id: ID
+  name: String
+  description: String
+  price: Float
+  stock: Float
+  image: String
+}
+
+type OrderProductsAggregateResponse {
+  groupBy: OrderProductsAggregateGroupBy
+  count: OrderProductsCountAggregate
+  sum: OrderProductsSumAggregate
+  avg: OrderProductsAvgAggregate
+  min: OrderProductsMinAggregate
+  max: OrderProductsMaxAggregate
+}
+
+type ProductDeleteResponse {
+  id: ID
+  name: String
+  description: String
+  price: Float
+  stock: Float
+  image: String
+  createAt: DateTime
+  updateAt: DateTime
 }
 
 type ProductConnection {
@@ -481,109 +695,6 @@ type ProductProvidersAggregateResponse {
   max: ProductProvidersMaxAggregate
 }
 
-type CustomerDeleteResponse {
-  id: ID
-  name: String
-  lastname: String
-  phone: String
-  email: String
-  direction: String
-  createAt: DateTime
-  updateAt: DateTime
-}
-
-type CustomerConnection {
-  """Paging information"""
-  pageInfo: OffsetPageInfo!
-
-  """Array of nodes."""
-  nodes: [Customer!]!
-
-  """Fetch total count of records"""
-  totalCount: Int!
-}
-
-type CustomerAggregateGroupBy {
-  id: ID
-  name: String
-  lastname: String
-  phone: String
-  email: String
-  direction: String
-}
-
-type CustomerCountAggregate {
-  id: Int
-  name: Int
-  lastname: Int
-  phone: Int
-  email: Int
-  direction: Int
-}
-
-type CustomerMinAggregate {
-  id: ID
-  name: String
-  lastname: String
-  phone: String
-  email: String
-  direction: String
-}
-
-type CustomerMaxAggregate {
-  id: ID
-  name: String
-  lastname: String
-  phone: String
-  email: String
-  direction: String
-}
-
-type CustomerAggregateResponse {
-  groupBy: CustomerAggregateGroupBy
-  count: CustomerCountAggregate
-  min: CustomerMinAggregate
-  max: CustomerMaxAggregate
-}
-
-type CustomerOrdersConnection {
-  """Paging information"""
-  pageInfo: OffsetPageInfo!
-
-  """Array of nodes."""
-  nodes: [Order!]!
-
-  """Fetch total count of records"""
-  totalCount: Int!
-}
-
-type CustomerOrdersAggregateGroupBy {
-  id: ID
-  date: DateTime
-}
-
-type CustomerOrdersCountAggregate {
-  id: Int
-  date: Int
-}
-
-type CustomerOrdersMinAggregate {
-  id: ID
-  date: DateTime
-}
-
-type CustomerOrdersMaxAggregate {
-  id: ID
-  date: DateTime
-}
-
-type CustomerOrdersAggregateResponse {
-  groupBy: CustomerOrdersAggregateGroupBy
-  count: CustomerOrdersCountAggregate
-  min: CustomerOrdersMinAggregate
-  max: CustomerOrdersMaxAggregate
-}
-
 type ProviderDeleteResponse {
   id: ID
   contactname: String
@@ -642,117 +753,6 @@ type ProviderAggregateResponse {
   count: ProviderCountAggregate
   min: ProviderMinAggregate
   max: ProviderMaxAggregate
-}
-
-type OrderDeleteResponse {
-  id: ID
-  date: DateTime
-  createAt: DateTime
-  updateAt: DateTime
-}
-
-type OrderConnection {
-  """Paging information"""
-  pageInfo: OffsetPageInfo!
-
-  """Array of nodes."""
-  nodes: [Order!]!
-
-  """Fetch total count of records"""
-  totalCount: Int!
-}
-
-type OrderAggregateGroupBy {
-  id: ID
-  date: DateTime
-}
-
-type OrderCountAggregate {
-  id: Int
-  date: Int
-}
-
-type OrderMinAggregate {
-  id: ID
-  date: DateTime
-}
-
-type OrderMaxAggregate {
-  id: ID
-  date: DateTime
-}
-
-type OrderAggregateResponse {
-  groupBy: OrderAggregateGroupBy
-  count: OrderCountAggregate
-  min: OrderMinAggregate
-  max: OrderMaxAggregate
-}
-
-type OrderProductsConnection {
-  """Paging information"""
-  pageInfo: OffsetPageInfo!
-
-  """Array of nodes."""
-  nodes: [Product!]!
-
-  """Fetch total count of records"""
-  totalCount: Int!
-}
-
-type OrderProductsAggregateGroupBy {
-  id: ID
-  name: String
-  description: String
-  price: Float
-  stock: Float
-  image: String
-}
-
-type OrderProductsCountAggregate {
-  id: Int
-  name: Int
-  description: Int
-  price: Int
-  stock: Int
-  image: Int
-}
-
-type OrderProductsSumAggregate {
-  price: Float
-  stock: Float
-}
-
-type OrderProductsAvgAggregate {
-  price: Float
-  stock: Float
-}
-
-type OrderProductsMinAggregate {
-  id: ID
-  name: String
-  description: String
-  price: Float
-  stock: Float
-  image: String
-}
-
-type OrderProductsMaxAggregate {
-  id: ID
-  name: String
-  description: String
-  price: Float
-  stock: Float
-  image: String
-}
-
-type OrderProductsAggregateResponse {
-  groupBy: OrderProductsAggregateGroupBy
-  count: OrderProductsCountAggregate
-  sum: OrderProductsSumAggregate
-  avg: OrderProductsAvgAggregate
-  min: OrderProductsMinAggregate
-  max: OrderProductsMaxAggregate
 }
 
 type Query {
