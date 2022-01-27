@@ -22,26 +22,29 @@ import { OrderDto } from 'src/modules/orders/dto/order.dto';
 })
 export class CustomerDto {
   @FilterableField(() => ID)
-  id: string;
+  id!: string;
 
   @FilterableField()
-  name: string;
+  name!: string;
 
   @FilterableField()
-  lastname: string;
+  lastname!: string;
 
   @FilterableField()
-  phone: string;
+  phone!: string;
 
   @FilterableField()
-  email: string;
+  email!: string;
 
   @FilterableField()
-  direction: string;
+  direction!: string;
 
   @Field(() => GraphQLISODateTime)
   createAt: Date;
 
   @Field(() => GraphQLISODateTime)
   updateAt: Date;
+
+  @Field(() => GraphQLISODateTime)
+  deleteAt: Date;
 }

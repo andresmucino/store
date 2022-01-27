@@ -25,14 +25,17 @@ import { ProductDto } from 'src/modules/products/dto/product.dto';
 })
 export class OrderDto {
   @FilterableField(() => ID)
-  id: string;
+  id!: string;
 
   @FilterableField()
-  date: Date;
+  date!: Date;
 
   @Field(() => GraphQLISODateTime)
-  createAt: Date;
+  createAt!: Date;
 
   @Field(() => GraphQLISODateTime)
-  updateAt: Date;
+  updateAt!: Date;
+
+  @Field(() => GraphQLISODateTime, { nullable: true })
+  deleteAt?: Date;
 }

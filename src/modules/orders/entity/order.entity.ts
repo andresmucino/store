@@ -3,6 +3,7 @@ import { ProductEntity } from 'src/modules/products/entity/product.entity';
 import {
   Column,
   CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
@@ -14,32 +15,35 @@ import {
 @Entity({ name: 'order' })
 export class OrderEntity {
   @PrimaryGeneratedColumn()
-  id: string;
+  id!: string;
 
   @Column()
-  date: Date;
+  date!: Date;
 
   @Column({
     nullable: true,
     name: 'customer_id',
     type: 'text',
   })
-  customerId: string;
+  customerId?: string;
 
   @ManyToOne(() => CustomerEntity, (customer) => customer.orders, {
     nullable: true,
   })
   @JoinColumn({ name: 'customer_id' })
-  customer: CustomerEntity;
+  customer?: CustomerEntity;
 
   @OneToMany(() => ProductEntity, (product) => product.order, {
     nullable: true,
   })
-  products: ProductEntity[];
+  products?: ProductEntity[];
 
   @CreateDateColumn()
-  createAt: Date;
+  createAt!: Date;
 
   @UpdateDateColumn()
-  updateAt: Date;
+  updateAt!: Date;
+
+  @DeleteDateColumn()
+  deleteAt?: Date;
 }

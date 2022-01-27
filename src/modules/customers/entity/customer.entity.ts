@@ -2,6 +2,7 @@ import { OrderEntity } from 'src/modules/orders/entity/order.entity';
 import {
   Column,
   CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -11,22 +12,22 @@ import {
 @Entity({ name: 'customer' })
 export class CustomerEntity {
   @PrimaryGeneratedColumn()
-  id: string;
+  id!: string;
 
   @Column()
-  name: string;
+  name!: string;
 
   @Column()
-  lastname: string;
+  lastname!: string;
 
   @Column()
-  phone: string;
+  phone!: string;
 
   @Column()
-  email: string;
+  email!: string;
 
   @Column()
-  direction: string;
+  direction!: string;
 
   @Column()
   image: string;
@@ -39,4 +40,7 @@ export class CustomerEntity {
 
   @UpdateDateColumn()
   updateAt: Date;
+
+  @DeleteDateColumn()
+  deleteAt: Date;
 }

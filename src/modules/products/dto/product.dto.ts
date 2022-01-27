@@ -27,26 +27,29 @@ import { ProviderDto } from 'src/modules/providers/dto/provider.dto';
 })
 export class ProductDto {
   @FilterableField(() => ID)
-  id: string;
+  id!: string;
 
   @FilterableField()
-  name: string;
+  name!: string;
 
   @FilterableField()
-  description: string;
+  description!: string;
 
   @FilterableField()
-  price: number;
+  price!: number;
 
   @FilterableField()
-  stock: number;
+  stock!: number;
 
   @FilterableField()
-  image: string;
+  image?: string;
 
   @Field(() => GraphQLISODateTime)
-  createAt: Date;
+  createAt?: Date;
 
   @Field(() => GraphQLISODateTime)
-  updateAt: Date;
+  updateAt?: Date;
+
+  @Field(() => GraphQLISODateTime, { nullable: true })
+  deleteAt?: Date;
 }

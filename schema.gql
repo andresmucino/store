@@ -271,6 +271,7 @@ type Customer {
   direction: String!
   createAt: DateTime!
   updateAt: DateTime!
+  deleteAt: DateTime!
   ordersAggregate(
     """Filter to find records to aggregate on"""
     filter: OrderAggregateFilter
@@ -350,6 +351,7 @@ type CustomerDeleteResponse {
   direction: String
   createAt: DateTime
   updateAt: DateTime
+  deleteAt: DateTime
 }
 
 type UpdateManyResponse {
@@ -1075,6 +1077,7 @@ input CreateCustomer {
   direction: String
   createAt: DateTime
   updateAt: DateTime
+  deleteAt: DateTime
 }
 
 input CreateManyCustomersInput {
@@ -1099,6 +1102,7 @@ input UpdateCustomer {
   direction: String
   createAt: DateTime
   updateAt: DateTime
+  deleteAt: DateTime
 }
 
 input UpdateManyCustomersInput {

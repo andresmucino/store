@@ -3,6 +3,7 @@ import { ProviderEntity } from 'src/modules/providers/entity/provider.entity';
 import {
   Column,
   CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
@@ -14,42 +15,45 @@ import {
 @Entity({ name: 'product' })
 export class ProductEntity {
   @PrimaryGeneratedColumn()
-  id: string;
+  id!: string;
 
   @Column()
-  name: string;
+  name!: string;
 
   @Column()
-  description: string;
+  description?: string;
 
   @Column()
-  price: number;
+  price!: number;
 
   @Column()
-  stock: number;
+  stock!: number;
 
   @Column()
-  image: string;
+  image?: string;
 
   @OneToOne(() => ProviderEntity, (provider) => provider.product, {
     nullable: true,
   })
-  provider: ProviderEntity;
+  provider?: ProviderEntity;
 
   @Column({
     nullable: true,
     name: 'order_id',
     type: 'text',
   })
-  orderId: string;
+  orderId?: string;
 
   @ManyToOne(() => OrderEntity, (order) => order.products, { nullable: true })
   @JoinColumn({ name: 'order_id' })
-  order: OrderEntity;
+  order?: OrderEntity;
 
   @CreateDateColumn()
-  createAt: Date;
+  createAt!: Date;
 
   @UpdateDateColumn()
-  updateAt: Date;
+  updateAt!: Date;
+
+  @DeleteDateColumn()
+  deleteAt?: Date;
 }

@@ -10,6 +10,8 @@ import { CustomerModule } from './modules/customers/customer.module';
 import { OrderModule } from './modules/orders/order.module';
 import { ProductModule } from './modules/products/product.module';
 import { ProviderModule } from './modules/providers/provider.module';
+import { AuthModule } from './common/auth/auth.module';
+import { UserModule } from './modules/users/user.module';
 
 @Module({
   imports: [
@@ -28,6 +30,8 @@ import { ProviderModule } from './modules/providers/provider.module';
     ProviderModule,
     OrderModule,
     DatabaseModule,
+    AuthModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
