@@ -1,7 +1,6 @@
 import {
   FilterableCursorConnection,
   FilterableField,
-  IDField,
   PagingStrategies,
   QueryOptions,
 } from '@nestjs-query/query-graphql';
@@ -22,7 +21,7 @@ import { OrderDto } from 'src/modules/orders/dto/order.dto';
   maxResultsSize: 1000,
 })
 export class CustomerDto {
-  @IDField(() => ID)
+  @FilterableField(() => ID)
   id: string;
 
   @FilterableField()

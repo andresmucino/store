@@ -2,7 +2,6 @@ import {
   FilterableCursorConnection,
   FilterableField,
   FilterableRelation,
-  IDField,
   KeySet,
   PagingStrategies,
   QueryOptions,
@@ -27,7 +26,7 @@ import { ProviderDto } from 'src/modules/providers/dto/provider.dto';
   maxResultsSize: 1000,
 })
 export class ProductDto {
-  @IDField(() => ID)
+  @FilterableField(() => ID)
   id: string;
 
   @FilterableField()

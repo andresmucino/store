@@ -3,6 +3,8 @@ import { NestjsQueryTypeOrmModule } from '@nestjs-query/query-typeorm';
 import { Module } from '@nestjs/common';
 import { CustomerDto } from './dto/customer.dto';
 import { CustomerEntity } from './entity/customer.entity';
+import { CustomerService } from './customer.service';
+import { CustomerResolver } from './customer.resolver';
 
 @Module({
   imports: [
@@ -19,5 +21,6 @@ import { CustomerEntity } from './entity/customer.entity';
       ],
     }),
   ],
+  providers: [CustomerService, CustomerResolver],
 })
 export class CustomerModule {}
