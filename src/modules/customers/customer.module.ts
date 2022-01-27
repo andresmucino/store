@@ -10,6 +10,7 @@ import { CustomerResolver } from './customer.resolver';
   imports: [
     NestjsQueryGraphQLModule.forFeature({
       imports: [NestjsQueryTypeOrmModule.forFeature([CustomerEntity])],
+      services: [CustomerService],
       resolvers: [
         {
           DTOClass: CustomerDto,
@@ -22,5 +23,6 @@ import { CustomerResolver } from './customer.resolver';
     }),
   ],
   providers: [CustomerService, CustomerResolver],
+  exports: [CustomerService],
 })
 export class CustomerModule {}

@@ -3,11 +3,14 @@ import { NestjsQueryTypeOrmModule } from '@nestjs-query/query-typeorm';
 import { Module } from '@nestjs/common';
 import { OrderDto } from './dto/order.dto';
 import { OrderEntity } from './entity/order.entity';
+import { OrderService } from './order.service';
+import { OrderResolver } from './order.resolver';
 
 @Module({
   imports: [
     NestjsQueryGraphQLModule.forFeature({
       imports: [NestjsQueryTypeOrmModule.forFeature([OrderEntity])],
+      services: [OrderService],
       resolvers: [
         {
           DTOClass: OrderDto,
@@ -19,5 +22,7 @@ import { OrderEntity } from './entity/order.entity';
       ],
     }),
   ],
+  providers: [OrderService, OrderResolver],
+  exports: [OrderService],
 })
 export class OrderModule {}
