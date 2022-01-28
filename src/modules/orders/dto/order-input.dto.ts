@@ -1,8 +1,12 @@
-import { FilterableField } from '@nestjs-query/query-graphql';
-import { InputType } from '@nestjs/graphql';
+import { Field, InputType } from '@nestjs/graphql';
+import { IsDate } from 'class-validator';
 
 @InputType('OrderInput')
 export class OrderInputDto {
-  @FilterableField()
+  @Field()
+  @IsDate()
   date!: Date;
+
+  @Field({ nullable: true })
+  customerI?: string;
 }

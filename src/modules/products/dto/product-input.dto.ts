@@ -1,20 +1,35 @@
-import { FilterableField } from '@nestjs-query/query-graphql';
-import { InputType } from '@nestjs/graphql';
+import { Field, InputType } from '@nestjs/graphql';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 @InputType('ProductInput')
 export class ProductInputDto {
-  @FilterableField()
+  @Field()
+  @IsString()
+  @IsNotEmpty()
   name!: string;
 
-  @FilterableField()
+  @Field()
+  @IsString()
+  @IsNotEmpty()
   description!: string;
 
-  @FilterableField()
+  @Field()
+  @IsString()
+  @IsNotEmpty()
   price!: number;
 
-  @FilterableField()
+  @Field()
+  @IsString()
+  @IsNotEmpty()
   stock!: number;
 
-  @FilterableField()
+  @Field({ nullable: true })
+  @IsString()
+  @IsNotEmpty()
   image?: string;
+
+  @Field({ nullable: true })
+  @IsString()
+  @IsNotEmpty()
+  orderId?: string;
 }

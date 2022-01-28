@@ -2,6 +2,7 @@ import { ProductEntity } from 'src/modules/products/entity/product.entity';
 import {
   Column,
   CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   JoinColumn,
   OneToOne,
@@ -12,36 +13,39 @@ import {
 @Entity({ name: 'provider' })
 export class ProviderEntity {
   @PrimaryGeneratedColumn()
-  id: string;
+  id!: string;
 
   @Column()
-  contactname: string;
+  contactname!: string;
 
   @Column()
-  email: string;
+  email!: string;
 
   @Column()
-  phone: string;
+  phone!: string;
 
   @Column()
-  direction: string;
+  direction!: string;
 
   @Column({
     nullable: true,
     name: 'product_id',
     type: 'text',
   })
-  productId: string;
+  productId?: string;
 
   @OneToOne(() => ProductEntity, (product) => product.provider, {
     nullable: true,
   })
   @JoinColumn({ name: 'pruduct_id' })
-  product: ProductEntity;
+  product?: ProductEntity;
 
   @CreateDateColumn()
-  createAt: Date;
+  createAt!: Date;
 
   @UpdateDateColumn()
-  updateAt: Date;
+  updateAt!: Date;
+
+  @DeleteDateColumn()
+  deleteAt?: Date;
 }

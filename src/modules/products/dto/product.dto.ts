@@ -44,6 +44,9 @@ export class ProductDto {
   @FilterableField()
   image?: string;
 
+  @FilterableField({ nullable: true })
+  orderId?: string;
+
   @Field(() => GraphQLISODateTime)
   createAt?: Date;
 

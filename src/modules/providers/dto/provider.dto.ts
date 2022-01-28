@@ -16,23 +16,29 @@ import { ProductDto } from 'src/modules/products/dto/product.dto';
 })
 export class ProviderDto {
   @FilterableField(() => ID)
-  id: string;
+  id!: string;
 
   @FilterableField()
-  contactname: string;
+  contactname!: string;
 
   @FilterableField()
-  email: string;
+  email!: string;
 
   @FilterableField()
-  phone: string;
+  phone!: string;
 
   @FilterableField()
-  direction: string;
+  direction!: string;
+
+  @FilterableField({ nullable: true })
+  productId?: string;
 
   @Field(() => GraphQLISODateTime)
-  createAt: Date;
+  createAt!: Date;
 
   @Field(() => GraphQLISODateTime)
-  updateAt: Date;
+  updateAt!: Date;
+
+  @Field(() => GraphQLISODateTime, { nullable: true })
+  deleteAt?: Date;
 }

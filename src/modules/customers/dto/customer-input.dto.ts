@@ -1,20 +1,30 @@
-import { FilterableField } from '@nestjs-query/query-graphql';
-import { InputType } from '@nestjs/graphql';
+import { Field, InputType } from '@nestjs/graphql';
+import { IsEmail, IsNotEmpty, IsPhoneNumber, IsString } from 'class-validator';
 
 @InputType('CustomerInput')
 export class CustomerInputDto {
-  @FilterableField()
+  @Field()
+  @IsString()
+  @IsNotEmpty()
   name!: string;
 
-  @FilterableField()
+  @Field()
+  @IsString()
+  @IsNotEmpty()
   lastname!: string;
 
-  @FilterableField()
+  @Field()
+  @IsPhoneNumber()
+  @IsNotEmpty()
   phone!: string;
 
-  @FilterableField()
+  @Field()
+  @IsEmail()
+  @IsNotEmpty()
   email!: string;
 
-  @FilterableField()
+  @Field()
+  @IsString()
+  @IsNotEmpty()
   direction!: string;
 }
