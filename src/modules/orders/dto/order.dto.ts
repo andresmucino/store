@@ -30,6 +30,9 @@ export class OrderDto {
   @FilterableField()
   date!: Date;
 
+  @FilterableField()
+  quantity?: number;
+
   @FilterableField({ nullable: true })
   customerId?: string;
 

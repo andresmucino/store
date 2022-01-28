@@ -8,5 +8,8 @@ export class OrderInputDto {
   date!: Date;
 
   @Field({ nullable: true })
-  customerI?: string;
+  customerId?: string;
+
+  @Field({ nullable: true })
+  quantity?: number;
 }

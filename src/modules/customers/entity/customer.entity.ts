@@ -1,10 +1,12 @@
 import { OrderEntity } from 'src/modules/orders/entity/order.entity';
+import { UserEntity } from 'src/modules/users/entity/user.entity';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -31,6 +33,9 @@ export class CustomerEntity {
 
   @Column()
   image: string;
+
+  @OneToOne(() => UserEntity, (user) => user.customer, { nullable: true })
+  user: UserEntity;
 
   @OneToMany(() => OrderEntity, (order) => order.customer, { nullable: true })
   orders: OrderEntity[];
