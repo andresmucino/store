@@ -5,6 +5,7 @@ import { OrderDto } from './dto/order.dto';
 import { OrderEntity } from './entity/order.entity';
 import { OrderService } from './order.service';
 import { OrderResolver } from './order.resolver';
+import { OrderInputDto } from './dto/order-input.dto';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { OrderResolver } from './order.resolver';
         {
           DTOClass: OrderDto,
           EntityClass: OrderEntity,
+          CreateDTOClass: OrderInputDto,
           enableAggregate: true,
           enableTotalCount: true,
           enableSubscriptions: false,

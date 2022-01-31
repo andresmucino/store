@@ -1,4 +1,4 @@
-import { Field } from '@nestjs/graphql';
+import { Field, InputType } from '@nestjs/graphql';
 import {
   IsEmail,
   IsNotEmpty,
@@ -7,6 +7,7 @@ import {
   IsString,
 } from 'class-validator';
 
+@InputType('ProviderInput')
 export class ProviderInputDto {
   @Field()
   @IsString()

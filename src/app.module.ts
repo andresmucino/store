@@ -10,8 +10,8 @@ import { CustomerModule } from './modules/customers/customer.module';
 import { OrderModule } from './modules/orders/order.module';
 import { ProductModule } from './modules/products/product.module';
 import { ProviderModule } from './modules/providers/provider.module';
-import { AuthModule } from './common/auth/auth.module';
 import { UserModule } from './modules/users/user.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -30,8 +30,8 @@ import { UserModule } from './modules/users/user.module';
     ProviderModule,
     OrderModule,
     DatabaseModule,
-    AuthModule,
     UserModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

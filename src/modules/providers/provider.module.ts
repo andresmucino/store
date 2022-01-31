@@ -5,6 +5,7 @@ import { ProviderDto } from './dto/provider.dto';
 import { ProviderEntity } from './entity/provider.entity';
 import { ProviderService } from './provider.service';
 import { ProviderResolver } from './provider.resolver';
+import { ProviderInputDto } from './dto/provider-input.dto';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { ProviderResolver } from './provider.resolver';
         {
           DTOClass: ProviderDto,
           EntityClass: ProviderEntity,
+          CreateDTOClass: ProviderInputDto,
           enableAggregate: true,
           enableTotalCount: true,
           enableSubscriptions: false,

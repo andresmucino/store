@@ -5,6 +5,7 @@ import { ProductEntity } from './entity/product.entity';
 import { ProductDto } from './dto/product.dto';
 import { ProductService } from './product.service';
 import { ProductResolver } from './product.resolver';
+import { ProductInputDto } from './dto/product-input.dto';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { ProductResolver } from './product.resolver';
         {
           DTOClass: ProductDto,
           EntityClass: ProductEntity,
+          CreateDTOClass: ProductInputDto,
           enableAggregate: true,
           enableTotalCount: true,
           enableSubscriptions: false,

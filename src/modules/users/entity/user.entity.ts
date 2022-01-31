@@ -3,12 +3,14 @@ import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
+  Entity,
   JoinColumn,
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
+@Entity({ name: 'user' })
 export class UserEntity {
   @PrimaryGeneratedColumn()
   id!: string;

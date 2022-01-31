@@ -5,6 +5,7 @@ import { CustomerDto } from './dto/customer.dto';
 import { CustomerEntity } from './entity/customer.entity';
 import { CustomerService } from './customer.service';
 import { CustomerResolver } from './customer.resolver';
+import { CustomerInputDto } from './dto/customer-input.dto';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { CustomerResolver } from './customer.resolver';
         {
           DTOClass: CustomerDto,
           EntityClass: CustomerEntity,
+          CreateDTOClass: CustomerInputDto,
           enableAggregate: true,
           enableTotalCount: true,
           enableSubscriptions: false,
