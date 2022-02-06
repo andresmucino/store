@@ -1,5 +1,5 @@
-import { CustomerEntity } from 'src/modules/customers/entity/customer.entity';
-import { ProductEntity } from 'src/modules/products/entity/product.entity';
+import { CustomerEntity } from 'src/modules/customers/entities/customer.entity';
+import { ProductEntity } from 'src/modules/products/entities/product.entity';
 import {
   Column,
   CreateDateColumn,

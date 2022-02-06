@@ -2,7 +2,7 @@ import { NestjsQueryGraphQLModule } from '@nestjs-query/query-graphql';
 import { NestjsQueryTypeOrmModule } from '@nestjs-query/query-typeorm';
 import { Module } from '@nestjs/common';
 import { OrderDto } from './dto/order.dto';
-import { OrderEntity } from './entity/order.entity';
+import { OrderEntity } from './entities/order.entity';
 import { OrderService } from './order.service';
 import { OrderResolver } from './order.resolver';
 import { OrderInputDto } from './dto/order-input.dto';

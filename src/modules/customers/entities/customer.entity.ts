@@ -1,12 +1,10 @@
-import { OrderEntity } from 'src/modules/orders/entity/order.entity';
-import { UserEntity } from 'src/modules/users/entity/user.entity';
+import { OrderEntity } from 'src/modules/orders/entities/order.entity';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
   OneToMany,
-  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -26,16 +24,10 @@ export class CustomerEntity {
   phone!: string;
 
   @Column()
-  email!: string;
-
-  @Column()
   direction!: string;
 
-  @Column()
-  image: string;
-
-  @OneToOne(() => UserEntity, (user) => user.customer, { nullable: true })
-  user: UserEntity;
+  @Column({ nullable: true })
+  image?: string;
 
   @OneToMany(() => OrderEntity, (order) => order.customer, { nullable: true })
   orders: OrderEntity[];

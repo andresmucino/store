@@ -30,7 +30,7 @@ export class OrderDto {
   @FilterableField()
   date!: Date;
 
-  @FilterableField()
+  @FilterableField({ nullable: true })
   quantity?: number;
 
   @FilterableField({ nullable: true })

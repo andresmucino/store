@@ -41,7 +41,7 @@ export class ProductDto {
   @FilterableField()
   stock!: number;
 
-  @FilterableField()
+  @FilterableField({ nullable: true })
   image?: string;
 
   @FilterableField({ nullable: true })
@@ -52,7 +52,4 @@ export class ProductDto {
 
   @Field(() => GraphQLISODateTime)
   updateAt?: Date;
-
-  @Field(() => GraphQLISODateTime, { nullable: true })
-  deleteAt?: Date;
 }

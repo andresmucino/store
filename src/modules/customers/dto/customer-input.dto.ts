@@ -1,5 +1,5 @@
 import { Field, InputType } from '@nestjs/graphql';
-import { IsEmail, IsNotEmpty, IsPhoneNumber, IsString } from 'class-validator';
+import { IsNotEmpty, IsPhoneNumber, IsString } from 'class-validator';
 
 @InputType('CustomerInput')
 export class CustomerInputDto {
@@ -19,12 +19,12 @@ export class CustomerInputDto {
   phone!: string;
 
   @Field()
-  @IsEmail()
-  @IsNotEmpty()
-  email!: string;
-
-  @Field()
   @IsString()
   @IsNotEmpty()
   direction!: string;
+
+  @Field({ nullable: true })
+  @IsString()
+  @IsNotEmpty()
+  image?: string;
 }

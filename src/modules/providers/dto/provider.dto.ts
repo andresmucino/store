@@ -38,7 +38,4 @@ export class ProviderDto {
 
   @Field(() => GraphQLISODateTime)
   updateAt!: Date;
-
-  @Field(() => GraphQLISODateTime, { nullable: true })
-  deleteAt?: Date;
 }

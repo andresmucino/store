@@ -11,7 +11,6 @@ type Provider {
   productId: String
   createAt: DateTime!
   updateAt: DateTime!
-  deleteAt: DateTime
   product: Product!
 }
 
@@ -26,11 +25,10 @@ type Product {
   description: String!
   price: Float!
   stock: Float!
-  image: String!
+  image: String
   orderId: String
   createAt: DateTime!
   updateAt: DateTime!
-  deleteAt: DateTime
   providersAggregate(
     """Filter to find records to aggregate on"""
     filter: ProviderAggregateFilter
@@ -175,7 +173,7 @@ enum SortNulls {
 type Order {
   id: ID!
   date: DateTime!
-  quantity: Float!
+  quantity: Float
   customerId: String
   createAt: DateTime!
   updateAt: DateTime!
@@ -284,8 +282,8 @@ type Customer {
   name: String!
   lastname: String!
   phone: String!
-  email: String!
   direction: String!
+  image: String
   createAt: DateTime!
   updateAt: DateTime!
   deleteAt: DateTime!
@@ -332,8 +330,8 @@ input OrderFilterCustomerFilter {
   name: StringFieldComparison
   lastname: StringFieldComparison
   phone: StringFieldComparison
-  email: StringFieldComparison
   direction: StringFieldComparison
+  image: StringFieldComparison
 }
 
 input OrderFilterProductFilter {
@@ -371,8 +369,8 @@ type CustomerDeleteResponse {
   name: String
   lastname: String
   phone: String
-  email: String
   direction: String
+  image: String
   createAt: DateTime
   updateAt: DateTime
   deleteAt: DateTime
@@ -407,8 +405,8 @@ type CustomerAggregateGroupBy {
   name: String
   lastname: String
   phone: String
-  email: String
   direction: String
+  image: String
 }
 
 type CustomerCountAggregate {
@@ -416,8 +414,8 @@ type CustomerCountAggregate {
   name: Int
   lastname: Int
   phone: Int
-  email: Int
   direction: Int
+  image: Int
 }
 
 type CustomerMinAggregate {
@@ -425,8 +423,8 @@ type CustomerMinAggregate {
   name: String
   lastname: String
   phone: String
-  email: String
   direction: String
+  image: String
 }
 
 type CustomerMaxAggregate {
@@ -434,8 +432,8 @@ type CustomerMaxAggregate {
   name: String
   lastname: String
   phone: String
-  email: String
   direction: String
+  image: String
 }
 
 type CustomerAggregateResponse {
@@ -647,7 +645,6 @@ type ProductDeleteResponse {
   orderId: String
   createAt: DateTime
   updateAt: DateTime
-  deleteAt: DateTime
 }
 
 type ProductConnection {
@@ -774,6 +771,64 @@ type ProductProvidersAggregateResponse {
   max: ProductProvidersMaxAggregate
 }
 
+type User {
+  id: String!
+  email: String!
+  password: String!
+  createAt: DateTime!
+  updateAt: DateTime!
+}
+
+type UserDeleteResponse {
+  id: String
+  email: String
+  password: String
+  createAt: DateTime
+  updateAt: DateTime
+}
+
+type UserConnection {
+  """Paging information"""
+  pageInfo: OffsetPageInfo!
+
+  """Array of nodes."""
+  nodes: [User!]!
+
+  """Fetch total count of records"""
+  totalCount: Int!
+}
+
+type UserAggregateGroupBy {
+  id: String
+  email: String
+  password: String
+}
+
+type UserCountAggregate {
+  id: Int
+  email: Int
+  password: Int
+}
+
+type UserMinAggregate {
+  id: String
+  email: String
+  password: String
+}
+
+type UserMaxAggregate {
+  id: String
+  email: String
+  password: String
+}
+
+type UserAggregateResponse {
+  groupBy: UserAggregateGroupBy
+  count: UserCountAggregate
+  min: UserMinAggregate
+  max: UserMaxAggregate
+}
+
 type ProviderDeleteResponse {
   id: ID
   contactname: String
@@ -783,7 +838,6 @@ type ProviderDeleteResponse {
   productId: String
   createAt: DateTime
   updateAt: DateTime
-  deleteAt: DateTime
 }
 
 type ProviderConnection {
@@ -840,103 +894,6 @@ type ProviderAggregateResponse {
   max: ProviderMaxAggregate
 }
 
-type user {
-  id: ID!
-  email: String!
-  password: String!
-  role: String!
-  customerId: String!
-  createAt: DateTime!
-  updateAt: DateTime!
-  deleteAt: DateTime!
-}
-
-type UserDeleteResponse {
-  id: ID
-  email: String
-  password: String
-  role: String
-  customerId: String
-  createAt: DateTime
-  updateAt: DateTime
-  deleteAt: DateTime
-}
-
-type userEdge {
-  """The node containing the user"""
-  node: user!
-
-  """Cursor for this node."""
-  cursor: ConnectionCursor!
-}
-
-"""Cursor for paging through collections"""
-scalar ConnectionCursor
-
-type PageInfo {
-  """true if paging forward and there are more records."""
-  hasNextPage: Boolean
-
-  """true if paging backwards and there are more records."""
-  hasPreviousPage: Boolean
-
-  """The cursor of the first returned record."""
-  startCursor: ConnectionCursor
-
-  """The cursor of the last returned record."""
-  endCursor: ConnectionCursor
-}
-
-type UserConnection {
-  """Paging information"""
-  pageInfo: PageInfo!
-
-  """Array of edges."""
-  edges: [userEdge!]!
-
-  """Fetch total count of records"""
-  totalCount: Int!
-}
-
-type userAggregateGroupBy {
-  id: ID
-  email: String
-  password: String
-  role: String
-  customerId: String
-}
-
-type userCountAggregate {
-  id: Int
-  email: Int
-  password: Int
-  role: Int
-  customerId: Int
-}
-
-type userMinAggregate {
-  id: ID
-  email: String
-  password: String
-  role: String
-  customerId: String
-}
-
-type userMaxAggregate {
-  id: ID
-  email: String
-  password: String
-  role: String
-  customerId: String
-}
-
-type userAggregateResponse {
-  groupBy: userAggregateGroupBy
-  count: userCountAggregate
-  min: userMinAggregate
-  max: userMaxAggregate
-}
-
 type Query {
   productAggregate(
     """Filter to find records to aggregate on"""
@@ -974,6 +931,24 @@ type Query {
     """Specify to sort results."""
     sorting: [CustomerSort!] = []
   ): CustomerConnection!
+  userAggregate(
+    """Filter to find records to aggregate on"""
+    filter: UserAggregateFilter
+  ): [UserAggregateResponse!]!
+  user(
+    """The id of the record to find."""
+    id: ID!
+  ): User
+  users(
+    """Limit or page results."""
+    paging: OffsetPaging = {limit: 10}
+
+    """Specify to filter the records returned."""
+    filter: UserFilter = {}
+
+    """Specify to sort results."""
+    sorting: [UserSort!] = []
+  ): UserConnection!
   providerAggregate(
     """Filter to find records to aggregate on"""
     filter: ProviderAggregateFilter
@@ -1010,24 +985,6 @@ type Query {
     """Specify to sort results."""
     sorting: [OrderSort!] = []
   ): OrderConnection!
-  userAggregate(
-    """Filter to find records to aggregate on"""
-    filter: userAggregateFilter
-  ): [userAggregateResponse!]!
-  user(
-    """The id of the record to find."""
-    id: ID!
-  ): user
-  users(
-    """Limit or page results."""
-    paging: CursorPaging = {first: 10}
-
-    """Specify to filter the records returned."""
-    filter: userFilter = {}
-
-    """Specify to sort results."""
-    sorting: [userSort!] = []
-  ): UserConnection!
 }
 
 input CustomerAggregateFilter {
@@ -1037,8 +994,8 @@ input CustomerAggregateFilter {
   name: StringFieldComparison
   lastname: StringFieldComparison
   phone: StringFieldComparison
-  email: StringFieldComparison
   direction: StringFieldComparison
+  image: StringFieldComparison
 }
 
 input CustomerFilter {
@@ -1048,8 +1005,8 @@ input CustomerFilter {
   name: StringFieldComparison
   lastname: StringFieldComparison
   phone: StringFieldComparison
-  email: StringFieldComparison
   direction: StringFieldComparison
+  image: StringFieldComparison
   orders: CustomerFilterOrderFilter
 }
 
@@ -1073,59 +1030,41 @@ enum CustomerSortFields {
   name
   lastname
   phone
-  email
   direction
+  image
 }
 
-input userAggregateFilter {
-  and: [userAggregateFilter!]
-  or: [userAggregateFilter!]
-  id: IDFilterComparison
+input UserAggregateFilter {
+  and: [UserAggregateFilter!]
+  or: [UserAggregateFilter!]
+  id: StringFieldComparison
   email: StringFieldComparison
   password: StringFieldComparison
-  role: StringFieldComparison
-  customerId: StringFieldComparison
 }
 
-input CursorPaging {
-  """Paginate before opaque cursor"""
-  before: ConnectionCursor
-
-  """Paginate after opaque cursor"""
-  after: ConnectionCursor
-
-  """Paginate first"""
-  first: Int
-
-  """Paginate last"""
-  last: Int
-}
-
-input userFilter {
-  and: [userFilter!]
-  or: [userFilter!]
-  id: IDFilterComparison
+input UserFilter {
+  and: [UserFilter!]
+  or: [UserFilter!]
+  id: StringFieldComparison
   email: StringFieldComparison
   password: StringFieldComparison
-  role: StringFieldComparison
-  customerId: StringFieldComparison
 }
 
-input userSort {
-  field: userSortFields!
+input UserSort {
+  field: UserSortFields!
   direction: SortDirection!
   nulls: SortNulls
 }
 
-enum userSortFields {
+enum UserSortFields {
   id
   email
   password
-  role
-  customerId
 }
 
 type Mutation {
+  restoreOneProduct(input: ID!): Product!
+  restoreManyProduct(input: ProductFilter!): UpdateManyResponse!
   setOrderOnProduct(input: SetOrderOnProductInput!): Product!
   addProvidersToProduct(input: AddProvidersToProductInput!): Product!
   setProvidersOnProduct(input: SetProvidersOnProductInput!): Product!
@@ -1137,6 +1076,8 @@ type Mutation {
   updateManyProducts(input: UpdateManyProductsInput!): UpdateManyResponse!
   deleteOneProduct(input: DeleteOneProductInput!): ProductDeleteResponse!
   deleteManyProducts(input: DeleteManyProductsInput!): DeleteManyResponse!
+  restoreOneCustomer(input: ID!): Customer!
+  restoreManyCustomers(input: CustomerFilter!): UpdateManyResponse!
   addOrdersToCustomer(input: AddOrdersToCustomerInput!): Customer!
   setOrdersOnCustomer(input: SetOrdersOnCustomerInput!): Customer!
   removeOrdersFromCustomer(input: RemoveOrdersFromCustomerInput!): Customer!
@@ -1146,6 +1087,16 @@ type Mutation {
   updateManyCustomers(input: UpdateManyCustomersInput!): UpdateManyResponse!
   deleteOneCustomer(input: DeleteOneCustomerInput!): CustomerDeleteResponse!
   deleteManyCustomers(input: DeleteManyCustomersInput!): DeleteManyResponse!
+  restoreOneProvider(input: ID!): Provider!
+  restoreManyProviders(input: OrderFilter!): UpdateManyResponse!
+  restoreOneUser(input: ID!): User!
+  restoreManyUsers(input: UserFilter!): UpdateManyResponse!
+  createOneUser(input: CreateOneUserInput!): User!
+  createManyUsers(input: CreateManyUsersInput!): [User!]!
+  updateOneUser(input: UpdateOneUserInput!): User!
+  updateManyUsers(input: UpdateManyUsersInput!): UpdateManyResponse!
+  deleteOneUser(input: DeleteOneUserInput!): UserDeleteResponse!
+  deleteManyUsers(input: DeleteManyUsersInput!): DeleteManyResponse!
   setProductOnProvider(input: SetProductOnProviderInput!): Provider!
   removeProductFromProvider(input: RemoveProductFromProviderInput!): Provider!
   createOneProvider(input: CreateOneProviderInput!): Provider!
@@ -1154,6 +1105,7 @@ type Mutation {
   updateManyProviders(input: UpdateManyProvidersInput!): UpdateManyResponse!
   deleteOneProvider(input: DeleteOneProviderInput!): ProviderDeleteResponse!
   deleteManyProviders(input: DeleteManyProvidersInput!): DeleteManyResponse!
+  restoreOneOrder(input: ID!): Order!
   setCustomerOnOrder(input: SetCustomerOnOrderInput!): Order!
   addProductsToOrder(input: AddProductsToOrderInput!): Order!
   setProductsOnOrder(input: SetProductsOnOrderInput!): Order!
@@ -1165,12 +1117,6 @@ type Mutation {
   updateManyOrders(input: UpdateManyOrdersInput!): UpdateManyResponse!
   deleteOneOrder(input: DeleteOneOrderInput!): OrderDeleteResponse!
   deleteManyOrders(input: DeleteManyOrdersInput!): DeleteManyResponse!
-  createOneUser(input: CreateOneUserInput!): user!
-  createManyUsers(input: CreateManyUsersInput!): [user!]!
-  updateOneUser(input: UpdateOneUserInput!): user!
-  updateManyUsers(input: UpdateManyUsersInput!): UpdateManyResponse!
-  deleteOneUser(input: DeleteOneUserInput!): UserDeleteResponse!
-  deleteManyUsers(input: DeleteManyUsersInput!): DeleteManyResponse!
 }
 
 input SetOrderOnProductInput {
@@ -1250,7 +1196,6 @@ input UpdateProduct {
   orderId: String
   createAt: DateTime
   updateAt: DateTime
-  deleteAt: DateTime
 }
 
 input UpdateManyProductsInput {
@@ -1328,8 +1273,8 @@ input CustomerInput {
   name: String!
   lastname: String!
   phone: String!
-  email: String!
   direction: String!
+  image: String
 }
 
 input CreateManyCustomersInput {
@@ -1350,8 +1295,8 @@ input UpdateCustomer {
   name: String
   lastname: String
   phone: String
-  email: String
   direction: String
+  image: String
   createAt: DateTime
   updateAt: DateTime
   deleteAt: DateTime
@@ -1372,8 +1317,8 @@ input CustomerUpdateFilter {
   name: StringFieldComparison
   lastname: StringFieldComparison
   phone: StringFieldComparison
-  email: StringFieldComparison
   direction: StringFieldComparison
+  image: StringFieldComparison
 }
 
 input DeleteOneCustomerInput {
@@ -1393,8 +1338,76 @@ input CustomerDeleteFilter {
   name: StringFieldComparison
   lastname: StringFieldComparison
   phone: StringFieldComparison
-  email: StringFieldComparison
   direction: StringFieldComparison
+  image: StringFieldComparison
+}
+
+input CreateOneUserInput {
+  """The record to create"""
+  user: CreateUser!
+}
+
+input CreateUser {
+  id: String
+  email: String
+  password: String
+  createAt: DateTime
+  updateAt: DateTime
+}
+
+input CreateManyUsersInput {
+  """Array of records to create"""
+  users: [CreateUser!]!
+}
+
+input UpdateOneUserInput {
+  """The id of the record to update"""
+  id: ID!
+
+  """The update to apply."""
+  update: UpdateUser!
+}
+
+input UpdateUser {
+  id: String
+  email: String
+  password: String
+  createAt: DateTime
+  updateAt: DateTime
+}
+
+input UpdateManyUsersInput {
+  """Filter used to find fields to update"""
+  filter: UserUpdateFilter!
+
+  """The update to apply to all records found using the filter"""
+  update: UpdateUser!
+}
+
+input UserUpdateFilter {
+  and: [UserUpdateFilter!]
+  or: [UserUpdateFilter!]
+  id: StringFieldComparison
+  email: StringFieldComparison
+  password: StringFieldComparison
+}
+
+input DeleteOneUserInput {
+  """The id of the record to delete."""
+  id: ID!
+}
+
+input DeleteManyUsersInput {
+  """Filter to find records to delete"""
+  filter: UserDeleteFilter!
+}
+
+input UserDeleteFilter {
+  and: [UserDeleteFilter!]
+  or: [UserDeleteFilter!]
+  id: StringFieldComparison
+  email: StringFieldComparison
+  password: StringFieldComparison
 }
 
 input SetProductOnProviderInput {
@@ -1436,19 +1449,7 @@ input UpdateOneProviderInput {
   id: ID!
 
   """The update to apply."""
-  update: UpdateProvider!
-}
-
-input UpdateProvider {
-  id: ID
-  contactname: String
-  email: String
-  phone: String
-  direction: String
-  productId: String
-  createAt: DateTime
-  updateAt: DateTime
-  deleteAt: DateTime
+  update: ProviderInput!
 }
 
 input UpdateManyProvidersInput {
@@ -1456,7 +1457,7 @@ input UpdateManyProvidersInput {
   filter: ProviderUpdateFilter!
 
   """The update to apply to all records found using the filter"""
-  update: UpdateProvider!
+  update: ProviderInput!
 }
 
 input ProviderUpdateFilter {
@@ -1598,79 +1599,5 @@ input OrderDeleteFilter {
   id: IDFilterComparison
   date: DateFieldComparison
   quantity: NumberFieldComparison
-  customerId: StringFieldComparison
-}
-
-input CreateOneUserInput {
-  """The record to create"""
-  user: UserInput!
-}
-
-input UserInput {
-  email: String!
-  password: String!
-  role: String!
-  customerId: String!
-}
-
-input CreateManyUsersInput {
-  """Array of records to create"""
-  users: [UserInput!]!
-}
-
-input UpdateOneUserInput {
-  """The id of the record to update"""
-  id: ID!
-
-  """The update to apply."""
-  update: UpdateUser!
-}
-
-input UpdateUser {
-  id: ID
-  email: String
-  password: String
-  role: String
-  customerId: String
-  createAt: DateTime
-  updateAt: DateTime
-  deleteAt: DateTime
-}
-
-input UpdateManyUsersInput {
-  """Filter used to find fields to update"""
-  filter: userUpdateFilter!
-
-  """The update to apply to all records found using the filter"""
-  update: UpdateUser!
-}
-
-input userUpdateFilter {
-  and: [userUpdateFilter!]
-  or: [userUpdateFilter!]
-  id: IDFilterComparison
-  email: StringFieldComparison
-  password: StringFieldComparison
-  role: StringFieldComparison
-  customerId: StringFieldComparison
-}
-
-input DeleteOneUserInput {
-  """The id of the record to delete."""
-  id: ID!
-}
-
-input DeleteManyUsersInput {
-  """Filter to find records to delete"""
-  filter: userDeleteFilter!
-}
-
-input userDeleteFilter {
-  and: [userDeleteFilter!]
-  or: [userDeleteFilter!]
-  id: IDFilterComparison
-  email: StringFieldComparison
-  password: StringFieldComparison
-  role: StringFieldComparison
   customerId: StringFieldComparison
 }

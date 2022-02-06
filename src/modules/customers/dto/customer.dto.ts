@@ -34,17 +34,17 @@ export class CustomerDto {
   phone!: string;
 
   @FilterableField()
-  email!: string;
-
-  @FilterableField()
   direction!: string;
 
-  @Field(() => GraphQLISODateTime)
-  createAt: Date;
+  @FilterableField({ nullable: true })
+  image?: string;
 
   @Field(() => GraphQLISODateTime)
-  updateAt: Date;
+  createAt!: Date;
 
   @Field(() => GraphQLISODateTime)
-  deleteAt: Date;
+  updateAt!: Date;
+
+  @Field(() => GraphQLISODateTime)
+  deleteAt?: Date;
 }

@@ -1,5 +1,5 @@
-import { OrderEntity } from 'src/modules/orders/entity/order.entity';
-import { ProviderEntity } from 'src/modules/providers/entity/provider.entity';
+import { OrderEntity } from 'src/modules/orders/entities/order.entity';
+import { ProviderEntity } from 'src/modules/providers/entities/provider.entity';
 import {
   Column,
   CreateDateColumn,
@@ -21,7 +21,7 @@ export class ProductEntity {
   name!: string;
 
   @Column()
-  description?: string;
+  description!: string;
 
   @Column()
   price!: number;
@@ -29,7 +29,7 @@ export class ProductEntity {
   @Column()
   stock!: number;
 
-  @Column()
+  @Column({ nullable: true })
   image?: string;
 
   @OneToOne(() => ProviderEntity, (provider) => provider.product, {

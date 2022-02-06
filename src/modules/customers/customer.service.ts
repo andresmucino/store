@@ -1,9 +1,14 @@
-// import { QueryService } from '@nestjs-query/core';
-// import { TypeOrmQueryService } from '@nestjs-query/query-typeorm';
-// import { CustomerEntity } from './entity/customer.entity';
-// import { InjectRepository } from '@nestjs/typeorm';
-// import { Repository } from 'typeorm';
-import { Injectable } from '@nestjs/common';
+import { QueryService } from '@nestjs-query/core';
+import { TypeOrmQueryService } from '@nestjs-query/query-typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { CustomerEntity } from './entities/customer.entity';
 
-@Injectable()
-export class CustomerService {}
+@QueryService(CustomerEntity)
+export class CustomerService extends TypeOrmQueryService<CustomerEntity> {
+  constructor(
+    @InjectRepository(CustomerEntity) repo: Repository<CustomerEntity>,
+  ) {
+    super(repo, { useSoftDelete: true });
+  }
+}

@@ -2,7 +2,7 @@ import { NestjsQueryGraphQLModule } from '@nestjs-query/query-graphql';
 import { NestjsQueryTypeOrmModule } from '@nestjs-query/query-typeorm';
 import { Module } from '@nestjs/common';
 import { CustomerDto } from './dto/customer.dto';
-import { CustomerEntity } from './entity/customer.entity';
+import { CustomerEntity } from './entities/customer.entity';
 import { CustomerService } from './customer.service';
 import { CustomerResolver } from './customer.resolver';
 import { CustomerInputDto } from './dto/customer-input.dto';
