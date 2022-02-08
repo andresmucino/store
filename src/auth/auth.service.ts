@@ -1,26 +1,48 @@
-import { Injectable } from '@nestjs/common';
-import { CreateAuthInput } from './dto/create-auth.input';
-import { UpdateAuthInput } from './dto/update-auth.input';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { InjectQueryService, QueryService } from '@nestjs-query/core';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
+import { UserDto } from 'src/modules/user/dto/user.dto';
+import { UserEntity } from 'src/modules/user/entities/user.entity';
+import { LoginResponseDto } from './dto/login-response.dto';
+import { AuthenticatedUser, JwtPayload } from './interface/auth.interface';
 
 @Injectable()
 export class AuthService {
-  create(createAuthInput: CreateAuthInput) {
-    return 'This action adds a new auth';
+  constructor(
+    @InjectQueryService(UserEntity)
+    private userService: QueryService<UserEntity>,
+    private jwtService: JwtService,
+  ) {}
+
+  async ValidateUser(
+    email: string,
+    password: string,
+  ): Promise<AuthenticatedUser | null> {
+    const [user] = await this.userService.query({
+      filter: { email: { eq: email } },
+    });
+    if (user && user.password === password) {
+      const { password, ...result } = user;
+      return result;
+    }
+
+    return null;
   }
 
-  findAll() {
-    return `This action returns all auth`;
+  async currentUser(authUser: AuthenticatedUser): Promise<UserDto> {
+    try {
+      const user = await this.userService.getById(authUser.id);
+      return user;
+    } catch (error) {
+      throw new UnauthorizedException();
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} auth`;
-  }
-
-  update(id: number, updateAuthInput: UpdateAuthInput) {
-    return `This action updates a #${id} auth`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} auth`;
+  login(user: AuthenticatedUser): Promise<LoginResponseDto> {
+    const payload: JwtPayload = { email: user.email, sub: user.id };
+    return Promise.resolve({
+      accessToken: this.jwtService.sign(payload),
+    });
   }
 }

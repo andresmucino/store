@@ -13,6 +13,8 @@ import { ProviderModule } from './modules/providers/provider.module';
 import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './auth/auth.module';
 
+export type GqlContext = { request: { headers: Record<string, string> } };
+
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -22,8 +24,19 @@ import { AuthModule } from './auth/auth.module';
     }),
     GraphQLModule.forRoot({
       autoSchemaFile: 'schema.gql',
-      playground: true,
-      introspection: true,
+      installSubscriptionHandlers: true,
+      subscriptions: {
+        'subscriptions-transport-ws': {
+          onConnect: (connectionParams: unknown) => ({
+            headers: connectionParams,
+          }),
+        },
+      },
+      context: ({
+        req,
+      }: {
+        req: { headers: Record<string, string> };
+      }): GqlContext => ({ request: req }),
     }),
     ProductModule,
     CustomerModule,

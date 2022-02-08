@@ -894,6 +894,10 @@ type ProviderAggregateResponse {
   max: ProviderMaxAggregate
 }
 
+type LoginResponse {
+  accessToken: String!
+}
+
 type Query {
   productAggregate(
     """Filter to find records to aggregate on"""
@@ -1117,6 +1121,7 @@ type Mutation {
   updateManyOrders(input: UpdateManyOrdersInput!): UpdateManyResponse!
   deleteOneOrder(input: DeleteOneOrderInput!): OrderDeleteResponse!
   deleteManyOrders(input: DeleteManyOrdersInput!): DeleteManyResponse!
+  login(input: LoginInputDTO!): LoginResponse!
 }
 
 input SetOrderOnProductInput {
@@ -1600,4 +1605,9 @@ input OrderDeleteFilter {
   date: DateFieldComparison
   quantity: NumberFieldComparison
   customerId: StringFieldComparison
+}
+
+input LoginInputDTO {
+  email: String!
+  password: String!
 }

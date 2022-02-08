@@ -7,6 +7,7 @@ import { ProviderService } from './provider.service';
 import { ProviderResolver } from './provider.resolver';
 import { ProviderInputDto } from './dto/provider-input.dto';
 import { UserModule } from '../user/user.module';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { UserModule } from '../user/user.module';
           enableAggregate: true,
           enableTotalCount: true,
           enableSubscriptions: false,
+          guards: [JwtAuthGuard],
         },
       ],
     }),

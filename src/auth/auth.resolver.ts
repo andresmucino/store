@@ -1,35 +1,31 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import { UnauthorizedException, UseGuards } from '@nestjs/common';
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
+import { UserDto } from 'src/modules/user/dto/user.dto';
 import { AuthService } from './auth.service';
-import { Auth } from './entities/auth.entity';
-import { CreateAuthInput } from './dto/create-auth.input';
-import { UpdateAuthInput } from './dto/update-auth.input';
+import { CurrentUser } from './current-user.decorator';
+import { LoginInputDTO } from './dto/login-input.dto';
+import { LoginResponseDto } from './dto/login-response.dto';
+import { JwtAuthGuard } from './guards/jwt-auth.guard';
+import { AuthenticatedUser } from './interface/auth.interface';
 
-@Resolver(() => Auth)
+@Resolver()
 export class AuthResolver {
-  constructor(private readonly authService: AuthService) {}
+  constructor(private authService: AuthService) {}
 
-  @Mutation(() => Auth)
-  createAuth(@Args('createAuthInput') createAuthInput: CreateAuthInput) {
-    return this.authService.create(createAuthInput);
+  @Mutation(() => LoginResponseDto)
+  async login(@Args('input') input: LoginInputDTO): Promise<LoginResponseDto> {
+    const user = await this.authService.ValidateUser(
+      input.email,
+      input.password,
+    );
+    if (!user) {
+      throw new UnauthorizedException();
+    }
+    return this.authService.login(user);
   }
 
-  @Query(() => [Auth], { name: 'auth' })
-  findAll() {
-    return this.authService.findAll();
-  }
-
-  @Query(() => Auth, { name: 'auth' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.authService.findOne(id);
-  }
-
-  @Mutation(() => Auth)
-  updateAuth(@Args('updateAuthInput') updateAuthInput: UpdateAuthInput) {
-    return this.authService.update(updateAuthInput.id, updateAuthInput);
-  }
-
-  @Mutation(() => Auth)
-  removeAuth(@Args('id', { type: () => Int }) id: number) {
-    return this.authService.remove(id);
+  @UseGuards(JwtAuthGuard)
+  me(@CurrentUser() user: AuthenticatedUser): Promise<UserDto> {
+    return this.authService.currentUser(user);
   }
 }

@@ -6,11 +6,6 @@ export class CreateUserInput {
   @Field()
   @IsString()
   @IsNotEmpty()
-  id!: string;
-
-  @Field()
-  @IsString()
-  @IsNotEmpty()
   email!: string;
 
   @Field()
