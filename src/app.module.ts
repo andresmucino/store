@@ -3,7 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import config from './config';
+import config, { GqlContext } from './config';
 import { DatabaseModule } from './database/database.module';
 import { enviroments } from './enviroments';
 import { CustomerModule } from './modules/customers/customer.module';
@@ -12,8 +12,6 @@ import { ProductModule } from './modules/products/product.module';
 import { ProviderModule } from './modules/providers/provider.module';
 import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './auth/auth.module';
-
-export type GqlContext = { request: { headers: Record<string, string> } };
 
 @Module({
   imports: [
@@ -25,13 +23,15 @@ export type GqlContext = { request: { headers: Record<string, string> } };
     GraphQLModule.forRoot({
       autoSchemaFile: 'schema.gql',
       installSubscriptionHandlers: true,
-      subscriptions: {
-        'subscriptions-transport-ws': {
-          onConnect: (connectionParams: unknown) => ({
-            headers: connectionParams,
-          }),
-        },
-      },
+      introspection: true,
+      playground: true,
+      // subscriptions: {
+      //   'subscriptions-transport-ws': {
+      //     onConnect: (connectionParams: unknown) => ({
+      //       headers: connectionParams,
+      //     }),
+      //   },
+      // },
       context: ({
         req,
       }: {

@@ -3,65 +3,42 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
-  PrimaryGeneratedColumn,
+  PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 @Entity({ name: 'user' })
 export class UserEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn({type: 'text', name: 'id'})
   id!: string;
 
-  @Column()
+  @Column({
+    name: 'email',
+    type: 'text',
+  })
   email!: string;
 
-  @Column()
+  @Column({
+    name: 'password',
+    type: 'text',
+  })
   password!: string;
 
-  @Column({
-    name: 'created_by_id',
-    type: 'text',
+  @CreateDateColumn({
+    name: 'create_at',
+    type: 'time with time zone',
   })
-  createdById!: string;
-
-  @Column({
-    name: 'created_by',
-    type: 'text',
-  })
-  createdBy!: string;
-
-  @Column({
-    name: 'updated_by_id',
-    type: 'text',
-  })
-  updatedById!: string;
-
-  @Column({
-    name: 'updated_by',
-    type: 'text',
-  })
-  updatedBy!: string;
-
-  @Column({
-    name: 'deleted_by_id',
-    type: 'text',
-    nullable: true,
-  })
-  deletedById!: string;
-
-  @Column({
-    name: 'deleted_by',
-    type: 'text',
-    nullable: true,
-  })
-  deletedBy!: string;
-
-  @CreateDateColumn()
   createAt!: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({
+    name: 'update_at',
+    type: 'time with time zone',
+  })
   updateAt!: Date;
 
-  @DeleteDateColumn()
+  @DeleteDateColumn({
+    name: 'delete_at',
+    type: 'time with time zone',
+  })
   deleteAt?: Date;
 }

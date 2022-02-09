@@ -6,6 +6,7 @@ import { OrderEntity } from './entities/order.entity';
 import { OrderService } from './order.service';
 import { OrderResolver } from './order.resolver';
 import { OrderInputDto } from './dto/order-input.dto';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { OrderInputDto } from './dto/order-input.dto';
           enableAggregate: true,
           enableTotalCount: true,
           enableSubscriptions: false,
+          guards: [JwtAuthGuard]
         },
       ],
     }),

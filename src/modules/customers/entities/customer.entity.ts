@@ -5,13 +5,16 @@ import {
   DeleteDateColumn,
   Entity,
   OneToMany,
-  PrimaryGeneratedColumn,
+  PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 @Entity({ name: 'customer' })
 export class CustomerEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn({
+    type: 'text',
+    name: 'id',
+  })
   id!: string;
 
   @Column()
@@ -33,11 +36,11 @@ export class CustomerEntity {
   orders: OrderEntity[];
 
   @CreateDateColumn()
-  createAt: Date;
+  createAt!: Date;
 
   @UpdateDateColumn()
-  updateAt: Date;
+  updateAt!: Date;
 
   @DeleteDateColumn()
-  deleteAt: Date;
+  deleteAt?: Date;
 }

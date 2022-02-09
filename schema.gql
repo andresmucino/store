@@ -4,7 +4,7 @@
 
 type Provider {
   id: ID!
-  contactname: String!
+  contactName: String!
   email: String!
   phone: String!
   direction: String!
@@ -29,6 +29,7 @@ type Product {
   orderId: String
   createAt: DateTime!
   updateAt: DateTime!
+  deleteAt: DateTime
   providersAggregate(
     """Filter to find records to aggregate on"""
     filter: ProviderAggregateFilter
@@ -50,7 +51,7 @@ input ProviderAggregateFilter {
   and: [ProviderAggregateFilter!]
   or: [ProviderAggregateFilter!]
   id: IDFilterComparison
-  contactname: StringFieldComparison
+  contactName: StringFieldComparison
   email: StringFieldComparison
   phone: StringFieldComparison
   direction: StringFieldComparison
@@ -103,7 +104,7 @@ input ProviderFilter {
   and: [ProviderFilter!]
   or: [ProviderFilter!]
   id: IDFilterComparison
-  contactname: StringFieldComparison
+  contactName: StringFieldComparison
   email: StringFieldComparison
   phone: StringFieldComparison
   direction: StringFieldComparison
@@ -151,7 +152,7 @@ input ProviderSort {
 
 enum ProviderSortFields {
   id
-  contactname
+  contactName
   email
   phone
   direction
@@ -254,7 +255,7 @@ input ProductFilterProviderFilter {
   and: [ProductFilterProviderFilter!]
   or: [ProductFilterProviderFilter!]
   id: IDFilterComparison
-  contactname: StringFieldComparison
+  contactName: StringFieldComparison
   email: StringFieldComparison
   phone: StringFieldComparison
   direction: StringFieldComparison
@@ -286,7 +287,7 @@ type Customer {
   image: String
   createAt: DateTime!
   updateAt: DateTime!
-  deleteAt: DateTime!
+  deleteAt: DateTime
   ordersAggregate(
     """Filter to find records to aggregate on"""
     filter: OrderAggregateFilter
@@ -645,6 +646,7 @@ type ProductDeleteResponse {
   orderId: String
   createAt: DateTime
   updateAt: DateTime
+  deleteAt: DateTime
 }
 
 type ProductConnection {
@@ -730,7 +732,7 @@ type ProductProvidersConnection {
 
 type ProductProvidersAggregateGroupBy {
   id: ID
-  contactname: String
+  contactName: String
   email: String
   phone: String
   direction: String
@@ -739,7 +741,7 @@ type ProductProvidersAggregateGroupBy {
 
 type ProductProvidersCountAggregate {
   id: Int
-  contactname: Int
+  contactName: Int
   email: Int
   phone: Int
   direction: Int
@@ -748,7 +750,7 @@ type ProductProvidersCountAggregate {
 
 type ProductProvidersMinAggregate {
   id: ID
-  contactname: String
+  contactName: String
   email: String
   phone: String
   direction: String
@@ -757,7 +759,7 @@ type ProductProvidersMinAggregate {
 
 type ProductProvidersMaxAggregate {
   id: ID
-  contactname: String
+  contactName: String
   email: String
   phone: String
   direction: String
@@ -772,19 +774,21 @@ type ProductProvidersAggregateResponse {
 }
 
 type User {
-  id: String!
+  id: ID!
   email: String!
   password: String!
   createAt: DateTime!
   updateAt: DateTime!
+  deleteAt: DateTime
 }
 
 type UserDeleteResponse {
-  id: String
+  id: ID
   email: String
   password: String
   createAt: DateTime
   updateAt: DateTime
+  deleteAt: DateTime
 }
 
 type UserConnection {
@@ -799,7 +803,7 @@ type UserConnection {
 }
 
 type UserAggregateGroupBy {
-  id: String
+  id: ID
   email: String
   password: String
 }
@@ -811,13 +815,13 @@ type UserCountAggregate {
 }
 
 type UserMinAggregate {
-  id: String
+  id: ID
   email: String
   password: String
 }
 
 type UserMaxAggregate {
-  id: String
+  id: ID
   email: String
   password: String
 }
@@ -831,7 +835,7 @@ type UserAggregateResponse {
 
 type ProviderDeleteResponse {
   id: ID
-  contactname: String
+  contactName: String
   email: String
   phone: String
   direction: String
@@ -853,7 +857,7 @@ type ProviderConnection {
 
 type ProviderAggregateGroupBy {
   id: ID
-  contactname: String
+  contactName: String
   email: String
   phone: String
   direction: String
@@ -862,7 +866,7 @@ type ProviderAggregateGroupBy {
 
 type ProviderCountAggregate {
   id: Int
-  contactname: Int
+  contactName: Int
   email: Int
   phone: Int
   direction: Int
@@ -871,7 +875,7 @@ type ProviderCountAggregate {
 
 type ProviderMinAggregate {
   id: ID
-  contactname: String
+  contactName: String
   email: String
   phone: String
   direction: String
@@ -880,7 +884,7 @@ type ProviderMinAggregate {
 
 type ProviderMaxAggregate {
   id: ID
-  contactname: String
+  contactName: String
   email: String
   phone: String
   direction: String
@@ -1041,7 +1045,7 @@ enum CustomerSortFields {
 input UserAggregateFilter {
   and: [UserAggregateFilter!]
   or: [UserAggregateFilter!]
-  id: StringFieldComparison
+  id: IDFilterComparison
   email: StringFieldComparison
   password: StringFieldComparison
 }
@@ -1049,7 +1053,7 @@ input UserAggregateFilter {
 input UserFilter {
   and: [UserFilter!]
   or: [UserFilter!]
-  id: StringFieldComparison
+  id: IDFilterComparison
   email: StringFieldComparison
   password: StringFieldComparison
 }
@@ -1201,6 +1205,7 @@ input UpdateProduct {
   orderId: String
   createAt: DateTime
   updateAt: DateTime
+  deleteAt: DateTime
 }
 
 input UpdateManyProductsInput {
@@ -1353,11 +1358,12 @@ input CreateOneUserInput {
 }
 
 input CreateUser {
-  id: String
+  id: ID
   email: String
   password: String
   createAt: DateTime
   updateAt: DateTime
+  deleteAt: DateTime
 }
 
 input CreateManyUsersInput {
@@ -1374,11 +1380,12 @@ input UpdateOneUserInput {
 }
 
 input UpdateUser {
-  id: String
+  id: ID
   email: String
   password: String
   createAt: DateTime
   updateAt: DateTime
+  deleteAt: DateTime
 }
 
 input UpdateManyUsersInput {
@@ -1392,7 +1399,7 @@ input UpdateManyUsersInput {
 input UserUpdateFilter {
   and: [UserUpdateFilter!]
   or: [UserUpdateFilter!]
-  id: StringFieldComparison
+  id: IDFilterComparison
   email: StringFieldComparison
   password: StringFieldComparison
 }
@@ -1410,7 +1417,7 @@ input DeleteManyUsersInput {
 input UserDeleteFilter {
   and: [UserDeleteFilter!]
   or: [UserDeleteFilter!]
-  id: StringFieldComparison
+  id: IDFilterComparison
   email: StringFieldComparison
   password: StringFieldComparison
 }
@@ -1437,7 +1444,7 @@ input CreateOneProviderInput {
 }
 
 input ProviderInput {
-  contactname: String!
+  contactName: String!
   email: String!
   phone: String!
   direction: String!
@@ -1469,7 +1476,7 @@ input ProviderUpdateFilter {
   and: [ProviderUpdateFilter!]
   or: [ProviderUpdateFilter!]
   id: IDFilterComparison
-  contactname: StringFieldComparison
+  contactName: StringFieldComparison
   email: StringFieldComparison
   phone: StringFieldComparison
   direction: StringFieldComparison
@@ -1490,7 +1497,7 @@ input ProviderDeleteFilter {
   and: [ProviderDeleteFilter!]
   or: [ProviderDeleteFilter!]
   id: IDFilterComparison
-  contactname: StringFieldComparison
+  contactName: StringFieldComparison
   email: StringFieldComparison
   phone: StringFieldComparison
   direction: StringFieldComparison

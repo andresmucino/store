@@ -8,15 +8,4 @@ export default registerAs('config', () => {
   };
 });
 
-export interface AuthConfig {
-  header: string;
-}
-export interface Config {
-  auth: AuthConfig;
-}
-
-export const config: Config = {
-  auth: {
-    header: 'super-secret',
-  },
-};
+export type GqlContext = { request: { headers: Record<string, string> } };

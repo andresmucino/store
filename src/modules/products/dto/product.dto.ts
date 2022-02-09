@@ -52,4 +52,7 @@ export class ProductDto {
 
   @Field(() => GraphQLISODateTime)
   updateAt?: Date;
+
+  @Field(() => GraphQLISODateTime, { nullable: true })
+  deleteAt?: Date;
 }

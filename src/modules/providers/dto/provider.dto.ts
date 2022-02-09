@@ -19,7 +19,7 @@ export class ProviderDto {
   id!: string;
 
   @FilterableField()
-  contactname!: string;
+  contactName!: string;
 
   @FilterableField()
   email!: string;
@@ -32,6 +32,24 @@ export class ProviderDto {
 
   @FilterableField({ nullable: true })
   productId?: string;
+
+  // @FilterableField()
+  // createdBy?: string;
+
+  // @FilterableField()
+  // createdById?: string;
+
+  // @FilterableField()
+  // updatedBy?: string;
+
+  // @FilterableField()
+  // updatedById?: string;
+
+  // @FilterableField({ nullable: true })
+  // deletedBy?: string;
+
+  // @FilterableField({ nullable: true })
+  // deletedById?: string;
 
   @Field(() => GraphQLISODateTime)
   createAt!: Date;

@@ -8,13 +8,16 @@ import {
   JoinColumn,
   ManyToOne,
   OneToMany,
-  PrimaryGeneratedColumn,
+  PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 @Entity({ name: 'order' })
 export class OrderEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn({
+    type: 'text',
+    name: 'id',
+  })
   id!: string;
 
   @Column()

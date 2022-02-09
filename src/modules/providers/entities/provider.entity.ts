@@ -6,25 +6,38 @@ import {
   Entity,
   JoinColumn,
   OneToOne,
+  PrimaryColumn,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 @Entity({ name: 'provider' })
 export class ProviderEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn({ type: 'text', name: 'id' })
   id!: string;
 
-  @Column()
-  contactname!: string;
+  @Column({
+    type: 'text',
+    name: 'contect_name',
+  })
+  contactName!: string;
 
-  @Column()
+  @Column({
+    type: 'text',
+    name: 'email',
+  })
   email!: string;
 
-  @Column()
+  @Column({
+    type: 'text',
+    name: 'phone',
+  })
   phone!: string;
 
-  @Column()
+  @Column({
+    type: 'text',
+    name: 'direction',
+  })
   direction!: string;
 
   @Column({
@@ -40,12 +53,60 @@ export class ProviderEntity {
   @JoinColumn({ name: 'pruduct_id' })
   product?: ProductEntity;
 
-  @CreateDateColumn()
+  // @Column({
+  //   type: 'text',
+  //   name: 'created_by',
+  // })
+  // createdBy!: string;
+
+  // @Column({
+  //   type: 'text',
+  //   name: 'created_by_id',
+  // })
+  // createdById!: string;
+
+  // @Column({
+  //   type: 'text',
+  //   name: 'updated_by',
+  // })
+  // updatedBy!: string;
+
+  // @Column({
+  //   type: 'text',
+  //   name: 'updated_by_id',
+  // })
+  // updatedById!: string;
+
+  // @Column({
+  //   type: 'text',
+  //   name: 'deleted_by',
+  //   nullable: true,
+  // })
+  // deletedBy!: string;
+
+  // @Column({
+  //   type: 'text',
+  //   name: 'deleted_by_id',
+  //   nullable: true,
+  // })
+  // deletedById!: string;
+
+  @CreateDateColumn({
+    type: 'time with time zone',
+    name: 'create_at',
+  })
   createAt!: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({
+    type: 'time with time zone',
+    name: 'update_at',
+  })
   updateAt!: Date;
 
-  @DeleteDateColumn()
+  @DeleteDateColumn({
+    type: 'time with time zone',
+    name: 'delete_at',
+    nullable: true,
+  })
   deleteAt?: Date;
 }

@@ -3,7 +3,7 @@ import {
   PagingStrategies,
   QueryOptions,
 } from '@nestjs-query/query-graphql';
-import { Field, GraphQLISODateTime, ObjectType } from '@nestjs/graphql';
+import { Field, GraphQLISODateTime, ID, ObjectType } from '@nestjs/graphql';
 
 @ObjectType('User')
 @QueryOptions({
@@ -12,7 +12,7 @@ import { Field, GraphQLISODateTime, ObjectType } from '@nestjs/graphql';
   maxResultsSize: 1000,
 })
 export class UserDto {
-  @FilterableField()
+  @FilterableField(() => ID)
   id!: string;
 
   @FilterableField()

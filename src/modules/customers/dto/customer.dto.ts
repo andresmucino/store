@@ -45,6 +45,6 @@ export class CustomerDto {
   @Field(() => GraphQLISODateTime)
   updateAt!: Date;
 
-  @Field(() => GraphQLISODateTime)
+  @Field(() => GraphQLISODateTime, { nullable: true })
   deleteAt?: Date;
 }

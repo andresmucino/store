@@ -6,6 +6,7 @@ import { CustomerEntity } from './entities/customer.entity';
 import { CustomerService } from './customer.service';
 import { CustomerResolver } from './customer.resolver';
 import { CustomerInputDto } from './dto/customer-input.dto';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { CustomerInputDto } from './dto/customer-input.dto';
           enableAggregate: true,
           enableTotalCount: true,
           enableSubscriptions: false,
+          guards: [JwtAuthGuard]
         },
       ],
     }),

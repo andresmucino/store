@@ -6,6 +6,7 @@ import { ProductDto } from './dto/product.dto';
 import { ProductService } from './product.service';
 import { ProductResolver } from './product.resolver';
 import { ProductInputDto } from './dto/product-input.dto';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { ProductInputDto } from './dto/product-input.dto';
           enableAggregate: true,
           enableTotalCount: true,
           enableSubscriptions: false,
+          guards: [JwtAuthGuard],
         },
       ],
     }),
