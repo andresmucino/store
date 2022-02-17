@@ -11,7 +11,7 @@ import { Field, GraphQLISODateTime, ID, ObjectType } from '@nestjs/graphql';
   enableTotalCount: true,
   maxResultsSize: 1000,
 })
-export class UserDto {
+export class UserDTO {
   @FilterableField(() => ID)
   id!: string;
 

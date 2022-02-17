@@ -1319,21 +1319,17 @@ input CustomerDeleteFilter {
 
 input CreateOneUserInput {
   """The record to create"""
-  user: CreateUser!
+  user: UserInput!
 }
 
-input CreateUser {
-  id: ID
-  email: String
-  password: String
-  createAt: DateTime
-  updateAt: DateTime
-  deleteAt: DateTime
+input UserInput {
+  email: String!
+  password: String!
 }
 
 input CreateManyUsersInput {
   """Array of records to create"""
-  users: [CreateUser!]!
+  users: [UserInput!]!
 }
 
 input UpdateOneUserInput {
@@ -1341,16 +1337,12 @@ input UpdateOneUserInput {
   id: ID!
 
   """The update to apply."""
-  update: UpdateUser!
+  update: UserUpdate!
 }
 
-input UpdateUser {
-  id: ID
-  email: String
-  password: String
-  createAt: DateTime
-  updateAt: DateTime
-  deleteAt: DateTime
+input UserUpdate {
+  email: String!
+  password: String!
 }
 
 input UpdateManyUsersInput {
@@ -1358,7 +1350,7 @@ input UpdateManyUsersInput {
   filter: UserUpdateFilter!
 
   """The update to apply to all records found using the filter"""
-  update: UpdateUser!
+  update: UserUpdate!
 }
 
 input UserUpdateFilter {

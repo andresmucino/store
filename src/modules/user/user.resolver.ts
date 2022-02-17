@@ -4,23 +4,23 @@ import {
   UpdateManyResponseType,
 } from '@nestjs-query/query-graphql';
 import { Args, ID, Mutation, Resolver } from '@nestjs/graphql';
-import { UserDto } from './dto/user.dto';
+import { UserDTO } from './dto/user.dto';
 import { UserService } from './user.service';
 
-@Resolver(() => UserDto)
+@Resolver(() => UserDTO)
 export class UserResolver {
   constructor(private service: UserService) {}
 
-  @Mutation(() => UserDto)
+  @Mutation(() => UserDTO)
   restoreOneUser(
     @Args('input', { type: () => ID }) id: string,
-  ): Promise<UserDto> {
+  ): Promise<UserDTO> {
     return this.service.restoreOne(id);
   }
 
   @Mutation(() => UpdateManyResponseType())
   restoreManyUsers(
-    @Args('input', { type: () => FilterType(UserDto) }) filter: Filter<UserDto>,
+    @Args('input', { type: () => FilterType(UserDTO) }) filter: Filter<UserDTO>,
   ): Promise<UpdateManyResponse> {
     return this.service.restoreMany(filter);
   }

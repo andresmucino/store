@@ -7,15 +7,15 @@ import {
 import { Field, InputType } from '@nestjs/graphql';
 import { IsNotEmpty, IsString } from 'class-validator';
 import { nanoid } from 'nanoid';
-import { UserDto } from './user.dto';
+import { UserDTO } from './user.dto';
 
 @InputType('UserInput')
-@BeforeCreateOne((input: CreateOneInputType<UserDto>, context: any) => {
+@BeforeCreateOne((input: CreateOneInputType<UserDTO>, context: any) => {
   input.input.id = nanoid(24);
   return input;
 })
 @BeforeCreateMany(
-  (input: CreateManyInputType<UserDto>, context: any) => {
+  (input: CreateManyInputType<UserDTO>, context: any) => {
     input.input = input.input.map((c) => {
       const id = nanoid(24);
       return {
@@ -26,7 +26,7 @@ import { UserDto } from './user.dto';
     return input;
   },
 )
-export class CreateUserInput {
+export class UserInputDTO {
   @Field()
   @IsString()
   @IsNotEmpty()

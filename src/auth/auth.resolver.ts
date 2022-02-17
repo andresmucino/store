@@ -1,6 +1,6 @@
 import { UnauthorizedException, UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
-import { UserDto } from 'src/modules/user/dto/user.dto';
+import { UserDTO } from 'src/modules/user/dto/user.dto';
 import { AuthService } from './auth.service';
 import { CurrentUser } from './current-user.decorator';
 import { LoginInputDTO } from './dto/login-input.dto';
@@ -25,7 +25,7 @@ export class AuthResolver {
   }
 
   @UseGuards(JwtAuthGuard)
-  me(@CurrentUser() user: AuthenticatedUser): Promise<UserDto> {
+  me(@CurrentUser() user: AuthenticatedUser): Promise<UserDTO> {
     return this.authService.currentUser(user);
   }
 }

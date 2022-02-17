@@ -2,7 +2,7 @@
 import { InjectQueryService, QueryService } from '@nestjs-query/core';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { UserDto } from 'src/modules/user/dto/user.dto';
+import { UserDTO } from 'src/modules/user/dto/user.dto';
 import { UserEntity } from 'src/modules/user/entities/user.entity';
 import { LoginResponseDto } from './dto/login-response.dto';
 import { AuthenticatedUser, JwtPayload } from './interface/auth.interface';
@@ -30,7 +30,7 @@ export class AuthService {
     return null;
   }
 
-  async currentUser(authUser: AuthenticatedUser): Promise<UserDto> {
+  async currentUser(authUser: AuthenticatedUser): Promise<UserDTO> {
     try {
       const user = await this.userService.getById(authUser.id);
       return user;

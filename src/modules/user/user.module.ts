@@ -4,7 +4,9 @@ import { UserResolver } from './user.resolver';
 import { NestjsQueryGraphQLModule } from '@nestjs-query/query-graphql';
 import { NestjsQueryTypeOrmModule } from '@nestjs-query/query-typeorm';
 import { UserEntity } from './entities/user.entity';
-import { UserDto } from './dto/user.dto';
+import { UserDTO } from './dto/user.dto';
+import { UserInputDTO } from './dto/user-input.dto';
+import { UserUpdateDTO } from './dto/user-update.dto';
 
 @Module({
   providers: [UserResolver, UserService],
@@ -13,8 +15,10 @@ import { UserDto } from './dto/user.dto';
       imports: [NestjsQueryTypeOrmModule.forFeature([UserEntity])],
       resolvers: [
         {
-          DTOClass: UserDto,
+          DTOClass: UserDTO,
           EntityClass: UserEntity,
+          CreateDTOClass: UserInputDTO,
+          UpdateDTOClass: UserUpdateDTO,
           enableAggregate: true,
           enableTotalCount: true,
           enableSubscriptions: false,
