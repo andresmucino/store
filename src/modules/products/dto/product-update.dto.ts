@@ -28,25 +28,25 @@ import { ProductDTO } from './product.dto';
   },
 )
 export class ProductUpdateDTO {
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   @IsString()
   @IsNotEmpty()
   name?: string;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   @IsString()
   @IsNotEmpty()
   description?: string;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   @IsNumber()
   @IsNotEmpty()
   price?: number;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   @IsNumber()
   @IsNotEmpty()
@@ -57,4 +57,10 @@ export class ProductUpdateDTO {
   @IsOptional()
   @IsNotEmpty()
   image?: string;
+
+  @Field({ nullable: true })
+  @IsString()
+  @IsOptional()
+  @IsNotEmpty()
+  providerId?: string;
 }

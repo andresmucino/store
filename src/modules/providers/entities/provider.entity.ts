@@ -15,6 +15,7 @@ export class ProviderEntity {
   @PrimaryColumn({ type: 'text', name: 'id' })
   id!: string;
 
+  // issue for change name
   @Column({
     type: 'text',
     name: 'contect_name',

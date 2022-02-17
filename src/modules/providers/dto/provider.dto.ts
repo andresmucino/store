@@ -8,7 +8,7 @@ import { GraphQLISODateTime, ID, ObjectType } from '@nestjs/graphql';
 import { ProductDTO } from 'src/modules/products/dto/product.dto';
 
 @ObjectType('Provider')
-@FilterableRelation('product', () => ProductDTO)
+@FilterableRelation('product', () => ProductDTO, { nullable: true })
 @QueryOptions({
   pagingStrategy: PagingStrategies.OFFSET,
   enableTotalCount: true,
@@ -29,9 +29,6 @@ export class ProviderDTO {
 
   @FilterableField()
   direction!: string;
-
-  @FilterableField({ nullable: true })
-  productId?: string;
 
   @FilterableField()
   createdBy?: string;

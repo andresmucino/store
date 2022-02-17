@@ -34,33 +34,33 @@ import { ProviderDTO } from './provider.dto';
   },
 )
 export class ProviderUpdateDTO {
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   @IsString()
   @IsNotEmpty()
   contactName?: string;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   @IsEmail()
   @IsNotEmpty()
   email?: string;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   @IsPhoneNumber()
   @IsNotEmpty()
   phone?: string;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   @IsString()
   @IsNotEmpty()
   direction?: string;
 
-  // @Field({ nullable: true })
-  // @IsOptional()
-  // @IsString()
-  // @IsNotEmpty()
-  // productId?: string;
+  @Field({ nullable: true })
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
+  productId?: string;
 }

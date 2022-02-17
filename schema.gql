@@ -251,7 +251,6 @@ type Provider {
   email: String!
   phone: String!
   direction: String!
-  productId: String
   createdBy: String!
   createdById: String!
   updatedBy: String!
@@ -261,7 +260,7 @@ type Provider {
   createdAt: DateTime!
   updatedAt: DateTime!
   deletedAt: DateTime
-  product: Product!
+  product: Product
 }
 
 type Product {
@@ -463,7 +462,6 @@ type ProviderDeleteResponse {
   email: String
   phone: String
   direction: String
-  productId: String
   createdBy: String
   createdById: String
   updatedBy: String
@@ -492,7 +490,6 @@ type ProviderAggregateGroupBy {
   email: String
   phone: String
   direction: String
-  productId: String
   createdBy: String
   createdById: String
   updatedBy: String
@@ -510,7 +507,6 @@ type ProviderCountAggregate {
   email: Int
   phone: Int
   direction: Int
-  productId: Int
   createdBy: Int
   createdById: Int
   updatedBy: Int
@@ -528,7 +524,6 @@ type ProviderMinAggregate {
   email: String
   phone: String
   direction: String
-  productId: String
   createdBy: String
   createdById: String
   updatedBy: String
@@ -546,7 +541,6 @@ type ProviderMaxAggregate {
   email: String
   phone: String
   direction: String
-  productId: String
   createdBy: String
   createdById: String
   updatedBy: String
@@ -769,7 +763,6 @@ input ProductFilterProviderFilter {
   email: StringFieldComparison
   phone: StringFieldComparison
   direction: StringFieldComparison
-  productId: StringFieldComparison
   createdBy: StringFieldComparison
   createdById: StringFieldComparison
   updatedBy: StringFieldComparison
@@ -926,7 +919,6 @@ input ProviderAggregateFilter {
   email: StringFieldComparison
   phone: StringFieldComparison
   direction: StringFieldComparison
-  productId: StringFieldComparison
   createdBy: StringFieldComparison
   createdById: StringFieldComparison
   updatedBy: StringFieldComparison
@@ -946,7 +938,6 @@ input ProviderFilter {
   email: StringFieldComparison
   phone: StringFieldComparison
   direction: StringFieldComparison
-  productId: StringFieldComparison
   createdBy: StringFieldComparison
   createdById: StringFieldComparison
   updatedBy: StringFieldComparison
@@ -989,7 +980,6 @@ enum ProviderSortFields {
   email
   phone
   direction
-  productId
   createdBy
   createdById
   updatedBy
@@ -1138,11 +1128,12 @@ input UpdateOneProductInput {
 }
 
 input ProductUpdate {
-  name: String!
-  description: String!
-  price: Float!
-  stock: Float!
+  name: String
+  description: String
+  price: Float
+  stock: Float
   image: String
+  providerId: String
 }
 
 input UpdateManyProductsInput {
@@ -1390,10 +1381,11 @@ input UpdateOneProviderInput {
 }
 
 input ProviderUpdate {
-  contactName: String!
-  email: String!
-  phone: String!
-  direction: String!
+  contactName: String
+  email: String
+  phone: String
+  direction: String
+  productId: String
 }
 
 input UpdateManyProvidersInput {
@@ -1412,7 +1404,6 @@ input ProviderUpdateFilter {
   email: StringFieldComparison
   phone: StringFieldComparison
   direction: StringFieldComparison
-  productId: StringFieldComparison
   createdBy: StringFieldComparison
   createdById: StringFieldComparison
   updatedBy: StringFieldComparison
@@ -1442,7 +1433,6 @@ input ProviderDeleteFilter {
   email: StringFieldComparison
   phone: StringFieldComparison
   direction: StringFieldComparison
-  productId: StringFieldComparison
   createdBy: StringFieldComparison
   createdById: StringFieldComparison
   updatedBy: StringFieldComparison
