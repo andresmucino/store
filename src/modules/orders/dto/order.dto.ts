@@ -6,7 +6,7 @@ import {
   QueryOptions,
 } from '@nestjs-query/query-graphql';
 import { Field, GraphQLISODateTime, ID, ObjectType } from '@nestjs/graphql';
-import { CustomerDto } from 'src/modules/customers/dto/customer.dto';
+// import { CustomerDto } from 'src/modules/customers/dto/customer.dto';
 // import { ProductDto } from 'src/modules/products/dto/product.dto';
 
 @ObjectType('Order')

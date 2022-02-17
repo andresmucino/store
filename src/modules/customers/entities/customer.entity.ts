@@ -17,30 +17,98 @@ export class CustomerEntity {
   })
   id!: string;
 
-  @Column()
+  @Column({
+    type: 'text',
+    name: 'name',
+  })
   name!: string;
 
-  @Column()
+  @Column({
+    type: 'text',
+    name: 'lastname',
+  })
   lastname!: string;
 
-  @Column()
+  @Column({
+    type: 'text',
+    name: 'phone',
+  })
   phone!: string;
 
-  @Column()
+  @Column({
+    type: 'text',
+    name: 'direction',
+  })
   direction!: string;
 
-  @Column({ nullable: true })
-  image?: string;
+  @Column({
+    type: 'text',
+    name: 'avatar',
+    nullable: true,
+  })
+  avatar?: string;
 
   // @OneToMany(() => OrderEntity, (order) => order.customer, { nullable: true })
   // orders: OrderEntity[];
 
-  @CreateDateColumn()
+  @Column({
+    type: 'text',
+    name: 'created_by',
+    nullable: true,
+  })
+  createdBy!: string;
+
+  @Column({
+    type: 'text',
+    name: 'created_by_id',
+    nullable: true,
+  })
+  createdById!: string;
+
+  @Column({
+    type: 'text',
+    name: 'updated_by',
+    nullable: true,
+  })
+  updatedBy!: string;
+
+  @Column({
+    type: 'text',
+    name: 'updated_by_id',
+    nullable: true,
+  })
+  updatedById!: string;
+
+  @Column({
+    type: 'text',
+    name: 'deleted_by',
+    nullable: true,
+  })
+  deletedBy!: string;
+
+  @Column({
+    type: 'text',
+    name: 'deleted_by_id',
+    nullable: true,
+  })
+  deletedById!: string;
+
+  @CreateDateColumn({
+    type: 'time with time zone',
+    name: 'create_at',
+  })
   createAt!: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({
+    type: 'time with time zone',
+    name: 'update_at',
+  })
   updateAt!: Date;
 
-  @DeleteDateColumn()
+  @DeleteDateColumn({
+    type: 'time with time zone',
+    name: 'delete_at',
+    nullable: true,
+  })
   deleteAt?: Date;
 }

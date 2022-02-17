@@ -7,28 +7,41 @@ import {
 import { Field, InputType } from '@nestjs/graphql';
 import { IsNotEmpty, IsPhoneNumber, IsString } from 'class-validator';
 import { nanoid } from 'nanoid';
-import { CustomerDto } from './customer.dto';
+import { UserContext } from 'src/auth/interface/auth.interface';
+import { CustomerDTO } from './customer.dto';
 
 @InputType('CustomerInput')
 @BeforeCreateOne(
-  (input: CreateOneInputType<CustomerDto>, context: any) => {
+  (input: CreateOneInputType<CustomerDTO>, context: UserContext) => {
     input.input.id = nanoid(24);
+    input.input.createdBy = context.req.user.email;
+    input.input.createdById = context.req.user.id;
+    input.input.updatedBy = context.req.user.email;
+    input.input.updatedById = context.req.user.id;
     return input;
   },
 )
 @BeforeCreateMany(
-  (input: CreateManyInputType<CustomerDto>, context: any) => {
+  (input: CreateManyInputType<CustomerDTO>, context: UserContext) => {
+    const createdBy = context.req.user.email;
+    const createdById = context.req.user.id;
+    const updatedBy = context.req.user.email;
+    const updatedById = context.req.user.id;
     input.input = input.input.map((c) => {
       const id = nanoid(24);
       return {
         ...c,
         id,
+        createdBy,
+        createdById,
+        updatedBy,
+        updatedById,
       };
     });
     return input;
   },
 )
-export class CustomerInputDto {
+export class CustomerInputDTO {
   @Field()
   @IsString()
   @IsNotEmpty()

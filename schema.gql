@@ -8,7 +8,13 @@ type Customer {
   lastname: String!
   phone: String!
   direction: String!
-  image: String
+  avatar: String
+  createdBy: String!
+  createdById: String!
+  updatedBy: String!
+  updatedById: String!
+  deletedBy: String
+  deletedById: String
   createAt: DateTime!
   updateAt: DateTime!
   deleteAt: DateTime
@@ -30,7 +36,13 @@ type CustomerDeleteResponse {
   lastname: String
   phone: String
   direction: String
-  image: String
+  avatar: String
+  createdBy: String
+  createdById: String
+  updatedBy: String
+  updatedById: String
+  deletedBy: String
+  deletedById: String
   createAt: DateTime
   updateAt: DateTime
   deleteAt: DateTime
@@ -66,7 +78,13 @@ type CustomerAggregateGroupBy {
   lastname: String
   phone: String
   direction: String
-  image: String
+  avatar: String
+  createdBy: String
+  createdById: String
+  updatedBy: String
+  updatedById: String
+  deletedBy: String
+  deletedById: String
 }
 
 type CustomerCountAggregate {
@@ -75,7 +93,13 @@ type CustomerCountAggregate {
   lastname: Int
   phone: Int
   direction: Int
-  image: Int
+  avatar: Int
+  createdBy: Int
+  createdById: Int
+  updatedBy: Int
+  updatedById: Int
+  deletedBy: Int
+  deletedById: Int
 }
 
 type CustomerMinAggregate {
@@ -84,7 +108,13 @@ type CustomerMinAggregate {
   lastname: String
   phone: String
   direction: String
-  image: String
+  avatar: String
+  createdBy: String
+  createdById: String
+  updatedBy: String
+  updatedById: String
+  deletedBy: String
+  deletedById: String
 }
 
 type CustomerMaxAggregate {
@@ -93,7 +123,13 @@ type CustomerMaxAggregate {
   lastname: String
   phone: String
   direction: String
-  image: String
+  avatar: String
+  createdBy: String
+  createdById: String
+  updatedBy: String
+  updatedById: String
+  deletedBy: String
+  deletedById: String
 }
 
 type CustomerAggregateResponse {
@@ -737,7 +773,13 @@ input CustomerAggregateFilter {
   lastname: StringFieldComparison
   phone: StringFieldComparison
   direction: StringFieldComparison
-  image: StringFieldComparison
+  avatar: StringFieldComparison
+  createdBy: StringFieldComparison
+  createdById: StringFieldComparison
+  updatedBy: StringFieldComparison
+  updatedById: StringFieldComparison
+  deletedBy: StringFieldComparison
+  deletedById: StringFieldComparison
 }
 
 input CustomerFilter {
@@ -748,7 +790,13 @@ input CustomerFilter {
   lastname: StringFieldComparison
   phone: StringFieldComparison
   direction: StringFieldComparison
-  image: StringFieldComparison
+  avatar: StringFieldComparison
+  createdBy: StringFieldComparison
+  createdById: StringFieldComparison
+  updatedBy: StringFieldComparison
+  updatedById: StringFieldComparison
+  deletedBy: StringFieldComparison
+  deletedById: StringFieldComparison
 }
 
 input CustomerSort {
@@ -763,7 +811,13 @@ enum CustomerSortFields {
   lastname
   phone
   direction
-  image
+  avatar
+  createdBy
+  createdById
+  updatedBy
+  updatedById
+  deletedBy
+  deletedById
 }
 
 input UserAggregateFilter {
@@ -1064,19 +1118,15 @@ input UpdateOneCustomerInput {
   id: ID!
 
   """The update to apply."""
-  update: UpdateCustomer!
+  update: CustomerUpdate!
 }
 
-input UpdateCustomer {
-  id: ID
-  name: String
-  lastname: String
-  phone: String
-  direction: String
+input CustomerUpdate {
+  name: String!
+  lastname: String!
+  phone: String!
+  direction: String!
   image: String
-  createAt: DateTime
-  updateAt: DateTime
-  deleteAt: DateTime
 }
 
 input UpdateManyCustomersInput {
@@ -1084,7 +1134,7 @@ input UpdateManyCustomersInput {
   filter: CustomerUpdateFilter!
 
   """The update to apply to all records found using the filter"""
-  update: UpdateCustomer!
+  update: CustomerUpdate!
 }
 
 input CustomerUpdateFilter {
@@ -1095,7 +1145,13 @@ input CustomerUpdateFilter {
   lastname: StringFieldComparison
   phone: StringFieldComparison
   direction: StringFieldComparison
-  image: StringFieldComparison
+  avatar: StringFieldComparison
+  createdBy: StringFieldComparison
+  createdById: StringFieldComparison
+  updatedBy: StringFieldComparison
+  updatedById: StringFieldComparison
+  deletedBy: StringFieldComparison
+  deletedById: StringFieldComparison
 }
 
 input DeleteOneCustomerInput {
@@ -1116,7 +1172,13 @@ input CustomerDeleteFilter {
   lastname: StringFieldComparison
   phone: StringFieldComparison
   direction: StringFieldComparison
-  image: StringFieldComparison
+  avatar: StringFieldComparison
+  createdBy: StringFieldComparison
+  createdById: StringFieldComparison
+  updatedBy: StringFieldComparison
+  updatedById: StringFieldComparison
+  deletedBy: StringFieldComparison
+  deletedById: StringFieldComparison
 }
 
 input CreateOneUserInput {

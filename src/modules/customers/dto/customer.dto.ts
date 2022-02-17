@@ -20,7 +20,7 @@ import { Field, GraphQLISODateTime, ID, ObjectType } from '@nestjs/graphql';
   enableTotalCount: true,
   maxResultsSize: 1000,
 })
-export class CustomerDto {
+export class CustomerDTO {
   @FilterableField(() => ID)
   id!: string;
 
@@ -37,7 +37,25 @@ export class CustomerDto {
   direction!: string;
 
   @FilterableField({ nullable: true })
-  image?: string;
+  avatar?: string;
+
+  @FilterableField()
+  createdBy?: string;
+
+  @FilterableField()
+  createdById?: string;
+
+  @FilterableField()
+  updatedBy?: string;
+
+  @FilterableField()
+  updatedById?: string;
+
+  @FilterableField({ nullable: true })
+  deletedBy?: string;
+
+  @FilterableField({ nullable: true })
+  deletedById?: string;
 
   @Field(() => GraphQLISODateTime)
   createAt!: Date;
