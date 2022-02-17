@@ -4,24 +4,24 @@ import {
   UpdateManyResponseType,
 } from '@nestjs-query/query-graphql';
 import { Args, ID, Mutation, Resolver } from '@nestjs/graphql';
-import { ProductDto } from './dto/product.dto';
+import { ProductDTO } from './dto/product.dto';
 import { ProductService } from './product.service';
 
-@Resolver(() => ProductDto)
+@Resolver(() => ProductDTO)
 export class ProductResolver {
   constructor(readonly service: ProductService) {}
 
-  @Mutation(() => ProductDto)
+  @Mutation(() => ProductDTO)
   restoreOneProduct(
     @Args('input', { type: () => ID }) id: string,
-  ): Promise<ProductDto> {
+  ): Promise<ProductDTO> {
     return this.service.restoreOne(id);
   }
 
   @Mutation(() => UpdateManyResponseType())
   restoreManyProduct(
-    @Args('input', { type: () => FilterType(ProductDto) })
-    filter: Filter<ProductDto>,
+    @Args('input', { type: () => FilterType(ProductDTO) })
+    filter: Filter<ProductDTO>,
   ): Promise<UpdateManyResponse> {
     return this.service.restoreMany(filter);
   }

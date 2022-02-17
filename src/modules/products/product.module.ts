@@ -2,11 +2,12 @@ import { Module } from '@nestjs/common';
 import { NestjsQueryGraphQLModule } from '@nestjs-query/query-graphql';
 import { NestjsQueryTypeOrmModule } from '@nestjs-query/query-typeorm';
 import { ProductEntity } from './entities/product.entity';
-import { ProductDto } from './dto/product.dto';
+import { ProductDTO } from './dto/product.dto';
 import { ProductService } from './product.service';
 import { ProductResolver } from './product.resolver';
-import { ProductInputDto } from './dto/product-input.dto';
+import { ProductInputDTO } from './dto/product-input.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { ProductUpdateDTO } from './dto/product-update.dto';
 
 @Module({
   imports: [
@@ -15,9 +16,10 @@ import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
       services: [ProductService],
       resolvers: [
         {
-          DTOClass: ProductDto,
+          DTOClass: ProductDTO,
           EntityClass: ProductEntity,
-          CreateDTOClass: ProductInputDto,
+          CreateDTOClass: ProductInputDTO,
+          UpdateDTOClass: ProductUpdateDTO,
           enableAggregate: true,
           enableTotalCount: true,
           enableSubscriptions: false,

@@ -5,7 +5,7 @@ import {
   QueryOptions,
 } from '@nestjs-query/query-graphql';
 import { Field, GraphQLISODateTime, ID, ObjectType } from '@nestjs/graphql';
-import { ProductDto } from 'src/modules/products/dto/product.dto';
+// import { ProductDto } from 'src/modules/products/dto/product.dto';
 
 @ObjectType('Provider')
 // @FilterableRelation('product', () => ProductDto)

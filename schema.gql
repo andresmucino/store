@@ -2,199 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Provider {
-  id: ID!
-  contactName: String!
-  email: String!
-  phone: String!
-  direction: String!
-  createdBy: String!
-  createdById: String!
-  updatedBy: String!
-  updatedById: String!
-  deletedBy: String
-  deletedById: String
-  createAt: DateTime!
-  updateAt: DateTime!
-  deleteAt: DateTime
-}
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
-
-type Product {
-  id: ID!
-  name: String!
-  description: String!
-  price: Float!
-  stock: Float!
-  image: String
-  createdBy: String!
-  createdById: String!
-  updatedBy: String!
-  updatedById: String!
-  deletedBy: String
-  deletedById: String
-  createAt: DateTime!
-  updateAt: DateTime!
-  deleteAt: DateTime
-}
-
-type Order {
-  id: ID!
-  date: DateTime!
-  quantity: Float
-  createAt: DateTime!
-  updateAt: DateTime!
-  deleteAt: DateTime
-  productsAggregate(
-    """Filter to find records to aggregate on"""
-    filter: ProductAggregateFilter
-  ): [OrderProductsAggregateResponse!]!
-  customer: Customer
-  products(
-    """Limit or page results."""
-    paging: OffsetPaging = {limit: 10}
-
-    """Specify to filter the records returned."""
-    filter: ProductFilter = {}
-
-    """Specify to sort results."""
-    sorting: [ProductSort!] = []
-  ): OrderProductsConnection
-}
-
-input ProductAggregateFilter {
-  and: [ProductAggregateFilter!]
-  or: [ProductAggregateFilter!]
-  id: IDFilterComparison
-  name: StringFieldComparison
-  description: StringFieldComparison
-  price: NumberFieldComparison
-  stock: NumberFieldComparison
-  image: StringFieldComparison
-  createdBy: StringFieldComparison
-  createdById: StringFieldComparison
-  updatedBy: StringFieldComparison
-  updatedById: StringFieldComparison
-  deletedBy: StringFieldComparison
-  deletedById: StringFieldComparison
-}
-
-input IDFilterComparison {
-  is: Boolean
-  isNot: Boolean
-  eq: ID
-  neq: ID
-  gt: ID
-  gte: ID
-  lt: ID
-  lte: ID
-  like: ID
-  notLike: ID
-  iLike: ID
-  notILike: ID
-  in: [ID!]
-  notIn: [ID!]
-}
-
-input StringFieldComparison {
-  is: Boolean
-  isNot: Boolean
-  eq: String
-  neq: String
-  gt: String
-  gte: String
-  lt: String
-  lte: String
-  like: String
-  notLike: String
-  iLike: String
-  notILike: String
-  in: [String!]
-  notIn: [String!]
-}
-
-input NumberFieldComparison {
-  is: Boolean
-  isNot: Boolean
-  eq: Float
-  neq: Float
-  gt: Float
-  gte: Float
-  lt: Float
-  lte: Float
-  in: [Float!]
-  notIn: [Float!]
-  between: NumberFieldComparisonBetween
-  notBetween: NumberFieldComparisonBetween
-}
-
-input NumberFieldComparisonBetween {
-  lower: Float!
-  upper: Float!
-}
-
-input OffsetPaging {
-  """Limit the number of records returned"""
-  limit: Int
-
-  """Offset to start returning records from"""
-  offset: Int
-}
-
-input ProductFilter {
-  and: [ProductFilter!]
-  or: [ProductFilter!]
-  id: IDFilterComparison
-  name: StringFieldComparison
-  description: StringFieldComparison
-  price: NumberFieldComparison
-  stock: NumberFieldComparison
-  image: StringFieldComparison
-  createdBy: StringFieldComparison
-  createdById: StringFieldComparison
-  updatedBy: StringFieldComparison
-  updatedById: StringFieldComparison
-  deletedBy: StringFieldComparison
-  deletedById: StringFieldComparison
-}
-
-input ProductSort {
-  field: ProductSortFields!
-  direction: SortDirection!
-  nulls: SortNulls
-}
-
-enum ProductSortFields {
-  id
-  name
-  description
-  price
-  stock
-  image
-  createdBy
-  createdById
-  updatedBy
-  updatedById
-  deletedBy
-  deletedById
-}
-
-"""Sort Directions"""
-enum SortDirection {
-  ASC
-  DESC
-}
-
-"""Sort Nulls Options"""
-enum SortNulls {
-  NULLS_FIRST
-  NULLS_LAST
-}
-
 type Customer {
   id: ID!
   name: String!
@@ -205,99 +12,12 @@ type Customer {
   createAt: DateTime!
   updateAt: DateTime!
   deleteAt: DateTime
-  ordersAggregate(
-    """Filter to find records to aggregate on"""
-    filter: OrderAggregateFilter
-  ): [CustomerOrdersAggregateResponse!]!
-  orders(
-    """Limit or page results."""
-    paging: OffsetPaging = {limit: 10}
-
-    """Specify to filter the records returned."""
-    filter: OrderFilter = {}
-
-    """Specify to sort results."""
-    sorting: [OrderSort!] = []
-  ): CustomerOrdersConnection
 }
 
-input OrderAggregateFilter {
-  and: [OrderAggregateFilter!]
-  or: [OrderAggregateFilter!]
-  id: IDFilterComparison
-  date: DateFieldComparison
-  quantity: NumberFieldComparison
-}
-
-input DateFieldComparison {
-  is: Boolean
-  isNot: Boolean
-  eq: DateTime
-  neq: DateTime
-  gt: DateTime
-  gte: DateTime
-  lt: DateTime
-  lte: DateTime
-  in: [DateTime!]
-  notIn: [DateTime!]
-  between: DateFieldComparisonBetween
-  notBetween: DateFieldComparisonBetween
-}
-
-input DateFieldComparisonBetween {
-  lower: DateTime!
-  upper: DateTime!
-}
-
-input OrderFilter {
-  and: [OrderFilter!]
-  or: [OrderFilter!]
-  id: IDFilterComparison
-  date: DateFieldComparison
-  quantity: NumberFieldComparison
-  customer: OrderFilterCustomerFilter
-  products: OrderFilterProductFilter
-}
-
-input OrderFilterCustomerFilter {
-  and: [OrderFilterCustomerFilter!]
-  or: [OrderFilterCustomerFilter!]
-  id: IDFilterComparison
-  name: StringFieldComparison
-  lastname: StringFieldComparison
-  phone: StringFieldComparison
-  direction: StringFieldComparison
-  image: StringFieldComparison
-}
-
-input OrderFilterProductFilter {
-  and: [OrderFilterProductFilter!]
-  or: [OrderFilterProductFilter!]
-  id: IDFilterComparison
-  name: StringFieldComparison
-  description: StringFieldComparison
-  price: NumberFieldComparison
-  stock: NumberFieldComparison
-  image: StringFieldComparison
-  createdBy: StringFieldComparison
-  createdById: StringFieldComparison
-  updatedBy: StringFieldComparison
-  updatedById: StringFieldComparison
-  deletedBy: StringFieldComparison
-  deletedById: StringFieldComparison
-}
-
-input OrderSort {
-  field: OrderSortFields!
-  direction: SortDirection!
-  nulls: SortNulls
-}
-
-enum OrderSortFields {
-  id
-  date
-  quantity
-}
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
 
 type DeleteManyResponse {
   """The number of records deleted."""
@@ -383,56 +103,13 @@ type CustomerAggregateResponse {
   max: CustomerMaxAggregate
 }
 
-type CustomerOrdersConnection {
-  """Paging information"""
-  pageInfo: OffsetPageInfo!
-
-  """Array of nodes."""
-  nodes: [Order!]!
-
-  """Fetch total count of records"""
-  totalCount: Int!
-}
-
-type CustomerOrdersAggregateGroupBy {
-  id: ID
-  date: DateTime
+type Order {
+  id: ID!
+  date: DateTime!
   quantity: Float
-}
-
-type CustomerOrdersCountAggregate {
-  id: Int
-  date: Int
-  quantity: Int
-}
-
-type CustomerOrdersSumAggregate {
-  quantity: Float
-}
-
-type CustomerOrdersAvgAggregate {
-  quantity: Float
-}
-
-type CustomerOrdersMinAggregate {
-  id: ID
-  date: DateTime
-  quantity: Float
-}
-
-type CustomerOrdersMaxAggregate {
-  id: ID
-  date: DateTime
-  quantity: Float
-}
-
-type CustomerOrdersAggregateResponse {
-  groupBy: CustomerOrdersAggregateGroupBy
-  count: CustomerOrdersCountAggregate
-  sum: CustomerOrdersSumAggregate
-  avg: CustomerOrdersAvgAggregate
-  min: CustomerOrdersMinAggregate
-  max: CustomerOrdersMaxAggregate
+  createAt: DateTime!
+  updateAt: DateTime!
+  deleteAt: DateTime
 }
 
 type OrderDeleteResponse {
@@ -496,94 +173,39 @@ type OrderAggregateResponse {
   max: OrderMaxAggregate
 }
 
-type OrderProductsConnection {
-  """Paging information"""
-  pageInfo: OffsetPageInfo!
-
-  """Array of nodes."""
-  nodes: [Product!]!
-
-  """Fetch total count of records"""
-  totalCount: Int!
-}
-
-type OrderProductsAggregateGroupBy {
-  id: ID
-  name: String
-  description: String
-  price: Float
-  stock: Float
-  image: String
-  createdBy: String
-  createdById: String
-  updatedBy: String
-  updatedById: String
+type Provider {
+  id: ID!
+  contactName: String!
+  email: String!
+  phone: String!
+  direction: String!
+  createdBy: String!
+  createdById: String!
+  updatedBy: String!
+  updatedById: String!
   deletedBy: String
   deletedById: String
+  createAt: DateTime!
+  updateAt: DateTime!
+  deleteAt: DateTime
 }
 
-type OrderProductsCountAggregate {
-  id: Int
-  name: Int
-  description: Int
-  price: Int
-  stock: Int
-  image: Int
-  createdBy: Int
-  createdById: Int
-  updatedBy: Int
-  updatedById: Int
-  deletedBy: Int
-  deletedById: Int
-}
-
-type OrderProductsSumAggregate {
-  price: Float
-  stock: Float
-}
-
-type OrderProductsAvgAggregate {
-  price: Float
-  stock: Float
-}
-
-type OrderProductsMinAggregate {
-  id: ID
-  name: String
-  description: String
-  price: Float
-  stock: Float
+type Product {
+  id: ID!
+  name: String!
+  description: String!
+  price: Float!
+  stock: Float!
   image: String
-  createdBy: String
-  createdById: String
-  updatedBy: String
-  updatedById: String
+  createdBy: String!
+  createdById: String!
+  updatedBy: String!
+  updatedById: String!
   deletedBy: String
   deletedById: String
-}
-
-type OrderProductsMaxAggregate {
-  id: ID
-  name: String
-  description: String
-  price: Float
-  stock: Float
-  image: String
-  createdBy: String
-  createdById: String
-  updatedBy: String
-  updatedById: String
-  deletedBy: String
-  deletedById: String
-}
-
-type OrderProductsAggregateResponse {
-  groupBy: OrderProductsAggregateGroupBy
-  count: OrderProductsCountAggregate
-  sum: OrderProductsSumAggregate
-  avg: OrderProductsAvgAggregate
-  min: OrderProductsMinAggregate
-  max: OrderProductsMaxAggregate
+  createAt: DateTime!
+  updateAt: DateTime!
+  deleteAt: DateTime
 }
 
 type ProductDeleteResponse {
@@ -942,6 +564,135 @@ type Query {
   ): OrderConnection!
 }
 
+input ProductAggregateFilter {
+  and: [ProductAggregateFilter!]
+  or: [ProductAggregateFilter!]
+  id: IDFilterComparison
+  name: StringFieldComparison
+  description: StringFieldComparison
+  price: NumberFieldComparison
+  stock: NumberFieldComparison
+  image: StringFieldComparison
+  createdBy: StringFieldComparison
+  createdById: StringFieldComparison
+  updatedBy: StringFieldComparison
+  updatedById: StringFieldComparison
+  deletedBy: StringFieldComparison
+  deletedById: StringFieldComparison
+}
+
+input IDFilterComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: ID
+  neq: ID
+  gt: ID
+  gte: ID
+  lt: ID
+  lte: ID
+  like: ID
+  notLike: ID
+  iLike: ID
+  notILike: ID
+  in: [ID!]
+  notIn: [ID!]
+}
+
+input StringFieldComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: String
+  neq: String
+  gt: String
+  gte: String
+  lt: String
+  lte: String
+  like: String
+  notLike: String
+  iLike: String
+  notILike: String
+  in: [String!]
+  notIn: [String!]
+}
+
+input NumberFieldComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: Float
+  neq: Float
+  gt: Float
+  gte: Float
+  lt: Float
+  lte: Float
+  in: [Float!]
+  notIn: [Float!]
+  between: NumberFieldComparisonBetween
+  notBetween: NumberFieldComparisonBetween
+}
+
+input NumberFieldComparisonBetween {
+  lower: Float!
+  upper: Float!
+}
+
+input OffsetPaging {
+  """Limit the number of records returned"""
+  limit: Int
+
+  """Offset to start returning records from"""
+  offset: Int
+}
+
+input ProductFilter {
+  and: [ProductFilter!]
+  or: [ProductFilter!]
+  id: IDFilterComparison
+  name: StringFieldComparison
+  description: StringFieldComparison
+  price: NumberFieldComparison
+  stock: NumberFieldComparison
+  image: StringFieldComparison
+  createdBy: StringFieldComparison
+  createdById: StringFieldComparison
+  updatedBy: StringFieldComparison
+  updatedById: StringFieldComparison
+  deletedBy: StringFieldComparison
+  deletedById: StringFieldComparison
+}
+
+input ProductSort {
+  field: ProductSortFields!
+  direction: SortDirection!
+  nulls: SortNulls
+}
+
+enum ProductSortFields {
+  id
+  name
+  description
+  price
+  stock
+  image
+  createdBy
+  createdById
+  updatedBy
+  updatedById
+  deletedBy
+  deletedById
+}
+
+"""Sort Directions"""
+enum SortDirection {
+  ASC
+  DESC
+}
+
+"""Sort Nulls Options"""
+enum SortNulls {
+  NULLS_FIRST
+  NULLS_LAST
+}
+
 input CustomerAggregateFilter {
   and: [CustomerAggregateFilter!]
   or: [CustomerAggregateFilter!]
@@ -962,15 +713,6 @@ input CustomerFilter {
   phone: StringFieldComparison
   direction: StringFieldComparison
   image: StringFieldComparison
-  orders: CustomerFilterOrderFilter
-}
-
-input CustomerFilterOrderFilter {
-  and: [CustomerFilterOrderFilter!]
-  or: [CustomerFilterOrderFilter!]
-  id: IDFilterComparison
-  date: DateFieldComparison
-  quantity: NumberFieldComparison
 }
 
 input CustomerSort {
@@ -1068,6 +810,54 @@ enum ProviderSortFields {
   deletedById
 }
 
+input OrderAggregateFilter {
+  and: [OrderAggregateFilter!]
+  or: [OrderAggregateFilter!]
+  id: IDFilterComparison
+  date: DateFieldComparison
+  quantity: NumberFieldComparison
+}
+
+input DateFieldComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: DateTime
+  neq: DateTime
+  gt: DateTime
+  gte: DateTime
+  lt: DateTime
+  lte: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  between: DateFieldComparisonBetween
+  notBetween: DateFieldComparisonBetween
+}
+
+input DateFieldComparisonBetween {
+  lower: DateTime!
+  upper: DateTime!
+}
+
+input OrderFilter {
+  and: [OrderFilter!]
+  or: [OrderFilter!]
+  id: IDFilterComparison
+  date: DateFieldComparison
+  quantity: NumberFieldComparison
+}
+
+input OrderSort {
+  field: OrderSortFields!
+  direction: SortDirection!
+  nulls: SortNulls
+}
+
+enum OrderSortFields {
+  id
+  date
+  quantity
+}
+
 type Mutation {
   restoreOneProduct(input: ID!): Product!
   restoreManyProduct(input: ProductFilter!): UpdateManyResponse!
@@ -1079,9 +869,6 @@ type Mutation {
   deleteManyProducts(input: DeleteManyProductsInput!): DeleteManyResponse!
   restoreOneCustomer(input: ID!): Customer!
   restoreManyCustomers(input: CustomerFilter!): UpdateManyResponse!
-  addOrdersToCustomer(input: AddOrdersToCustomerInput!): Customer!
-  setOrdersOnCustomer(input: SetOrdersOnCustomerInput!): Customer!
-  removeOrdersFromCustomer(input: RemoveOrdersFromCustomerInput!): Customer!
   createOneCustomer(input: CreateOneCustomerInput!): Customer!
   createManyCustomers(input: CreateManyCustomersInput!): [Customer!]!
   updateOneCustomer(input: UpdateOneCustomerInput!): Customer!
@@ -1105,11 +892,6 @@ type Mutation {
   deleteOneProvider(input: DeleteOneProviderInput!): ProviderDeleteResponse!
   deleteManyProviders(input: DeleteManyProvidersInput!): DeleteManyResponse!
   restoreOneOrder(input: ID!): Order!
-  setCustomerOnOrder(input: SetCustomerOnOrderInput!): Order!
-  addProductsToOrder(input: AddProductsToOrderInput!): Order!
-  setProductsOnOrder(input: SetProductsOnOrderInput!): Order!
-  removeCustomerFromOrder(input: RemoveCustomerFromOrderInput!): Order!
-  removeProductsFromOrder(input: RemoveProductsFromOrderInput!): Order!
   createOneOrder(input: CreateOneOrderInput!): Order!
   createManyOrders(input: CreateManyOrdersInput!): [Order!]!
   updateOneOrder(input: UpdateOneOrderInput!): Order!
@@ -1142,25 +924,15 @@ input UpdateOneProductInput {
   id: ID!
 
   """The update to apply."""
-  update: UpdateProduct!
+  update: ProductUpdate!
 }
 
-input UpdateProduct {
-  id: ID
-  name: String
-  description: String
-  price: Float
-  stock: Float
+input ProductUpdate {
+  name: String!
+  description: String!
+  price: Float!
+  stock: Float!
   image: String
-  createdBy: String
-  createdById: String
-  updatedBy: String
-  updatedById: String
-  deletedBy: String
-  deletedById: String
-  createAt: DateTime
-  updateAt: DateTime
-  deleteAt: DateTime
 }
 
 input UpdateManyProductsInput {
@@ -1168,7 +940,7 @@ input UpdateManyProductsInput {
   filter: ProductUpdateFilter!
 
   """The update to apply to all records found using the filter"""
-  update: UpdateProduct!
+  update: ProductUpdate!
 }
 
 input ProductUpdateFilter {
@@ -1213,30 +985,6 @@ input ProductDeleteFilter {
   updatedById: StringFieldComparison
   deletedBy: StringFieldComparison
   deletedById: StringFieldComparison
-}
-
-input AddOrdersToCustomerInput {
-  """The id of the record."""
-  id: ID!
-
-  """The ids of the relations."""
-  relationIds: [ID!]!
-}
-
-input SetOrdersOnCustomerInput {
-  """The id of the record."""
-  id: ID!
-
-  """The ids of the relations."""
-  relationIds: [ID!]!
-}
-
-input RemoveOrdersFromCustomerInput {
-  """The id of the record."""
-  id: ID!
-
-  """The ids of the relations."""
-  relationIds: [ID!]!
 }
 
 input CreateOneCustomerInput {
@@ -1459,46 +1207,6 @@ input ProviderDeleteFilter {
   updatedById: StringFieldComparison
   deletedBy: StringFieldComparison
   deletedById: StringFieldComparison
-}
-
-input SetCustomerOnOrderInput {
-  """The id of the record."""
-  id: ID!
-
-  """The id of relation."""
-  relationId: ID!
-}
-
-input AddProductsToOrderInput {
-  """The id of the record."""
-  id: ID!
-
-  """The ids of the relations."""
-  relationIds: [ID!]!
-}
-
-input SetProductsOnOrderInput {
-  """The id of the record."""
-  id: ID!
-
-  """The ids of the relations."""
-  relationIds: [ID!]!
-}
-
-input RemoveCustomerFromOrderInput {
-  """The id of the record."""
-  id: ID!
-
-  """The id of relation."""
-  relationId: ID!
-}
-
-input RemoveProductsFromOrderInput {
-  """The id of the record."""
-  id: ID!
-
-  """The ids of the relations."""
-  relationIds: [ID!]!
 }
 
 input CreateOneOrderInput {

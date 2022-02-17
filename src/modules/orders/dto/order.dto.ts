@@ -7,17 +7,17 @@ import {
 } from '@nestjs-query/query-graphql';
 import { Field, GraphQLISODateTime, ID, ObjectType } from '@nestjs/graphql';
 import { CustomerDto } from 'src/modules/customers/dto/customer.dto';
-import { ProductDto } from 'src/modules/products/dto/product.dto';
+// import { ProductDto } from 'src/modules/products/dto/product.dto';
 
 @ObjectType('Order')
-@FilterableRelation('customer', () => CustomerDto, { nullable: true })
-@FilterableCursorConnection('products', () => ProductDto, {
-  nullable: true,
-  pagingStrategy: PagingStrategies.OFFSET,
-  enableAggregate: true,
-  enableTotalCount: true,
-  maxResultsSize: 1000,
-})
+// @FilterableRelation('customer', () => CustomerDto, { nullable: true })
+// @FilterableCursorConnection('products', () => ProductDto, {
+//   nullable: true,
+//   pagingStrategy: PagingStrategies.OFFSET,
+//   enableAggregate: true,
+//   enableTotalCount: true,
+//   maxResultsSize: 1000,
+// })
 @QueryOptions({
   pagingStrategy: PagingStrategies.OFFSET,
   enableTotalCount: true,

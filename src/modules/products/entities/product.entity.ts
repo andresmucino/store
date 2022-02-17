@@ -124,6 +124,7 @@ export class ProductEntity {
   @DeleteDateColumn({
     type: 'time with time zone',
     name: 'delete_at',
+    nullable: true
   })
   deleteAt?: Date;
 }
