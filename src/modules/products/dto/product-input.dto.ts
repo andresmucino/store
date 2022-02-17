@@ -7,18 +7,17 @@ import {
 import { Field, InputType } from '@nestjs/graphql';
 import { IsNotEmpty, IsString } from 'class-validator';
 import { nanoid } from 'nanoid';
-import { GqlContext } from 'src/config';
 import { ProductDto } from './product.dto';
 
 @InputType('ProductInput')
 @BeforeCreateOne(
-  (input: CreateOneInputType<ProductDto>, context: GqlContext) => {
+  (input: CreateOneInputType<ProductDto>, context: any) => {
     input.input.id = nanoid(24);
     return input;
   },
 )
 @BeforeCreateMany(
-  (input: CreateManyInputType<ProductDto>, context: GqlContext) => {
+  (input: CreateManyInputType<ProductDto>, context: any) => {
     input.input = input.input.map((c) => {
       const id = nanoid(24);
       return {

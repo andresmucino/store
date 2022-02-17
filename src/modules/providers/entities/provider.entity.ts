@@ -7,7 +7,6 @@ import {
   JoinColumn,
   OneToOne,
   PrimaryColumn,
-  PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
@@ -40,42 +39,46 @@ export class ProviderEntity {
   })
   direction!: string;
 
+  // @Column({
+  //   nullable: true,
+  //   name: 'product_id',
+  //   type: 'text',
+  // })
+  // productId?: string;
+
+  // @OneToOne(() => ProductEntity, (product) => product.provider, {
+  //   nullable: true,
+  // })
+  // @JoinColumn({ name: 'pruduct_id' })
+  // product?: ProductEntity;
+
   @Column({
-    nullable: true,
-    name: 'product_id',
     type: 'text',
-  })
-  productId?: string;
-
-  @OneToOne(() => ProductEntity, (product) => product.provider, {
+    name: 'created_by',
     nullable: true,
   })
-  @JoinColumn({ name: 'pruduct_id' })
-  product?: ProductEntity;
+  createdBy!: string;
 
-  // @Column({
-  //   type: 'text',
-  //   name: 'created_by',
-  // })
-  // createdBy!: string;
+  @Column({
+    type: 'text',
+    name: 'created_by_id',
+    nullable: true,
+  })
+  createdById!: string;
 
-  // @Column({
-  //   type: 'text',
-  //   name: 'created_by_id',
-  // })
-  // createdById!: string;
+  @Column({
+    type: 'text',
+    name: 'updated_by',
+    nullable: true,
+  })
+  updatedBy!: string;
 
-  // @Column({
-  //   type: 'text',
-  //   name: 'updated_by',
-  // })
-  // updatedBy!: string;
-
-  // @Column({
-  //   type: 'text',
-  //   name: 'updated_by_id',
-  // })
-  // updatedById!: string;
+  @Column({
+    type: 'text',
+    name: 'updated_by_id',
+    nullable: true,
+  })
+  updatedById!: string;
 
   // @Column({
   //   type: 'text',

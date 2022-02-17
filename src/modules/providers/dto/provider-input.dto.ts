@@ -13,35 +13,36 @@ import {
   IsString,
 } from 'class-validator';
 import { nanoid } from 'nanoid';
-import { GqlContext } from 'src/config';
+import { UserContext } from 'src/auth/interface/auth.interface';
 import { ProviderDto } from './provider.dto';
 
 @InputType('ProviderInput')
 @BeforeCreateOne(
-  (input: CreateOneInputType<ProviderDto>, context: GqlContext) => {
+  (input: CreateOneInputType<ProviderDto>, context: UserContext) => {
     input.input.id = nanoid(24);
-    // input.input.createdBy = context.request.headers.email;
-    // input.input.createdById = context.request.headers.sub;
-    // input.input.updatedBy = context.request.headers.email;
-    // input.input.updatedById = context.request.headers.sub;
+    console.log(context.req.user.email);
+    input.input.createdBy = context.req.user.email;
+    input.input.createdById = context.req.user.id;
+    input.input.updatedBy = context.req.user.email;
+    input.input.updatedById = context.req.user.id;
     return input;
   },
 )
 @BeforeCreateMany(
-  (input: CreateManyInputType<ProviderDto>, context: GqlContext) => {
-    // const createdBy = context.request.headers.email;
-    // const createdById = context.request.headers.sub;
-    // const updatedBy = context.request.headers.email;
-    // const updatedById = context.request.headers.sub;
+  (input: CreateManyInputType<ProviderDto>, context: UserContext) => {
+    const createdBy = context.req.user.email;
+    const createdById = context.req.user.id;
+    const updatedBy = context.req.user.email;
+    const updatedById = context.req.user.id;
     input.input = input.input.map((c) => {
       const id = nanoid(24);
       return {
         ...c,
         id,
-        // createdBy,
-        // createdById,
-        // updatedBy,
-        // updatedById,
+        createdBy,
+        createdById,
+        updatedBy,
+        updatedById,
       };
     });
     return input;

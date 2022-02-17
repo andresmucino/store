@@ -35,10 +35,10 @@ export class ProductEntity {
   @Column({ nullable: true })
   image?: string;
 
-  @OneToOne(() => ProviderEntity, (provider) => provider.product, {
-    nullable: true,
-  })
-  provider?: ProviderEntity;
+  // @OneToOne(() => ProviderEntity, (provider) => provider.product, {
+  //   nullable: true,
+  // })
+  // provider?: ProviderEntity;
 
   @Column({
     nullable: true,

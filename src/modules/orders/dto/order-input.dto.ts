@@ -7,16 +7,15 @@ import {
 import { Field, InputType } from '@nestjs/graphql';
 import { IsDate } from 'class-validator';
 import { nanoid } from 'nanoid';
-import { GqlContext } from 'src/config';
 import { OrderDto } from './order.dto';
 
 @InputType('OrderInput')
-@BeforeCreateOne((input: CreateOneInputType<OrderDto>, context: GqlContext) => {
+@BeforeCreateOne((input: CreateOneInputType<OrderDto>, context: any) => {
   input.input.id = nanoid(24);
   return input;
 })
 @BeforeCreateMany(
-  (input: CreateManyInputType<OrderDto>, context: GqlContext) => {
+  (input: CreateManyInputType<OrderDto>, context: any) => {
     input.input = input.input.map((c) => {
       const id = nanoid(24);
       return {
