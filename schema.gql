@@ -107,6 +107,12 @@ type Order {
   id: ID!
   date: DateTime!
   quantity: Float
+  createdBy: String!
+  createdById: String!
+  updatedBy: String!
+  updatedById: String!
+  deletedBy: String
+  deletedById: String
   createAt: DateTime!
   updateAt: DateTime!
   deleteAt: DateTime
@@ -116,6 +122,12 @@ type OrderDeleteResponse {
   id: ID
   date: DateTime
   quantity: Float
+  createdBy: String
+  createdById: String
+  updatedBy: String
+  updatedById: String
+  deletedBy: String
+  deletedById: String
   createAt: DateTime
   updateAt: DateTime
   deleteAt: DateTime
@@ -136,12 +148,24 @@ type OrderAggregateGroupBy {
   id: ID
   date: DateTime
   quantity: Float
+  createdBy: String
+  createdById: String
+  updatedBy: String
+  updatedById: String
+  deletedBy: String
+  deletedById: String
 }
 
 type OrderCountAggregate {
   id: Int
   date: Int
   quantity: Int
+  createdBy: Int
+  createdById: Int
+  updatedBy: Int
+  updatedById: Int
+  deletedBy: Int
+  deletedById: Int
 }
 
 type OrderSumAggregate {
@@ -156,12 +180,24 @@ type OrderMinAggregate {
   id: ID
   date: DateTime
   quantity: Float
+  createdBy: String
+  createdById: String
+  updatedBy: String
+  updatedById: String
+  deletedBy: String
+  deletedById: String
 }
 
 type OrderMaxAggregate {
   id: ID
   date: DateTime
   quantity: Float
+  createdBy: String
+  createdById: String
+  updatedBy: String
+  updatedById: String
+  deletedBy: String
+  deletedById: String
 }
 
 type OrderAggregateResponse {
@@ -816,6 +852,12 @@ input OrderAggregateFilter {
   id: IDFilterComparison
   date: DateFieldComparison
   quantity: NumberFieldComparison
+  createdBy: StringFieldComparison
+  createdById: StringFieldComparison
+  updatedBy: StringFieldComparison
+  updatedById: StringFieldComparison
+  deletedBy: StringFieldComparison
+  deletedById: StringFieldComparison
 }
 
 input DateFieldComparison {
@@ -844,6 +886,12 @@ input OrderFilter {
   id: IDFilterComparison
   date: DateFieldComparison
   quantity: NumberFieldComparison
+  createdBy: StringFieldComparison
+  createdById: StringFieldComparison
+  updatedBy: StringFieldComparison
+  updatedById: StringFieldComparison
+  deletedBy: StringFieldComparison
+  deletedById: StringFieldComparison
 }
 
 input OrderSort {
@@ -856,6 +904,12 @@ enum OrderSortFields {
   id
   date
   quantity
+  createdBy
+  createdById
+  updatedBy
+  updatedById
+  deletedBy
+  deletedById
 }
 
 type Mutation {
@@ -1216,7 +1270,6 @@ input CreateOneOrderInput {
 
 input OrderInput {
   date: DateTime!
-  customerId: String
   quantity: Float
 }
 
@@ -1230,16 +1283,12 @@ input UpdateOneOrderInput {
   id: ID!
 
   """The update to apply."""
-  update: UpdateOrder!
+  update: OrderUpdate!
 }
 
-input UpdateOrder {
-  id: ID
-  date: DateTime
+input OrderUpdate {
+  date: DateTime!
   quantity: Float
-  createAt: DateTime
-  updateAt: DateTime
-  deleteAt: DateTime
 }
 
 input UpdateManyOrdersInput {
@@ -1247,7 +1296,7 @@ input UpdateManyOrdersInput {
   filter: OrderUpdateFilter!
 
   """The update to apply to all records found using the filter"""
-  update: UpdateOrder!
+  update: OrderUpdate!
 }
 
 input OrderUpdateFilter {
@@ -1256,6 +1305,12 @@ input OrderUpdateFilter {
   id: IDFilterComparison
   date: DateFieldComparison
   quantity: NumberFieldComparison
+  createdBy: StringFieldComparison
+  createdById: StringFieldComparison
+  updatedBy: StringFieldComparison
+  updatedById: StringFieldComparison
+  deletedBy: StringFieldComparison
+  deletedById: StringFieldComparison
 }
 
 input DeleteOneOrderInput {
@@ -1274,6 +1329,12 @@ input OrderDeleteFilter {
   id: IDFilterComparison
   date: DateFieldComparison
   quantity: NumberFieldComparison
+  createdBy: StringFieldComparison
+  createdById: StringFieldComparison
+  updatedBy: StringFieldComparison
+  updatedById: StringFieldComparison
+  deletedBy: StringFieldComparison
+  deletedById: StringFieldComparison
 }
 
 input LoginInputDTO {

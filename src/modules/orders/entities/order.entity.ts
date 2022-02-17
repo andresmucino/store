@@ -20,10 +20,17 @@ export class OrderEntity {
   })
   id!: string;
 
-  @Column()
+  @Column({
+    type: 'time with time zone',
+    name: 'date',
+  })
   date!: Date;
 
-  @Column({ type: 'int' })
+  @Column({
+    type: 'int',
+    name: 'quantity',
+    nullable: true,
+  })
   quantity?: number;
 
   // @Column({
@@ -44,12 +51,64 @@ export class OrderEntity {
   // })
   // products?: ProductEntity[];
 
-  @CreateDateColumn()
+  @Column({
+    type: 'text',
+    name: 'created_by',
+    nullable: true,
+  })
+  createdBy!: string;
+
+  @Column({
+    type: 'text',
+    name: 'created_by_id',
+    nullable: true,
+  })
+  createdById!: string;
+
+  @Column({
+    type: 'text',
+    name: 'updated_by',
+    nullable: true,
+  })
+  updatedBy!: string;
+
+  @Column({
+    type: 'text',
+    name: 'updated_by_id',
+    nullable: true,
+  })
+  updatedById!: string;
+
+  @Column({
+    type: 'text',
+    name: 'deleted_by',
+    nullable: true,
+  })
+  deletedBy!: string;
+
+  @Column({
+    type: 'text',
+    name: 'deleted_by_id',
+    nullable: true,
+  })
+  deletedById!: string;
+
+  @CreateDateColumn({
+    type: 'time with time zone',
+    name: 'create_at',
+  })
   createAt!: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({
+    type: 'time with time zone',
+    name: 'update_at',
+  })
   updateAt!: Date;
 
-  @DeleteDateColumn()
+  @DeleteDateColumn({
+    type: 'time with time zone',
+    name: 'delete_at',
+    nullable: true,
+  })
   deleteAt?: Date;
 }

@@ -23,7 +23,7 @@ import { CustomerDto } from 'src/modules/customers/dto/customer.dto';
   enableTotalCount: true,
   maxResultsSize: 1000,
 })
-export class OrderDto {
+export class OrderDTO {
   @FilterableField(() => ID)
   id!: string;
 
@@ -35,6 +35,24 @@ export class OrderDto {
 
   // @FilterableField({ nullable: true })
   // customerId?: string;
+
+  @FilterableField()
+  createdBy?: string;
+
+  @FilterableField()
+  createdById?: string;
+
+  @FilterableField()
+  updatedBy?: string;
+
+  @FilterableField()
+  updatedById?: string;
+
+  @FilterableField({ nullable: true })
+  deletedBy?: string;
+
+  @FilterableField({ nullable: true })
+  deletedById?: string;
 
   @Field(() => GraphQLISODateTime)
   createAt!: Date;
