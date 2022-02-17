@@ -14,7 +14,7 @@ import { ProductDto } from 'src/modules/products/dto/product.dto';
   enableTotalCount: true,
   maxResultsSize: 1000,
 })
-export class ProviderDto {
+export class ProviderDTO {
   @FilterableField(() => ID)
   id!: string;
 

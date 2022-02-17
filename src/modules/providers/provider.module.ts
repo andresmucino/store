@@ -1,13 +1,14 @@
 import { NestjsQueryGraphQLModule } from '@nestjs-query/query-graphql';
 import { NestjsQueryTypeOrmModule } from '@nestjs-query/query-typeorm';
 import { Module } from '@nestjs/common';
-import { ProviderDto } from './dto/provider.dto';
+import { ProviderDTO } from './dto/provider.dto';
 import { ProviderEntity } from './entities/provider.entity';
 import { ProviderService } from './provider.service';
 import { ProviderResolver } from './provider.resolver';
-import { ProviderInputDto } from './dto/provider-input.dto';
+import { ProviderInputDTO } from './dto/provider-input.dto';
 import { UserModule } from '../user/user.module';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { ProviderUpdateDTO } from './dto/provider-update.dto';
 
 @Module({
   imports: [
@@ -20,10 +21,10 @@ import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
       services: [ProviderService],
       resolvers: [
         {
-          DTOClass: ProviderDto,
+          DTOClass: ProviderDTO,
           EntityClass: ProviderEntity,
-          CreateDTOClass: ProviderInputDto,
-          UpdateDTOClass: ProviderInputDto,
+          CreateDTOClass: ProviderInputDTO,
+          UpdateDTOClass: ProviderUpdateDTO,
           enableAggregate: true,
           enableTotalCount: true,
           enableSubscriptions: false,

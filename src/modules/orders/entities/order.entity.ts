@@ -26,23 +26,23 @@ export class OrderEntity {
   @Column({ type: 'int' })
   quantity?: number;
 
-  @Column({
-    nullable: true,
-    name: 'customer_id',
-    type: 'text',
-  })
-  customerId?: string;
+  // @Column({
+  //   nullable: true,
+  //   name: 'customer_id',
+  //   type: 'text',
+  // })
+  // customerId?: string;
 
-  @ManyToOne(() => CustomerEntity, (customer) => customer.orders, {
-    nullable: true,
-  })
-  @JoinColumn({ name: 'customer_id' })
-  customer?: CustomerEntity;
+  // @ManyToOne(() => CustomerEntity, (customer) => customer.orders, {
+  //   nullable: true,
+  // })
+  // @JoinColumn({ name: 'customer_id' })
+  // customer?: CustomerEntity;
 
-  @OneToMany(() => ProductEntity, (product) => product.order, {
-    nullable: true,
-  })
-  products?: ProductEntity[];
+  // @OneToMany(() => ProductEntity, (product) => product.order, {
+  //   nullable: true,
+  // })
+  // products?: ProductEntity[];
 
   @CreateDateColumn()
   createAt!: Date;

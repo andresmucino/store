@@ -32,8 +32,8 @@ export class CustomerEntity {
   @Column({ nullable: true })
   image?: string;
 
-  @OneToMany(() => OrderEntity, (order) => order.customer, { nullable: true })
-  orders: OrderEntity[];
+  // @OneToMany(() => OrderEntity, (order) => order.customer, { nullable: true })
+  // orders: OrderEntity[];
 
   @CreateDateColumn()
   createAt!: Date;

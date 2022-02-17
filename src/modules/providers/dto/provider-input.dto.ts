@@ -14,11 +14,11 @@ import {
 } from 'class-validator';
 import { nanoid } from 'nanoid';
 import { UserContext } from 'src/auth/interface/auth.interface';
-import { ProviderDto } from './provider.dto';
+import { ProviderDTO } from './provider.dto';
 
 @InputType('ProviderInput')
 @BeforeCreateOne(
-  (input: CreateOneInputType<ProviderDto>, context: UserContext) => {
+  (input: CreateOneInputType<ProviderDTO>, context: UserContext) => {
     input.input.id = nanoid(24);
     console.log(context.req.user.email);
     input.input.createdBy = context.req.user.email;
@@ -29,7 +29,7 @@ import { ProviderDto } from './provider.dto';
   },
 )
 @BeforeCreateMany(
-  (input: CreateManyInputType<ProviderDto>, context: UserContext) => {
+  (input: CreateManyInputType<ProviderDTO>, context: UserContext) => {
     const createdBy = context.req.user.email;
     const createdById = context.req.user.id;
     const updatedBy = context.req.user.email;
@@ -48,7 +48,7 @@ import { ProviderDto } from './provider.dto';
     return input;
   },
 )
-export class ProviderInputDto {
+export class ProviderInputDTO {
   @Field()
   @IsString()
   @IsNotEmpty()
@@ -69,9 +69,9 @@ export class ProviderInputDto {
   @IsNotEmpty()
   direction!: string;
 
-  @Field({ nullable: true })
-  @IsOptional()
-  @IsString()
-  @IsNotEmpty()
-  productId?: string;
+  // @Field({ nullable: true })
+  // @IsOptional()
+  // @IsString()
+  // @IsNotEmpty()
+  // productId?: string;
 }

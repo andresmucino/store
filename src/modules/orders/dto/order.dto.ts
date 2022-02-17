@@ -33,8 +33,8 @@ export class OrderDto {
   @FilterableField({ nullable: true })
   quantity?: number;
 
-  @FilterableField({ nullable: true })
-  customerId?: string;
+  // @FilterableField({ nullable: true })
+  // customerId?: string;
 
   @Field(() => GraphQLISODateTime)
   createAt!: Date;

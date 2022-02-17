@@ -8,18 +8,18 @@ import {
 } from '@nestjs-query/query-graphql';
 import { Field, GraphQLISODateTime, ID, ObjectType } from '@nestjs/graphql';
 import { OrderDto } from 'src/modules/orders/dto/order.dto';
-import { ProviderDto } from 'src/modules/providers/dto/provider.dto';
+import { ProviderDTO } from 'src/modules/providers/dto/provider.dto';
 
 @ObjectType('Product')
 @KeySet(['id'])
-@FilterableCursorConnection('provider', () => ProviderDto, {
-  nullable: true,
-  pagingStrategy: PagingStrategies.OFFSET,
-  enableAggregate: true,
-  enableTotalCount: true,
-  maxResultsSize: 1000,
-})
-@FilterableRelation('order', () => OrderDto, { nullable: true })
+// @FilterableCursorConnection('provider', () => ProviderDto, {
+//   nullable: true,
+//   pagingStrategy: PagingStrategies.OFFSET,
+//   enableAggregate: true,
+//   enableTotalCount: true,
+//   maxResultsSize: 1000,
+// })
+// @FilterableRelation('order', () => OrderDto, { nullable: true })
 @QueryOptions({
   pagingStrategy: PagingStrategies.OFFSET,
   enableTotalCount: true,
@@ -46,6 +46,24 @@ export class ProductDto {
 
   // @FilterableField({ nullable: true })
   // orderId?: string;
+
+  @FilterableField()
+  createdBy?: string;
+
+  @FilterableField()
+  createdById?: string;
+
+  @FilterableField()
+  updatedBy?: string;
+
+  @FilterableField()
+  updatedById?: string;
+
+  @FilterableField({ nullable: true })
+  deletedBy?: string;
+
+  @FilterableField({ nullable: true })
+  deletedById?: string;
 
   @Field(() => GraphQLISODateTime)
   createAt?: Date;

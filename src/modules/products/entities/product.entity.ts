@@ -20,19 +20,35 @@ export class ProductEntity {
   })
   id!: string;
 
-  @Column()
+  @Column({
+    type: 'text',
+    name: 'name',
+  })
   name!: string;
 
-  @Column()
+  @Column({
+    type: 'text',
+    name: 'description',
+  })
   description!: string;
 
-  @Column()
+  @Column({
+    type: 'int',
+    name: 'price',
+  })
   price!: number;
 
-  @Column()
+  @Column({
+    type: 'int',
+    name: 'stock',
+  })
   stock!: number;
 
-  @Column({ nullable: true })
+  @Column({
+    type: 'text',
+    name: 'image',
+    nullable: true,
+  })
   image?: string;
 
   // @OneToOne(() => ProviderEntity, (provider) => provider.product, {
@@ -40,23 +56,74 @@ export class ProductEntity {
   // })
   // provider?: ProviderEntity;
 
+  // @Column({
+  //   nullable: true,
+  //   name: 'order_id',
+  //   type: 'text',
+  // })
+  // orderId?: string;
+
+  // @ManyToOne(() => OrderEntity, (order) => order.products, { nullable: true })
+  // @JoinColumn({ name: 'order_id' })
+  // order?: OrderEntity;
+
   @Column({
-    nullable: true,
-    name: 'order_id',
     type: 'text',
+    name: 'created_by',
+    nullable: true,
   })
-  orderId?: string;
+  createdBy!: string;
 
-  @ManyToOne(() => OrderEntity, (order) => order.products, { nullable: true })
-  @JoinColumn({ name: 'order_id' })
-  order?: OrderEntity;
+  @Column({
+    type: 'text',
+    name: 'created_by_id',
+    nullable: true,
+  })
+  createdById!: string;
 
-  @CreateDateColumn()
+  @Column({
+    type: 'text',
+    name: 'updated_by',
+    nullable: true,
+  })
+  updatedBy!: string;
+
+  @Column({
+    type: 'text',
+    name: 'updated_by_id',
+    nullable: true,
+  })
+  updatedById!: string;
+
+  @Column({
+    type: 'text',
+    name: 'deleted_by',
+    nullable: true,
+  })
+  deletedBy!: string;
+
+  @Column({
+    type: 'text',
+    name: 'deleted_by_id',
+    nullable: true,
+  })
+  deletedById!: string;
+
+  @CreateDateColumn({
+    type: 'time with time zone',
+    name: 'create_at',
+  })
   createAt!: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({
+    type: 'time with time zone',
+    name: 'update_at',
+  })
   updateAt!: Date;
 
-  @DeleteDateColumn()
+  @DeleteDateColumn({
+    type: 'time with time zone',
+    name: 'delete_at',
+  })
   deleteAt?: Date;
 }
