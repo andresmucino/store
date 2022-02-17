@@ -12,8 +12,11 @@ type Provider {
   createdById: String!
   updatedBy: String!
   updatedById: String!
+  deletedBy: String
+  deletedById: String
   createAt: DateTime!
   updateAt: DateTime!
+  deleteAt: DateTime
 }
 
 """
@@ -60,6 +63,8 @@ input ProviderAggregateFilter {
   createdById: StringFieldComparison
   updatedBy: StringFieldComparison
   updatedById: StringFieldComparison
+  deletedBy: StringFieldComparison
+  deletedById: StringFieldComparison
 }
 
 input IDFilterComparison {
@@ -116,6 +121,8 @@ input ProviderFilter {
   createdById: StringFieldComparison
   updatedBy: StringFieldComparison
   updatedById: StringFieldComparison
+  deletedBy: StringFieldComparison
+  deletedById: StringFieldComparison
 }
 
 input ProviderSort {
@@ -134,6 +141,8 @@ enum ProviderSortFields {
   createdById
   updatedBy
   updatedById
+  deletedBy
+  deletedById
 }
 
 """Sort Directions"""
@@ -258,6 +267,8 @@ input ProductFilterProviderFilter {
   createdById: StringFieldComparison
   updatedBy: StringFieldComparison
   updatedById: StringFieldComparison
+  deletedBy: StringFieldComparison
+  deletedById: StringFieldComparison
 }
 
 input ProductSort {
@@ -727,6 +738,8 @@ type ProductProvidersAggregateGroupBy {
   createdById: String
   updatedBy: String
   updatedById: String
+  deletedBy: String
+  deletedById: String
 }
 
 type ProductProvidersCountAggregate {
@@ -739,6 +752,8 @@ type ProductProvidersCountAggregate {
   createdById: Int
   updatedBy: Int
   updatedById: Int
+  deletedBy: Int
+  deletedById: Int
 }
 
 type ProductProvidersMinAggregate {
@@ -751,6 +766,8 @@ type ProductProvidersMinAggregate {
   createdById: String
   updatedBy: String
   updatedById: String
+  deletedBy: String
+  deletedById: String
 }
 
 type ProductProvidersMaxAggregate {
@@ -763,6 +780,8 @@ type ProductProvidersMaxAggregate {
   createdById: String
   updatedBy: String
   updatedById: String
+  deletedBy: String
+  deletedById: String
 }
 
 type ProductProvidersAggregateResponse {
@@ -842,8 +861,11 @@ type ProviderDeleteResponse {
   createdById: String
   updatedBy: String
   updatedById: String
+  deletedBy: String
+  deletedById: String
   createAt: DateTime
   updateAt: DateTime
+  deleteAt: DateTime
 }
 
 type ProviderConnection {
@@ -867,6 +889,8 @@ type ProviderAggregateGroupBy {
   createdById: String
   updatedBy: String
   updatedById: String
+  deletedBy: String
+  deletedById: String
 }
 
 type ProviderCountAggregate {
@@ -879,6 +903,8 @@ type ProviderCountAggregate {
   createdById: Int
   updatedBy: Int
   updatedById: Int
+  deletedBy: Int
+  deletedById: Int
 }
 
 type ProviderMinAggregate {
@@ -891,6 +917,8 @@ type ProviderMinAggregate {
   createdById: String
   updatedBy: String
   updatedById: String
+  deletedBy: String
+  deletedById: String
 }
 
 type ProviderMaxAggregate {
@@ -903,6 +931,8 @@ type ProviderMaxAggregate {
   createdById: String
   updatedBy: String
   updatedById: String
+  deletedBy: String
+  deletedById: String
 }
 
 type ProviderAggregateResponse {
@@ -1477,6 +1507,8 @@ input ProviderUpdateFilter {
   createdById: StringFieldComparison
   updatedBy: StringFieldComparison
   updatedById: StringFieldComparison
+  deletedBy: StringFieldComparison
+  deletedById: StringFieldComparison
 }
 
 input DeleteOneProviderInput {
@@ -1501,6 +1533,8 @@ input ProviderDeleteFilter {
   createdById: StringFieldComparison
   updatedBy: StringFieldComparison
   updatedById: StringFieldComparison
+  deletedBy: StringFieldComparison
+  deletedById: StringFieldComparison
 }
 
 input SetCustomerOnOrderInput {

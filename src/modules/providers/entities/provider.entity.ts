@@ -80,19 +80,19 @@ export class ProviderEntity {
   })
   updatedById!: string;
 
-  // @Column({
-  //   type: 'text',
-  //   name: 'deleted_by',
-  //   nullable: true,
-  // })
-  // deletedBy!: string;
+  @Column({
+    type: 'text',
+    name: 'deleted_by',
+    nullable: true,
+  })
+  deletedBy!: string;
 
-  // @Column({
-  //   type: 'text',
-  //   name: 'deleted_by_id',
-  //   nullable: true,
-  // })
-  // deletedById!: string;
+  @Column({
+    type: 'text',
+    name: 'deleted_by_id',
+    nullable: true,
+  })
+  deletedById!: string;
 
   @CreateDateColumn({
     type: 'time with time zone',

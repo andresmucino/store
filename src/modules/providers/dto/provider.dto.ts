@@ -34,10 +34,10 @@ export class ProviderDto {
   // productId?: string;
 
   @FilterableField()
-  createdBy!: string;
+  createdBy?: string;
 
   @FilterableField()
-  createdById!: string;
+  createdById?: string;
 
   @FilterableField()
   updatedBy?: string;
@@ -45,15 +45,18 @@ export class ProviderDto {
   @FilterableField()
   updatedById?: string;
 
-  // @FilterableField({ nullable: true })
-  // deletedBy?: string;
+  @FilterableField({ nullable: true })
+  deletedBy?: string;
 
-  // @FilterableField({ nullable: true })
-  // deletedById?: string;
+  @FilterableField({ nullable: true })
+  deletedById?: string;
 
   @Field(() => GraphQLISODateTime)
   createAt!: Date;
 
   @Field(() => GraphQLISODateTime)
   updateAt!: Date;
+
+  @Field(() => GraphQLISODateTime, { nullable: true})
+  deleteAt?: Date
 }
