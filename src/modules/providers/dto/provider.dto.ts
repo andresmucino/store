@@ -4,11 +4,11 @@ import {
   PagingStrategies,
   QueryOptions,
 } from '@nestjs-query/query-graphql';
-import { Field, GraphQLISODateTime, ID, ObjectType } from '@nestjs/graphql';
-// import { ProductDto } from 'src/modules/products/dto/product.dto';
+import { GraphQLISODateTime, ID, ObjectType } from '@nestjs/graphql';
+import { ProductDTO } from 'src/modules/products/dto/product.dto';
 
 @ObjectType('Provider')
-// @FilterableRelation('product', () => ProductDto)
+@FilterableRelation('product', () => ProductDTO)
 @QueryOptions({
   pagingStrategy: PagingStrategies.OFFSET,
   enableTotalCount: true,
@@ -30,8 +30,8 @@ export class ProviderDTO {
   @FilterableField()
   direction!: string;
 
-  // @FilterableField({ nullable: true })
-  // productId?: string;
+  @FilterableField({ nullable: true })
+  productId?: string;
 
   @FilterableField()
   createdBy?: string;
@@ -51,12 +51,12 @@ export class ProviderDTO {
   @FilterableField({ nullable: true })
   deletedById?: string;
 
-  @Field(() => GraphQLISODateTime)
-  createAt!: Date;
+  @FilterableField(() => GraphQLISODateTime)
+  createdAt!: Date;
 
-  @Field(() => GraphQLISODateTime)
-  updateAt!: Date;
+  @FilterableField(() => GraphQLISODateTime)
+  updatedAt!: Date;
 
-  @Field(() => GraphQLISODateTime, { nullable: true})
-  deleteAt?: Date
+  @FilterableField(() => GraphQLISODateTime, { nullable: true })
+  deletedAt?: Date;
 }

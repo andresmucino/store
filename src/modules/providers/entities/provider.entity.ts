@@ -39,18 +39,18 @@ export class ProviderEntity {
   })
   direction!: string;
 
-  // @Column({
-  //   nullable: true,
-  //   name: 'product_id',
-  //   type: 'text',
-  // })
-  // productId?: string;
+  @Column({
+    nullable: true,
+    name: 'product_id',
+    type: 'text',
+  })
+  productId?: string;
 
-  // @OneToOne(() => ProductEntity, (product) => product.provider, {
-  //   nullable: true,
-  // })
-  // @JoinColumn({ name: 'pruduct_id' })
-  // product?: ProductEntity;
+  @OneToOne(() => ProductEntity, (product) => product.provider, {
+    nullable: true,
+  })
+  @JoinColumn({ name: 'pruduct_id' })
+  product?: ProductEntity;
 
   @Column({
     type: 'text',
@@ -95,21 +95,21 @@ export class ProviderEntity {
   deletedById!: string;
 
   @CreateDateColumn({
-    type: 'time with time zone',
+    type: 'timestamp with time zone',
     name: 'create_at',
   })
-  createAt!: Date;
+  createdAt!: Date;
 
   @UpdateDateColumn({
-    type: 'time with time zone',
+    type: 'timestamp with time zone',
     name: 'update_at',
   })
-  updateAt!: Date;
+  updatedAt!: Date;
 
   @DeleteDateColumn({
-    type: 'time with time zone',
+    type: 'timestamp with time zone',
     name: 'delete_at',
     nullable: true,
   })
-  deleteAt?: Date;
+  deletedAt?: Date;
 }

@@ -51,10 +51,17 @@ export class ProductEntity {
   })
   image?: string;
 
-  // @OneToOne(() => ProviderEntity, (provider) => provider.product, {
-  //   nullable: true,
-  // })
-  // provider?: ProviderEntity;
+  @Column({
+    type: 'text',
+    name: 'provider_id',
+    nullable: true,
+  })
+  providerId?: string;
+
+  @OneToOne(() => ProviderEntity, (provider) => provider.product, {
+    nullable: true,
+  })
+  provider?: ProviderEntity;
 
   // @Column({
   //   nullable: true,
@@ -113,18 +120,18 @@ export class ProductEntity {
     type: 'time with time zone',
     name: 'create_at',
   })
-  createAt!: Date;
+  createdAt!: Date;
 
   @UpdateDateColumn({
     type: 'time with time zone',
     name: 'update_at',
   })
-  updateAt!: Date;
+  updatedAt!: Date;
 
   @DeleteDateColumn({
     type: 'time with time zone',
     name: 'delete_at',
-    nullable: true
+    nullable: true,
   })
-  deleteAt?: Date;
+  deletedAt?: Date;
 }

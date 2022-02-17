@@ -251,15 +251,17 @@ type Provider {
   email: String!
   phone: String!
   direction: String!
+  productId: String
   createdBy: String!
   createdById: String!
   updatedBy: String!
   updatedById: String!
   deletedBy: String
   deletedById: String
-  createAt: DateTime!
-  updateAt: DateTime!
-  deleteAt: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+  product: Product!
 }
 
 type Product {
@@ -269,15 +271,17 @@ type Product {
   price: Float!
   stock: Float!
   image: String
+  providerId: String
   createdBy: String!
   createdById: String!
   updatedBy: String!
   updatedById: String!
   deletedBy: String
   deletedById: String
-  createAt: DateTime!
-  updateAt: DateTime!
-  deleteAt: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+  provider: Provider
 }
 
 type ProductDeleteResponse {
@@ -287,15 +291,16 @@ type ProductDeleteResponse {
   price: Float
   stock: Float
   image: String
+  providerId: String
   createdBy: String
   createdById: String
   updatedBy: String
   updatedById: String
   deletedBy: String
   deletedById: String
-  createAt: DateTime
-  updateAt: DateTime
-  deleteAt: DateTime
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
 }
 
 type ProductConnection {
@@ -316,6 +321,7 @@ type ProductAggregateGroupBy {
   price: Float
   stock: Float
   image: String
+  providerId: String
   createdBy: String
   createdById: String
   updatedBy: String
@@ -331,6 +337,7 @@ type ProductCountAggregate {
   price: Int
   stock: Int
   image: Int
+  providerId: Int
   createdBy: Int
   createdById: Int
   updatedBy: Int
@@ -356,6 +363,7 @@ type ProductMinAggregate {
   price: Float
   stock: Float
   image: String
+  providerId: String
   createdBy: String
   createdById: String
   updatedBy: String
@@ -371,6 +379,7 @@ type ProductMaxAggregate {
   price: Float
   stock: Float
   image: String
+  providerId: String
   createdBy: String
   createdById: String
   updatedBy: String
@@ -454,15 +463,16 @@ type ProviderDeleteResponse {
   email: String
   phone: String
   direction: String
+  productId: String
   createdBy: String
   createdById: String
   updatedBy: String
   updatedById: String
   deletedBy: String
   deletedById: String
-  createAt: DateTime
-  updateAt: DateTime
-  deleteAt: DateTime
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
 }
 
 type ProviderConnection {
@@ -482,12 +492,16 @@ type ProviderAggregateGroupBy {
   email: String
   phone: String
   direction: String
+  productId: String
   createdBy: String
   createdById: String
   updatedBy: String
   updatedById: String
   deletedBy: String
   deletedById: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
 }
 
 type ProviderCountAggregate {
@@ -496,12 +510,16 @@ type ProviderCountAggregate {
   email: Int
   phone: Int
   direction: Int
+  productId: Int
   createdBy: Int
   createdById: Int
   updatedBy: Int
   updatedById: Int
   deletedBy: Int
   deletedById: Int
+  createdAt: Int
+  updatedAt: Int
+  deletedAt: Int
 }
 
 type ProviderMinAggregate {
@@ -510,12 +528,16 @@ type ProviderMinAggregate {
   email: String
   phone: String
   direction: String
+  productId: String
   createdBy: String
   createdById: String
   updatedBy: String
   updatedById: String
   deletedBy: String
   deletedById: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
 }
 
 type ProviderMaxAggregate {
@@ -524,12 +546,16 @@ type ProviderMaxAggregate {
   email: String
   phone: String
   direction: String
+  productId: String
   createdBy: String
   createdById: String
   updatedBy: String
   updatedById: String
   deletedBy: String
   deletedById: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
 }
 
 type ProviderAggregateResponse {
@@ -645,6 +671,7 @@ input ProductAggregateFilter {
   price: NumberFieldComparison
   stock: NumberFieldComparison
   image: StringFieldComparison
+  providerId: StringFieldComparison
   createdBy: StringFieldComparison
   createdById: StringFieldComparison
   updatedBy: StringFieldComparison
@@ -724,12 +751,54 @@ input ProductFilter {
   price: NumberFieldComparison
   stock: NumberFieldComparison
   image: StringFieldComparison
+  providerId: StringFieldComparison
   createdBy: StringFieldComparison
   createdById: StringFieldComparison
   updatedBy: StringFieldComparison
   updatedById: StringFieldComparison
   deletedBy: StringFieldComparison
   deletedById: StringFieldComparison
+  provider: ProductFilterProviderFilter
+}
+
+input ProductFilterProviderFilter {
+  and: [ProductFilterProviderFilter!]
+  or: [ProductFilterProviderFilter!]
+  id: IDFilterComparison
+  contactName: StringFieldComparison
+  email: StringFieldComparison
+  phone: StringFieldComparison
+  direction: StringFieldComparison
+  productId: StringFieldComparison
+  createdBy: StringFieldComparison
+  createdById: StringFieldComparison
+  updatedBy: StringFieldComparison
+  updatedById: StringFieldComparison
+  deletedBy: StringFieldComparison
+  deletedById: StringFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input DateFieldComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: DateTime
+  neq: DateTime
+  gt: DateTime
+  gte: DateTime
+  lt: DateTime
+  lte: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  between: DateFieldComparisonBetween
+  notBetween: DateFieldComparisonBetween
+}
+
+input DateFieldComparisonBetween {
+  lower: DateTime!
+  upper: DateTime!
 }
 
 input ProductSort {
@@ -745,6 +814,7 @@ enum ProductSortFields {
   price
   stock
   image
+  providerId
   createdBy
   createdById
   updatedBy
@@ -856,12 +926,16 @@ input ProviderAggregateFilter {
   email: StringFieldComparison
   phone: StringFieldComparison
   direction: StringFieldComparison
+  productId: StringFieldComparison
   createdBy: StringFieldComparison
   createdById: StringFieldComparison
   updatedBy: StringFieldComparison
   updatedById: StringFieldComparison
   deletedBy: StringFieldComparison
   deletedById: StringFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input ProviderFilter {
@@ -872,6 +946,29 @@ input ProviderFilter {
   email: StringFieldComparison
   phone: StringFieldComparison
   direction: StringFieldComparison
+  productId: StringFieldComparison
+  createdBy: StringFieldComparison
+  createdById: StringFieldComparison
+  updatedBy: StringFieldComparison
+  updatedById: StringFieldComparison
+  deletedBy: StringFieldComparison
+  deletedById: StringFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+  product: ProviderFilterProductFilter
+}
+
+input ProviderFilterProductFilter {
+  and: [ProviderFilterProductFilter!]
+  or: [ProviderFilterProductFilter!]
+  id: IDFilterComparison
+  name: StringFieldComparison
+  description: StringFieldComparison
+  price: NumberFieldComparison
+  stock: NumberFieldComparison
+  image: StringFieldComparison
+  providerId: StringFieldComparison
   createdBy: StringFieldComparison
   createdById: StringFieldComparison
   updatedBy: StringFieldComparison
@@ -892,12 +989,16 @@ enum ProviderSortFields {
   email
   phone
   direction
+  productId
   createdBy
   createdById
   updatedBy
   updatedById
   deletedBy
   deletedById
+  createdAt
+  updatedAt
+  deletedAt
 }
 
 input OrderAggregateFilter {
@@ -912,26 +1013,6 @@ input OrderAggregateFilter {
   updatedById: StringFieldComparison
   deletedBy: StringFieldComparison
   deletedById: StringFieldComparison
-}
-
-input DateFieldComparison {
-  is: Boolean
-  isNot: Boolean
-  eq: DateTime
-  neq: DateTime
-  gt: DateTime
-  gte: DateTime
-  lt: DateTime
-  lte: DateTime
-  in: [DateTime!]
-  notIn: [DateTime!]
-  between: DateFieldComparisonBetween
-  notBetween: DateFieldComparisonBetween
-}
-
-input DateFieldComparisonBetween {
-  lower: DateTime!
-  upper: DateTime!
 }
 
 input OrderFilter {
@@ -969,6 +1050,8 @@ enum OrderSortFields {
 type Mutation {
   restoreOneProduct(input: ID!): Product!
   restoreManyProduct(input: ProductFilter!): UpdateManyResponse!
+  setProviderOnProduct(input: SetProviderOnProductInput!): Product!
+  removeProviderFromProduct(input: RemoveProviderFromProductInput!): Product!
   createOneProduct(input: CreateOneProductInput!): Product!
   createManyProducts(input: CreateManyProductsInput!): [Product!]!
   updateOneProduct(input: UpdateOneProductInput!): Product!
@@ -993,6 +1076,8 @@ type Mutation {
   updateManyUsers(input: UpdateManyUsersInput!): UpdateManyResponse!
   deleteOneUser(input: DeleteOneUserInput!): UserDeleteResponse!
   deleteManyUsers(input: DeleteManyUsersInput!): DeleteManyResponse!
+  setProductOnProvider(input: SetProductOnProviderInput!): Provider!
+  removeProductFromProvider(input: RemoveProductFromProviderInput!): Provider!
   createOneProvider(input: CreateOneProviderInput!): Provider!
   createManyProviders(input: CreateManyProvidersInput!): [Provider!]!
   updateOneProvider(input: UpdateOneProviderInput!): Provider!
@@ -1009,6 +1094,22 @@ type Mutation {
   login(input: LoginInputDTO!): LoginResponse!
 }
 
+input SetProviderOnProductInput {
+  """The id of the record."""
+  id: ID!
+
+  """The id of relation."""
+  relationId: ID!
+}
+
+input RemoveProviderFromProductInput {
+  """The id of the record."""
+  id: ID!
+
+  """The id of relation."""
+  relationId: ID!
+}
+
 input CreateOneProductInput {
   """The record to create"""
   product: ProductInput!
@@ -1020,6 +1121,7 @@ input ProductInput {
   price: Float!
   stock: Float!
   image: String
+  providerId: String
 }
 
 input CreateManyProductsInput {
@@ -1060,6 +1162,7 @@ input ProductUpdateFilter {
   price: NumberFieldComparison
   stock: NumberFieldComparison
   image: StringFieldComparison
+  providerId: StringFieldComparison
   createdBy: StringFieldComparison
   createdById: StringFieldComparison
   updatedBy: StringFieldComparison
@@ -1087,6 +1190,7 @@ input ProductDeleteFilter {
   price: NumberFieldComparison
   stock: NumberFieldComparison
   image: StringFieldComparison
+  providerId: StringFieldComparison
   createdBy: StringFieldComparison
   createdById: StringFieldComparison
   updatedBy: StringFieldComparison
@@ -1183,17 +1287,21 @@ input CustomerDeleteFilter {
 
 input CreateOneUserInput {
   """The record to create"""
-  user: UserInput!
+  user: CreateUser!
 }
 
-input UserInput {
-  email: String!
-  password: String!
+input CreateUser {
+  id: ID
+  email: String
+  password: String
+  createAt: DateTime
+  updateAt: DateTime
+  deleteAt: DateTime
 }
 
 input CreateManyUsersInput {
   """Array of records to create"""
-  users: [UserInput!]!
+  users: [CreateUser!]!
 }
 
 input UpdateOneUserInput {
@@ -1201,12 +1309,16 @@ input UpdateOneUserInput {
   id: ID!
 
   """The update to apply."""
-  update: UserUpdate!
+  update: UpdateUser!
 }
 
-input UserUpdate {
-  email: String!
-  password: String!
+input UpdateUser {
+  id: ID
+  email: String
+  password: String
+  createAt: DateTime
+  updateAt: DateTime
+  deleteAt: DateTime
 }
 
 input UpdateManyUsersInput {
@@ -1214,7 +1326,7 @@ input UpdateManyUsersInput {
   filter: UserUpdateFilter!
 
   """The update to apply to all records found using the filter"""
-  update: UserUpdate!
+  update: UpdateUser!
 }
 
 input UserUpdateFilter {
@@ -1243,6 +1355,22 @@ input UserDeleteFilter {
   password: StringFieldComparison
 }
 
+input SetProductOnProviderInput {
+  """The id of the record."""
+  id: ID!
+
+  """The id of relation."""
+  relationId: ID!
+}
+
+input RemoveProductFromProviderInput {
+  """The id of the record."""
+  id: ID!
+
+  """The id of relation."""
+  relationId: ID!
+}
+
 input CreateOneProviderInput {
   """The record to create"""
   provider: ProviderInput!
@@ -1253,6 +1381,7 @@ input ProviderInput {
   email: String!
   phone: String!
   direction: String!
+  productId: String
 }
 
 input CreateManyProvidersInput {
@@ -1291,12 +1420,16 @@ input ProviderUpdateFilter {
   email: StringFieldComparison
   phone: StringFieldComparison
   direction: StringFieldComparison
+  productId: StringFieldComparison
   createdBy: StringFieldComparison
   createdById: StringFieldComparison
   updatedBy: StringFieldComparison
   updatedById: StringFieldComparison
   deletedBy: StringFieldComparison
   deletedById: StringFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input DeleteOneProviderInput {
@@ -1317,12 +1450,16 @@ input ProviderDeleteFilter {
   email: StringFieldComparison
   phone: StringFieldComparison
   direction: StringFieldComparison
+  productId: StringFieldComparison
   createdBy: StringFieldComparison
   createdById: StringFieldComparison
   updatedBy: StringFieldComparison
   updatedById: StringFieldComparison
   deletedBy: StringFieldComparison
   deletedById: StringFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input CreateOneOrderInput {

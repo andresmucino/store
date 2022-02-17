@@ -69,9 +69,9 @@ export class ProviderInputDTO {
   @IsNotEmpty()
   direction!: string;
 
-  // @Field({ nullable: true })
-  // @IsOptional()
-  // @IsString()
-  // @IsNotEmpty()
-  // productId?: string;
+  @Field({ nullable: true })
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
+  productId?: string;
 }

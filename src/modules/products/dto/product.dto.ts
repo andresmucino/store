@@ -12,13 +12,9 @@ import { ProviderDTO } from 'src/modules/providers/dto/provider.dto';
 
 @ObjectType('Product')
 @KeySet(['id'])
-// @FilterableCursorConnection('provider', () => ProviderDto, {
-//   nullable: true,
-//   pagingStrategy: PagingStrategies.OFFSET,
-//   enableAggregate: true,
-//   enableTotalCount: true,
-//   maxResultsSize: 1000,
-// })
+@FilterableRelation('provider', () => ProviderDTO, {
+  nullable: true,
+})
 // @FilterableRelation('order', () => OrderDto, { nullable: true })
 @QueryOptions({
   pagingStrategy: PagingStrategies.OFFSET,
@@ -44,6 +40,9 @@ export class ProductDTO {
   @FilterableField({ nullable: true })
   image?: string;
 
+  @FilterableField({ nullable: true })
+  providerId?: string;
+
   // @FilterableField({ nullable: true })
   // orderId?: string;
 
@@ -66,11 +65,11 @@ export class ProductDTO {
   deletedById?: string;
 
   @Field(() => GraphQLISODateTime)
-  createAt?: Date;
+  createdAt?: Date;
 
   @Field(() => GraphQLISODateTime)
-  updateAt?: Date;
+  updatedAt?: Date;
 
   @Field(() => GraphQLISODateTime, { nullable: true })
-  deleteAt?: Date;
+  deletedAt?: Date;
 }

@@ -35,7 +35,7 @@ import { ProductDTO } from './product.dto';
         createdBy,
         createdById,
         updatedBy,
-        updatedById
+        updatedById,
       };
     });
     return input;
@@ -67,6 +67,12 @@ export class ProductInputDTO {
   @IsOptional()
   @IsNotEmpty()
   image?: string;
+
+  @Field({ nullable: true })
+  @IsString()
+  @IsOptional()
+  @IsNotEmpty()
+  providerId?: string;
 
   // @Field({ nullable: true })
   // @IsString()
