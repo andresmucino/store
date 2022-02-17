@@ -94,19 +94,19 @@ export class CustomerEntity {
   deletedById!: string;
 
   @CreateDateColumn({
-    type: 'time with time zone',
+    type: 'timestamp with time zone',
     name: 'create_at',
   })
   createAt!: Date;
 
   @UpdateDateColumn({
-    type: 'time with time zone',
+    type: 'timestamp with time zone',
     name: 'update_at',
   })
   updateAt!: Date;
 
   @DeleteDateColumn({
-    type: 'time with time zone',
+    type: 'timestamp with time zone',
     name: 'delete_at',
     nullable: true,
   })

@@ -17,8 +17,8 @@ import { UserUpdateDTO } from './dto/user-update.dto';
         {
           DTOClass: UserDTO,
           EntityClass: UserEntity,
-          // CreateDTOClass: UserInputDTO,
-          // UpdateDTOClass: UserUpdateDTO,
+          CreateDTOClass: UserInputDTO,
+          UpdateDTOClass: UserUpdateDTO,
           enableAggregate: true,
           enableTotalCount: true,
           enableSubscriptions: false,

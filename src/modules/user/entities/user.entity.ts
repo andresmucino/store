@@ -3,7 +3,6 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
-  PrimaryColumn,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -27,19 +26,19 @@ export class UserEntity {
 
   @CreateDateColumn({
     name: 'create_at',
-    type: 'time with time zone',
+    type: 'timestamp with time zone',
   })
   createAt!: Date;
 
   @UpdateDateColumn({
     name: 'update_at',
-    type: 'time with time zone',
+    type: 'timestamp with time zone',
   })
   updateAt!: Date;
 
   @DeleteDateColumn({
     name: 'delete_at',
-    type: 'time with time zone',
+    type: 'timestamp with time zone',
   })
   deleteAt?: Date;
 }
