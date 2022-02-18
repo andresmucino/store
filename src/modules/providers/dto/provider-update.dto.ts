@@ -57,10 +57,4 @@ export class ProviderUpdateDTO {
   @IsString()
   @IsNotEmpty()
   direction?: string;
-
-  @Field({ nullable: true })
-  @IsOptional()
-  @IsString()
-  @IsNotEmpty()
-  productId?: string;
 }

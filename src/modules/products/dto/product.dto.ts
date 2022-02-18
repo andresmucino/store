@@ -6,7 +6,7 @@ import {
   QueryOptions,
 } from '@nestjs-query/query-graphql';
 import { Field, GraphQLISODateTime, ID, ObjectType } from '@nestjs/graphql';
-// import { OrderDto } from 'src/modules/orders/dto/order.dto';
+import { OrderDTO } from 'src/modules/orders/dto/order.dto';
 import { ProviderDTO } from 'src/modules/providers/dto/provider.dto';
 
 @ObjectType('Product')
@@ -14,7 +14,7 @@ import { ProviderDTO } from 'src/modules/providers/dto/provider.dto';
 @FilterableRelation('provider', () => ProviderDTO, {
   nullable: true,
 })
-// @FilterableRelation('order', () => OrderDto, { nullable: true })
+// @FilterableRelation('order', () => OrderDTO, { nullable: true })
 @QueryOptions({
   pagingStrategy: PagingStrategies.OFFSET,
   enableTotalCount: true,

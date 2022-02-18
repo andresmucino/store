@@ -64,17 +64,6 @@ export class ProductEntity {
   @JoinColumn({ name: 'provider_id' })
   provider?: ProviderEntity;
 
-  // @Column({
-  //   nullable: true,
-  //   name: 'order_id',
-  //   type: 'text',
-  // })
-  // orderId?: string;
-
-  // @ManyToOne(() => OrderEntity, (order) => order.products, { nullable: true })
-  // @JoinColumn({ name: 'order_id' })
-  // order?: OrderEntity;
-
   @Column({
     type: 'text',
     name: 'created_by',

@@ -63,4 +63,10 @@ export class ProductUpdateDTO {
   @IsOptional()
   @IsNotEmpty()
   providerId?: string;
+
+  @Field({ nullable: true })
+  @IsString()
+  @IsOptional()
+  @IsNotEmpty()
+  orderId?: string;
 }

@@ -1,7 +1,6 @@
 import {
   FilterableCursorConnection,
   FilterableField,
-  FilterableRelation,
   PagingStrategies,
   QueryOptions,
 } from '@nestjs-query/query-graphql';
@@ -36,9 +35,6 @@ export class ProviderDTO {
 
   @FilterableField()
   direction!: string;
-
-  // @FilterableField()
-  // productId?: string
 
   @FilterableField()
   createdBy?: string;

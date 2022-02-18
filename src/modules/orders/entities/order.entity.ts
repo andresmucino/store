@@ -21,12 +21,6 @@ export class OrderEntity {
   id!: string;
 
   @Column({
-    type: 'timestamp with time zone',
-    name: 'date',
-  })
-  date!: Date;
-
-  @Column({
     type: 'int',
     name: 'quantity',
     nullable: true,
@@ -45,11 +39,6 @@ export class OrderEntity {
   // })
   // @JoinColumn({ name: 'customer_id' })
   // customer?: CustomerEntity;
-
-  // @OneToMany(() => ProductEntity, (product) => product.order, {
-  //   nullable: true,
-  // })
-  // products?: ProductEntity[];
 
   @Column({
     type: 'text',

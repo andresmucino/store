@@ -5,7 +5,7 @@ import {
   CreateOneInputType,
 } from '@nestjs-query/query-graphql';
 import { Field, InputType } from '@nestjs/graphql';
-import { IsDate } from 'class-validator';
+import { IsDate, IsNumber, IsOptional, IsString } from 'class-validator';
 import { nanoid } from 'nanoid';
 import { UserContext } from 'src/auth/interface/auth.interface';
 import { OrderDTO } from './order.dto';
@@ -42,13 +42,11 @@ import { OrderDTO } from './order.dto';
   },
 )
 export class OrderInputDTO {
-  @Field()
-  @IsDate()
-  date!: Date;
-
   // @Field({ nullable: true })
   // customerId?: string;
 
   @Field({ nullable: true })
+  @IsOptional()
+  @IsNumber()
   quantity?: number;
 }

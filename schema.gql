@@ -157,112 +157,6 @@ type CustomerAggregateResponse {
   max: CustomerMaxAggregate
 }
 
-type Order {
-  id: ID!
-  date: DateTime!
-  quantity: Float
-  createdBy: String!
-  createdById: String!
-  updatedBy: String!
-  updatedById: String!
-  deletedBy: String
-  deletedById: String
-  createAt: DateTime!
-  updateAt: DateTime!
-  deleteAt: DateTime
-}
-
-type OrderDeleteResponse {
-  id: ID
-  date: DateTime
-  quantity: Float
-  createdBy: String
-  createdById: String
-  updatedBy: String
-  updatedById: String
-  deletedBy: String
-  deletedById: String
-  createAt: DateTime
-  updateAt: DateTime
-  deleteAt: DateTime
-}
-
-type OrderConnection {
-  """Paging information"""
-  pageInfo: OffsetPageInfo!
-
-  """Array of nodes."""
-  nodes: [Order!]!
-
-  """Fetch total count of records"""
-  totalCount: Int!
-}
-
-type OrderAggregateGroupBy {
-  id: ID
-  date: DateTime
-  quantity: Float
-  createdBy: String
-  createdById: String
-  updatedBy: String
-  updatedById: String
-  deletedBy: String
-  deletedById: String
-}
-
-type OrderCountAggregate {
-  id: Int
-  date: Int
-  quantity: Int
-  createdBy: Int
-  createdById: Int
-  updatedBy: Int
-  updatedById: Int
-  deletedBy: Int
-  deletedById: Int
-}
-
-type OrderSumAggregate {
-  quantity: Float
-}
-
-type OrderAvgAggregate {
-  quantity: Float
-}
-
-type OrderMinAggregate {
-  id: ID
-  date: DateTime
-  quantity: Float
-  createdBy: String
-  createdById: String
-  updatedBy: String
-  updatedById: String
-  deletedBy: String
-  deletedById: String
-}
-
-type OrderMaxAggregate {
-  id: ID
-  date: DateTime
-  quantity: Float
-  createdBy: String
-  createdById: String
-  updatedBy: String
-  updatedById: String
-  deletedBy: String
-  deletedById: String
-}
-
-type OrderAggregateResponse {
-  groupBy: OrderAggregateGroupBy
-  count: OrderCountAggregate
-  sum: OrderSumAggregate
-  avg: OrderAvgAggregate
-  min: OrderMinAggregate
-  max: OrderMaxAggregate
-}
-
 type Provider {
   id: ID!
   contactName: String!
@@ -484,6 +378,106 @@ type Product {
   updatedAt: DateTime!
   deletedAt: DateTime
   provider: Provider
+}
+
+type Order {
+  id: ID!
+  quantity: Float
+  createdBy: String!
+  createdById: String!
+  updatedBy: String!
+  updatedById: String!
+  deletedBy: String
+  deletedById: String
+  createAt: DateTime!
+  updateAt: DateTime!
+  deleteAt: DateTime
+}
+
+type OrderDeleteResponse {
+  id: ID
+  quantity: Float
+  createdBy: String
+  createdById: String
+  updatedBy: String
+  updatedById: String
+  deletedBy: String
+  deletedById: String
+  createAt: DateTime
+  updateAt: DateTime
+  deleteAt: DateTime
+}
+
+type OrderConnection {
+  """Paging information"""
+  pageInfo: OffsetPageInfo!
+
+  """Array of nodes."""
+  nodes: [Order!]!
+
+  """Fetch total count of records"""
+  totalCount: Int!
+}
+
+type OrderAggregateGroupBy {
+  id: ID
+  quantity: Float
+  createdBy: String
+  createdById: String
+  updatedBy: String
+  updatedById: String
+  deletedBy: String
+  deletedById: String
+}
+
+type OrderCountAggregate {
+  id: Int
+  quantity: Int
+  createdBy: Int
+  createdById: Int
+  updatedBy: Int
+  updatedById: Int
+  deletedBy: Int
+  deletedById: Int
+}
+
+type OrderSumAggregate {
+  quantity: Float
+}
+
+type OrderAvgAggregate {
+  quantity: Float
+}
+
+type OrderMinAggregate {
+  id: ID
+  quantity: Float
+  createdBy: String
+  createdById: String
+  updatedBy: String
+  updatedById: String
+  deletedBy: String
+  deletedById: String
+}
+
+type OrderMaxAggregate {
+  id: ID
+  quantity: Float
+  createdBy: String
+  createdById: String
+  updatedBy: String
+  updatedById: String
+  deletedBy: String
+  deletedById: String
+}
+
+type OrderAggregateResponse {
+  groupBy: OrderAggregateGroupBy
+  count: OrderCountAggregate
+  sum: OrderSumAggregate
+  avg: OrderAvgAggregate
+  min: OrderMinAggregate
+  max: OrderMaxAggregate
 }
 
 type ProductDeleteResponse {
@@ -1151,7 +1145,6 @@ input OrderAggregateFilter {
   and: [OrderAggregateFilter!]
   or: [OrderAggregateFilter!]
   id: IDFilterComparison
-  date: DateFieldComparison
   quantity: NumberFieldComparison
   createdBy: StringFieldComparison
   createdById: StringFieldComparison
@@ -1165,7 +1158,6 @@ input OrderFilter {
   and: [OrderFilter!]
   or: [OrderFilter!]
   id: IDFilterComparison
-  date: DateFieldComparison
   quantity: NumberFieldComparison
   createdBy: StringFieldComparison
   createdById: StringFieldComparison
@@ -1183,7 +1175,6 @@ input OrderSort {
 
 enum OrderSortFields {
   id
-  date
   quantity
   createdBy
   createdById
@@ -1295,6 +1286,7 @@ input ProductUpdate {
   stock: Float
   image: String
   providerId: String
+  orderId: String
 }
 
 input UpdateManyProductsInput {
@@ -1592,7 +1584,6 @@ input ProviderUpdate {
   email: String
   phone: String
   direction: String
-  productId: String
 }
 
 input UpdateManyProvidersInput {
@@ -1657,7 +1648,6 @@ input CreateOneOrderInput {
 }
 
 input OrderInput {
-  date: DateTime!
   quantity: Float
 }
 
@@ -1675,7 +1665,6 @@ input UpdateOneOrderInput {
 }
 
 input OrderUpdate {
-  date: DateTime!
   quantity: Float
 }
 
@@ -1691,7 +1680,6 @@ input OrderUpdateFilter {
   and: [OrderUpdateFilter!]
   or: [OrderUpdateFilter!]
   id: IDFilterComparison
-  date: DateFieldComparison
   quantity: NumberFieldComparison
   createdBy: StringFieldComparison
   createdById: StringFieldComparison
@@ -1715,7 +1703,6 @@ input OrderDeleteFilter {
   and: [OrderDeleteFilter!]
   or: [OrderDeleteFilter!]
   id: IDFilterComparison
-  date: DateFieldComparison
   quantity: NumberFieldComparison
   createdBy: StringFieldComparison
   createdById: StringFieldComparison
