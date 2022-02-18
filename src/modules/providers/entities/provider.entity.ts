@@ -5,6 +5,7 @@ import {
   DeleteDateColumn,
   Entity,
   JoinColumn,
+  OneToMany,
   OneToOne,
   PrimaryColumn,
   UpdateDateColumn,
@@ -40,18 +41,17 @@ export class ProviderEntity {
   })
   direction!: string;
 
-  @Column({
-    nullable: true,
-    name: 'product_id',
-    type: 'text',
-  })
-  productId?: string;
+  // @Column({
+  //   nullable: true,
+  //   name: 'product_id',
+  //   type: 'text',
+  // })
+  // productId?: string;
 
-  @OneToOne(() => ProductEntity, (product) => product.provider, {
+  @OneToMany(() => ProductEntity, (product) => product.provider, {
     nullable: true,
   })
-  @JoinColumn({ name: 'pruduct_id' })
-  product?: ProductEntity;
+  products?: ProductEntity[];
 
   @Column({
     type: 'text',

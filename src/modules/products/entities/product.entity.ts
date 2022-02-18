@@ -58,9 +58,10 @@ export class ProductEntity {
   })
   providerId?: string;
 
-  @OneToOne(() => ProviderEntity, (provider) => provider.product, {
+  @ManyToOne(() => ProviderEntity, (provider) => provider.products, {
     nullable: true,
   })
+  @JoinColumn({ name: 'provider_id' })
   provider?: ProviderEntity;
 
   // @Column({

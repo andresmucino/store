@@ -1,5 +1,4 @@
 import {
-  FilterableCursorConnection,
   FilterableField,
   FilterableRelation,
   KeySet,

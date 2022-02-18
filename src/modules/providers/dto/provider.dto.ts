@@ -1,4 +1,5 @@
 import {
+  FilterableCursorConnection,
   FilterableField,
   FilterableRelation,
   PagingStrategies,
@@ -8,7 +9,13 @@ import { GraphQLISODateTime, ID, ObjectType } from '@nestjs/graphql';
 import { ProductDTO } from 'src/modules/products/dto/product.dto';
 
 @ObjectType('Provider')
-@FilterableRelation('product', () => ProductDTO, { nullable: true })
+@FilterableCursorConnection('Products', () => ProductDTO, {
+  nullable: true,
+  pagingStrategy: PagingStrategies.OFFSET,
+  enableAggregate: true,
+  enableTotalCount: true,
+  maxResultsSize: 1000,
+})
 @QueryOptions({
   pagingStrategy: PagingStrategies.OFFSET,
   enableTotalCount: true,
@@ -29,6 +36,9 @@ export class ProviderDTO {
 
   @FilterableField()
   direction!: string;
+
+  // @FilterableField()
+  // productId?: string
 
   @FilterableField()
   createdBy?: string;
