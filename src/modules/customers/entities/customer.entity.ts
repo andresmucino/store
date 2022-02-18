@@ -1,10 +1,11 @@
-import { OrderEntity } from 'src/modules/orders/entities/order.entity';
+import { UserEntity } from 'src/modules/user/entities/user.entity';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
-  OneToMany,
+  JoinColumn,
+  OneToOne,
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -47,6 +48,17 @@ export class CustomerEntity {
     nullable: true,
   })
   avatar?: string;
+
+  @Column({
+    type: 'text',
+    name: 'user_id',
+    nullable: true,
+  })
+  userId?: string;
+
+  @OneToOne(() => UserEntity, (user) => user.customer, { nullable: true })
+  @JoinColumn({ name: 'user_id' })
+  user?: UserEntity;
 
   // @OneToMany(() => OrderEntity, (order) => order.customer, { nullable: true })
   // orders: OrderEntity[];

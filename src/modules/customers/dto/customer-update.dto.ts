@@ -33,32 +33,39 @@ import { CustomerDTO } from './customer.dto';
   },
 )
 export class CustomerUpdateDTO {
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   @IsString()
   @IsNotEmpty()
   name?: string;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   @IsString()
   @IsNotEmpty()
   lastname?: string;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   @IsPhoneNumber()
   @IsNotEmpty()
   phone?: string;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   @IsString()
   @IsNotEmpty()
   direction?: string;
 
   @Field({ nullable: true })
+  @IsOptional()
   @IsString()
   @IsNotEmpty()
   image?: string;
+
+  @Field({ nullable: true })
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
+  userId?: string;
 }

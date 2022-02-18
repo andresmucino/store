@@ -1,15 +1,23 @@
 import { Field, InputType } from '@nestjs/graphql';
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 @InputType('UserUpdate')
 export class UserUpdateDTO {
-  @Field()
+  @Field({ nullable: true })
+  @IsOptional()
   @IsString()
   @IsNotEmpty()
-  email!: string;
+  email?: string;
 
-  @Field()
+  @Field({ nullable: true })
+  @IsOptional()
   @IsString()
   @IsNotEmpty()
-  password!: string;
+  password?: string;
+
+  @Field({ nullable: true })
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
+  customerId?: string;
 }

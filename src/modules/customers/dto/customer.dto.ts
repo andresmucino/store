@@ -1,13 +1,16 @@
 import {
   FilterableCursorConnection,
   FilterableField,
+  FilterableRelation,
   PagingStrategies,
   QueryOptions,
 } from '@nestjs-query/query-graphql';
 import { Field, GraphQLISODateTime, ID, ObjectType } from '@nestjs/graphql';
+import { UserDTO } from 'src/modules/user/dto/user.dto';
 // import { OrderDto } from 'src/modules/orders/dto/order.dto';
 
 @ObjectType('Customer')
+@FilterableRelation('user', () => UserDTO)
 // @FilterableCursorConnection('orders', () => OrderDto, {
 //   nullable: true,
 //   pagingStrategy: PagingStrategies.OFFSET,
@@ -38,6 +41,9 @@ export class CustomerDTO {
 
   @FilterableField({ nullable: true })
   avatar?: string;
+
+  @FilterableField({ nullable: true })
+  userId?: string;
 
   @FilterableField()
   createdBy?: string;

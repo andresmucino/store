@@ -1,8 +1,11 @@
+import { CustomerEntity } from 'src/modules/customers/entities/customer.entity';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -23,6 +26,19 @@ export class UserEntity {
     type: 'text',
   })
   password!: string;
+
+  @Column({
+    type: 'text',
+    name: 'customer_id',
+    nullable: true,
+  })
+  customerId?: string;
+
+  @OneToOne(() => CustomerEntity, (customer) => customer.user, {
+    nullable: true,
+  })
+  @JoinColumn({ name: 'customer_id' })
+  customer: CustomerEntity;
 
   @CreateDateColumn({
     name: 'create_at',

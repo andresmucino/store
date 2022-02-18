@@ -2,6 +2,22 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type User {
+  id: ID!
+  email: String!
+  password: String!
+  customerId: String
+  createAt: DateTime!
+  updateAt: DateTime!
+  deleteAt: DateTime
+  customer: Customer
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type Customer {
   id: ID!
   name: String!
@@ -9,6 +25,7 @@ type Customer {
   phone: String!
   direction: String!
   avatar: String
+  userId: String
   createdBy: String!
   createdById: String!
   updatedBy: String!
@@ -18,12 +35,8 @@ type Customer {
   createAt: DateTime!
   updateAt: DateTime!
   deleteAt: DateTime
+  user: User!
 }
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
 
 type DeleteManyResponse {
   """The number of records deleted."""
@@ -37,6 +50,7 @@ type CustomerDeleteResponse {
   phone: String
   direction: String
   avatar: String
+  userId: String
   createdBy: String
   createdById: String
   updatedBy: String
@@ -79,6 +93,7 @@ type CustomerAggregateGroupBy {
   phone: String
   direction: String
   avatar: String
+  userId: String
   createdBy: String
   createdById: String
   updatedBy: String
@@ -94,6 +109,7 @@ type CustomerCountAggregate {
   phone: Int
   direction: Int
   avatar: Int
+  userId: Int
   createdBy: Int
   createdById: Int
   updatedBy: Int
@@ -109,6 +125,7 @@ type CustomerMinAggregate {
   phone: String
   direction: String
   avatar: String
+  userId: String
   createdBy: String
   createdById: String
   updatedBy: String
@@ -124,6 +141,7 @@ type CustomerMaxAggregate {
   phone: String
   direction: String
   avatar: String
+  userId: String
   createdBy: String
   createdById: String
   updatedBy: String
@@ -581,19 +599,11 @@ type ProductAggregateResponse {
   max: ProductMaxAggregate
 }
 
-type User {
-  id: ID!
-  email: String!
-  password: String!
-  createAt: DateTime!
-  updateAt: DateTime!
-  deleteAt: DateTime
-}
-
 type UserDeleteResponse {
   id: ID
   email: String
   password: String
+  customerId: String
   createAt: DateTime
   updateAt: DateTime
   deleteAt: DateTime
@@ -614,24 +624,28 @@ type UserAggregateGroupBy {
   id: ID
   email: String
   password: String
+  customerId: String
 }
 
 type UserCountAggregate {
   id: Int
   email: Int
   password: Int
+  customerId: Int
 }
 
 type UserMinAggregate {
   id: ID
   email: String
   password: String
+  customerId: String
 }
 
 type UserMaxAggregate {
   id: ID
   email: String
   password: String
+  customerId: String
 }
 
 type UserAggregateResponse {
@@ -944,6 +958,7 @@ input CustomerAggregateFilter {
   phone: StringFieldComparison
   direction: StringFieldComparison
   avatar: StringFieldComparison
+  userId: StringFieldComparison
   createdBy: StringFieldComparison
   createdById: StringFieldComparison
   updatedBy: StringFieldComparison
@@ -961,12 +976,23 @@ input CustomerFilter {
   phone: StringFieldComparison
   direction: StringFieldComparison
   avatar: StringFieldComparison
+  userId: StringFieldComparison
   createdBy: StringFieldComparison
   createdById: StringFieldComparison
   updatedBy: StringFieldComparison
   updatedById: StringFieldComparison
   deletedBy: StringFieldComparison
   deletedById: StringFieldComparison
+  user: CustomerFilterUserFilter
+}
+
+input CustomerFilterUserFilter {
+  and: [CustomerFilterUserFilter!]
+  or: [CustomerFilterUserFilter!]
+  id: IDFilterComparison
+  email: StringFieldComparison
+  password: StringFieldComparison
+  customerId: StringFieldComparison
 }
 
 input CustomerSort {
@@ -982,6 +1008,7 @@ enum CustomerSortFields {
   phone
   direction
   avatar
+  userId
   createdBy
   createdById
   updatedBy
@@ -996,6 +1023,7 @@ input UserAggregateFilter {
   id: IDFilterComparison
   email: StringFieldComparison
   password: StringFieldComparison
+  customerId: StringFieldComparison
 }
 
 input UserFilter {
@@ -1004,6 +1032,26 @@ input UserFilter {
   id: IDFilterComparison
   email: StringFieldComparison
   password: StringFieldComparison
+  customerId: StringFieldComparison
+  customer: UserFilterCustomerFilter
+}
+
+input UserFilterCustomerFilter {
+  and: [UserFilterCustomerFilter!]
+  or: [UserFilterCustomerFilter!]
+  id: IDFilterComparison
+  name: StringFieldComparison
+  lastname: StringFieldComparison
+  phone: StringFieldComparison
+  direction: StringFieldComparison
+  avatar: StringFieldComparison
+  userId: StringFieldComparison
+  createdBy: StringFieldComparison
+  createdById: StringFieldComparison
+  updatedBy: StringFieldComparison
+  updatedById: StringFieldComparison
+  deletedBy: StringFieldComparison
+  deletedById: StringFieldComparison
 }
 
 input UserSort {
@@ -1016,6 +1064,7 @@ enum UserSortFields {
   id
   email
   password
+  customerId
 }
 
 input ProviderAggregateFilter {
@@ -1157,6 +1206,8 @@ type Mutation {
   deleteManyProducts(input: DeleteManyProductsInput!): DeleteManyResponse!
   restoreOneCustomer(input: ID!): Customer!
   restoreManyCustomers(input: CustomerFilter!): UpdateManyResponse!
+  setUserOnCustomer(input: SetUserOnCustomerInput!): Customer!
+  removeUserFromCustomer(input: RemoveUserFromCustomerInput!): Customer!
   createOneCustomer(input: CreateOneCustomerInput!): Customer!
   createManyCustomers(input: CreateManyCustomersInput!): [Customer!]!
   updateOneCustomer(input: UpdateOneCustomerInput!): Customer!
@@ -1167,6 +1218,8 @@ type Mutation {
   restoreManyProviders(input: OrderFilter!): UpdateManyResponse!
   restoreOneUser(input: ID!): User!
   restoreManyUsers(input: UserFilter!): UpdateManyResponse!
+  setCustomerOnUser(input: SetCustomerOnUserInput!): User!
+  removeCustomerFromUser(input: RemoveCustomerFromUserInput!): User!
   createOneUser(input: CreateOneUserInput!): User!
   createManyUsers(input: CreateManyUsersInput!): [User!]!
   updateOneUser(input: UpdateOneUserInput!): User!
@@ -1298,6 +1351,22 @@ input ProductDeleteFilter {
   deletedById: StringFieldComparison
 }
 
+input SetUserOnCustomerInput {
+  """The id of the record."""
+  id: ID!
+
+  """The id of relation."""
+  relationId: ID!
+}
+
+input RemoveUserFromCustomerInput {
+  """The id of the record."""
+  id: ID!
+
+  """The id of relation."""
+  relationId: ID!
+}
+
 input CreateOneCustomerInput {
   """The record to create"""
   customer: CustomerInput!
@@ -1325,11 +1394,12 @@ input UpdateOneCustomerInput {
 }
 
 input CustomerUpdate {
-  name: String!
-  lastname: String!
-  phone: String!
-  direction: String!
+  name: String
+  lastname: String
+  phone: String
+  direction: String
   image: String
+  userId: String
 }
 
 input UpdateManyCustomersInput {
@@ -1349,6 +1419,7 @@ input CustomerUpdateFilter {
   phone: StringFieldComparison
   direction: StringFieldComparison
   avatar: StringFieldComparison
+  userId: StringFieldComparison
   createdBy: StringFieldComparison
   createdById: StringFieldComparison
   updatedBy: StringFieldComparison
@@ -1376,12 +1447,29 @@ input CustomerDeleteFilter {
   phone: StringFieldComparison
   direction: StringFieldComparison
   avatar: StringFieldComparison
+  userId: StringFieldComparison
   createdBy: StringFieldComparison
   createdById: StringFieldComparison
   updatedBy: StringFieldComparison
   updatedById: StringFieldComparison
   deletedBy: StringFieldComparison
   deletedById: StringFieldComparison
+}
+
+input SetCustomerOnUserInput {
+  """The id of the record."""
+  id: ID!
+
+  """The id of relation."""
+  relationId: ID!
+}
+
+input RemoveCustomerFromUserInput {
+  """The id of the record."""
+  id: ID!
+
+  """The id of relation."""
+  relationId: ID!
 }
 
 input CreateOneUserInput {
@@ -1408,8 +1496,9 @@ input UpdateOneUserInput {
 }
 
 input UserUpdate {
-  email: String!
-  password: String!
+  email: String
+  password: String
+  customerId: String
 }
 
 input UpdateManyUsersInput {
@@ -1426,6 +1515,7 @@ input UserUpdateFilter {
   id: IDFilterComparison
   email: StringFieldComparison
   password: StringFieldComparison
+  customerId: StringFieldComparison
 }
 
 input DeleteOneUserInput {
@@ -1444,6 +1534,7 @@ input UserDeleteFilter {
   id: IDFilterComparison
   email: StringFieldComparison
   password: StringFieldComparison
+  customerId: StringFieldComparison
 }
 
 input AddProductsToProviderInput {
