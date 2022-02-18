@@ -41,7 +41,7 @@ import { AuthModule } from './auth/auth.module';
     ProductModule,
     CustomerModule,
     ProviderModule,
-    OrderModule,
+    // OrderModule,
     DatabaseModule,
     UserModule,
     AuthModule,

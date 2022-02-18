@@ -380,106 +380,6 @@ type Product {
   provider: Provider
 }
 
-type Order {
-  id: ID!
-  quantity: Float
-  createdBy: String!
-  createdById: String!
-  updatedBy: String!
-  updatedById: String!
-  deletedBy: String
-  deletedById: String
-  createAt: DateTime!
-  updateAt: DateTime!
-  deleteAt: DateTime
-}
-
-type OrderDeleteResponse {
-  id: ID
-  quantity: Float
-  createdBy: String
-  createdById: String
-  updatedBy: String
-  updatedById: String
-  deletedBy: String
-  deletedById: String
-  createAt: DateTime
-  updateAt: DateTime
-  deleteAt: DateTime
-}
-
-type OrderConnection {
-  """Paging information"""
-  pageInfo: OffsetPageInfo!
-
-  """Array of nodes."""
-  nodes: [Order!]!
-
-  """Fetch total count of records"""
-  totalCount: Int!
-}
-
-type OrderAggregateGroupBy {
-  id: ID
-  quantity: Float
-  createdBy: String
-  createdById: String
-  updatedBy: String
-  updatedById: String
-  deletedBy: String
-  deletedById: String
-}
-
-type OrderCountAggregate {
-  id: Int
-  quantity: Int
-  createdBy: Int
-  createdById: Int
-  updatedBy: Int
-  updatedById: Int
-  deletedBy: Int
-  deletedById: Int
-}
-
-type OrderSumAggregate {
-  quantity: Float
-}
-
-type OrderAvgAggregate {
-  quantity: Float
-}
-
-type OrderMinAggregate {
-  id: ID
-  quantity: Float
-  createdBy: String
-  createdById: String
-  updatedBy: String
-  updatedById: String
-  deletedBy: String
-  deletedById: String
-}
-
-type OrderMaxAggregate {
-  id: ID
-  quantity: Float
-  createdBy: String
-  createdById: String
-  updatedBy: String
-  updatedById: String
-  deletedBy: String
-  deletedById: String
-}
-
-type OrderAggregateResponse {
-  groupBy: OrderAggregateGroupBy
-  count: OrderCountAggregate
-  sum: OrderSumAggregate
-  avg: OrderAvgAggregate
-  min: OrderMinAggregate
-  max: OrderMaxAggregate
-}
-
 type ProductDeleteResponse {
   id: ID
   name: String
@@ -923,24 +823,6 @@ type Query {
     """Specify to sort results."""
     sorting: [ProviderSort!] = []
   ): ProviderConnection!
-  orderAggregate(
-    """Filter to find records to aggregate on"""
-    filter: OrderAggregateFilter
-  ): [OrderAggregateResponse!]!
-  order(
-    """The id of the record to find."""
-    id: ID!
-  ): Order
-  orders(
-    """Limit or page results."""
-    paging: OffsetPaging = {limit: 10}
-
-    """Specify to filter the records returned."""
-    filter: OrderFilter = {}
-
-    """Specify to sort results."""
-    sorting: [OrderSort!] = []
-  ): OrderConnection!
 }
 
 input CustomerAggregateFilter {
@@ -1141,49 +1023,6 @@ enum ProviderSortFields {
   deletedAt
 }
 
-input OrderAggregateFilter {
-  and: [OrderAggregateFilter!]
-  or: [OrderAggregateFilter!]
-  id: IDFilterComparison
-  quantity: NumberFieldComparison
-  createdBy: StringFieldComparison
-  createdById: StringFieldComparison
-  updatedBy: StringFieldComparison
-  updatedById: StringFieldComparison
-  deletedBy: StringFieldComparison
-  deletedById: StringFieldComparison
-}
-
-input OrderFilter {
-  and: [OrderFilter!]
-  or: [OrderFilter!]
-  id: IDFilterComparison
-  quantity: NumberFieldComparison
-  createdBy: StringFieldComparison
-  createdById: StringFieldComparison
-  updatedBy: StringFieldComparison
-  updatedById: StringFieldComparison
-  deletedBy: StringFieldComparison
-  deletedById: StringFieldComparison
-}
-
-input OrderSort {
-  field: OrderSortFields!
-  direction: SortDirection!
-  nulls: SortNulls
-}
-
-enum OrderSortFields {
-  id
-  quantity
-  createdBy
-  createdById
-  updatedBy
-  updatedById
-  deletedBy
-  deletedById
-}
-
 type Mutation {
   restoreOneProduct(input: ID!): Product!
   restoreManyProduct(input: ProductFilter!): UpdateManyResponse!
@@ -1206,7 +1045,7 @@ type Mutation {
   deleteOneCustomer(input: DeleteOneCustomerInput!): CustomerDeleteResponse!
   deleteManyCustomers(input: DeleteManyCustomersInput!): DeleteManyResponse!
   restoreOneProvider(input: ID!): Provider!
-  restoreManyProviders(input: OrderFilter!): UpdateManyResponse!
+  restoreManyProviders(input: ProviderFilter!): UpdateManyResponse!
   restoreOneUser(input: ID!): User!
   restoreManyUsers(input: UserFilter!): UpdateManyResponse!
   setCustomerOnUser(input: SetCustomerOnUserInput!): User!
@@ -1226,13 +1065,6 @@ type Mutation {
   updateManyProviders(input: UpdateManyProvidersInput!): UpdateManyResponse!
   deleteOneProvider(input: DeleteOneProviderInput!): ProviderDeleteResponse!
   deleteManyProviders(input: DeleteManyProvidersInput!): DeleteManyResponse!
-  restoreOneOrder(input: ID!): Order!
-  createOneOrder(input: CreateOneOrderInput!): Order!
-  createManyOrders(input: CreateManyOrdersInput!): [Order!]!
-  updateOneOrder(input: UpdateOneOrderInput!): Order!
-  updateManyOrders(input: UpdateManyOrdersInput!): UpdateManyResponse!
-  deleteOneOrder(input: DeleteOneOrderInput!): OrderDeleteResponse!
-  deleteManyOrders(input: DeleteManyOrdersInput!): DeleteManyResponse!
   login(input: LoginInputDTO!): LoginResponse!
 }
 
@@ -1640,76 +1472,6 @@ input ProviderDeleteFilter {
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
-}
-
-input CreateOneOrderInput {
-  """The record to create"""
-  order: OrderInput!
-}
-
-input OrderInput {
-  quantity: Float
-}
-
-input CreateManyOrdersInput {
-  """Array of records to create"""
-  orders: [OrderInput!]!
-}
-
-input UpdateOneOrderInput {
-  """The id of the record to update"""
-  id: ID!
-
-  """The update to apply."""
-  update: OrderUpdate!
-}
-
-input OrderUpdate {
-  quantity: Float
-}
-
-input UpdateManyOrdersInput {
-  """Filter used to find fields to update"""
-  filter: OrderUpdateFilter!
-
-  """The update to apply to all records found using the filter"""
-  update: OrderUpdate!
-}
-
-input OrderUpdateFilter {
-  and: [OrderUpdateFilter!]
-  or: [OrderUpdateFilter!]
-  id: IDFilterComparison
-  quantity: NumberFieldComparison
-  createdBy: StringFieldComparison
-  createdById: StringFieldComparison
-  updatedBy: StringFieldComparison
-  updatedById: StringFieldComparison
-  deletedBy: StringFieldComparison
-  deletedById: StringFieldComparison
-}
-
-input DeleteOneOrderInput {
-  """The id of the record to delete."""
-  id: ID!
-}
-
-input DeleteManyOrdersInput {
-  """Filter to find records to delete"""
-  filter: OrderDeleteFilter!
-}
-
-input OrderDeleteFilter {
-  and: [OrderDeleteFilter!]
-  or: [OrderDeleteFilter!]
-  id: IDFilterComparison
-  quantity: NumberFieldComparison
-  createdBy: StringFieldComparison
-  createdById: StringFieldComparison
-  updatedBy: StringFieldComparison
-  updatedById: StringFieldComparison
-  deletedBy: StringFieldComparison
-  deletedById: StringFieldComparison
 }
 
 input LoginInputDTO {
