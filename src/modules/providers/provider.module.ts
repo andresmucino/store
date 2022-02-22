@@ -9,6 +9,9 @@ import { ProviderInputDTO } from './dto/provider-input.dto';
 import { UserModule } from '../user/user.module';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { ProviderUpdateDTO } from './dto/provider-update.dto';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
+import { Role } from 'src/auth/decorators/role.decorator';
+import { UserRole } from '../user/entities/user.entity';
 
 @Module({
   imports: [
@@ -29,6 +32,8 @@ import { ProviderUpdateDTO } from './dto/provider-update.dto';
           enableTotalCount: true,
           enableSubscriptions: false,
           guards: [JwtAuthGuard],
+          create: { decorators: [Role(UserRole.ADMIN)] },
+          read: { decorators: [Role(UserRole.ADMIN)] },
         },
       ],
     }),

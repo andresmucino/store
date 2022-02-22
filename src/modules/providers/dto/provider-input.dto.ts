@@ -55,7 +55,7 @@ export class ProviderInputDTO {
   contactName!: string;
 
   @Field()
-  @IsEmail()
+  @IsString()
   @IsNotEmpty()
   email!: string;
 
