@@ -2,7 +2,7 @@ import { UnauthorizedException, UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { UserDTO } from 'src/modules/user/dto/user.dto';
 import { AuthService } from './auth.service';
-import { CurrentUser } from './current-user.decorator';
+import { CurrentUser } from './decorators/current-user.decorator';
 import { LoginInputDTO } from './dto/login-input.dto';
 import { LoginResponseDto } from './dto/login-response.dto';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';

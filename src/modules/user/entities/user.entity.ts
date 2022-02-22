@@ -1,3 +1,4 @@
+import { registerEnumType } from '@nestjs/graphql';
 import { CustomerEntity } from 'src/modules/customers/entities/customer.entity';
 import {
   Column,
@@ -9,6 +10,15 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+
+export enum UserRole {
+  ADMIN = 'admin',
+  USER = 'user'
+}
+
+registerEnumType(UserRole, {
+  name: 'UserRole'
+})
 
 @Entity({ name: 'user' })
 export class UserEntity {
@@ -26,6 +36,14 @@ export class UserEntity {
     type: 'text',
   })
   password!: string;
+
+  @Column({
+    type: 'enum',
+    array: true,
+    enum: UserRole,
+    default: [UserRole.USER]
+  })
+  role!: string
 
   @Column({
     type: 'text',

@@ -6,6 +6,7 @@ import {
 } from '@nestjs-query/query-graphql';
 import { Field, GraphQLISODateTime, ID, ObjectType } from '@nestjs/graphql';
 import { CustomerDTO } from 'src/modules/customers/dto/customer.dto';
+import { UserRole } from '../entities/user.entity';
 
 @ObjectType('User')
 @FilterableRelation('customer', () => CustomerDTO, { nullable: true })
@@ -23,6 +24,9 @@ export class UserDTO {
 
   @FilterableField()
   password!: string;
+
+  @Field(() => [UserRole])
+  role!: string
 
   @FilterableField({ nullable: true })
   customerId?: string
