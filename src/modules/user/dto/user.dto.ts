@@ -23,13 +23,13 @@ export class UserDTO {
   email!: string;
 
   @FilterableField()
-  password!: string;
+   password!: string;
 
-  @Field(() => [UserRole])
-  role!: string
+  @Field(() => [UserRole], { nullable: true })
+  role?: string;
 
   @FilterableField({ nullable: true })
-  customerId?: string
+  customerId?: string;
 
   @Field(() => GraphQLISODateTime)
   createAt!: Date;

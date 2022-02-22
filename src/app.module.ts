@@ -25,13 +25,6 @@ import { AuthModule } from './auth/auth.module';
       installSubscriptionHandlers: true,
       introspection: true,
       playground: true,
-      // subscriptions: {
-      //   'subscriptions-transport-ws': {
-      //     onConnect: (connectionParams: unknown) => ({
-      //       headers: connectionParams,
-      //     }),
-      //   },
-      // },
       context: ({
         req,
       }: {

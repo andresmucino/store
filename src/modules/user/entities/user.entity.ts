@@ -1,4 +1,5 @@
 import { registerEnumType } from '@nestjs/graphql';
+import { Exclude } from 'class-transformer';
 import { CustomerEntity } from 'src/modules/customers/entities/customer.entity';
 import {
   Column,
@@ -13,12 +14,12 @@ import {
 
 export enum UserRole {
   ADMIN = 'admin',
-  USER = 'user'
+  USER = 'user',
 }
 
 registerEnumType(UserRole, {
-  name: 'UserRole'
-})
+  name: 'UserRole',
+});
 
 @Entity({ name: 'user' })
 export class UserEntity {
@@ -41,9 +42,9 @@ export class UserEntity {
     type: 'enum',
     array: true,
     enum: UserRole,
-    default: [UserRole.USER]
+    default: [UserRole.USER],
   })
-  role!: string
+  role?: string;
 
   @Column({
     type: 'text',

@@ -8,6 +8,9 @@ import { ProductResolver } from './product.resolver';
 import { ProductInputDTO } from './dto/product-input.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { ProductUpdateDTO } from './dto/product-update.dto';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
+import { Role } from 'src/auth/decorators/role.decorator';
+import { UserRole } from '../user/entities/user.entity';
 
 @Module({
   imports: [
@@ -23,7 +26,12 @@ import { ProductUpdateDTO } from './dto/product-update.dto';
           enableAggregate: true,
           enableTotalCount: true,
           enableSubscriptions: false,
-          guards: [JwtAuthGuard],
+          guards: [JwtAuthGuard, RolesGuard],
+          create: { decorators: [Role(UserRole.ADMIN)] },
+          read: { decorators: [Role(UserRole.ADMIN)] },
+          update: { decorators: [Role(UserRole.ADMIN)] },
+          aggregate: { decorators: [Role(UserRole.ADMIN)] },
+          delete: { disabled: true },
         },
       ],
     }),

@@ -11,6 +11,7 @@ import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { ProviderUpdateDTO } from './dto/provider-update.dto';
 import { Role } from 'src/auth/decorators/role.decorator';
 import { UserRole } from '../user/entities/user.entity';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
 
 @Module({
   imports: [
@@ -30,9 +31,12 @@ import { UserRole } from '../user/entities/user.entity';
           enableAggregate: true,
           enableTotalCount: true,
           enableSubscriptions: false,
-          guards: [JwtAuthGuard],
+          guards: [JwtAuthGuard, RolesGuard],
           create: { decorators: [Role(UserRole.ADMIN)] },
           read: { decorators: [Role(UserRole.ADMIN)] },
+          update: { decorators: [Role(UserRole.ADMIN)] },
+          aggregate: { decorators: [Role(UserRole.ADMIN)] },
+          delete: { disabled: true },
         },
       ],
     }),

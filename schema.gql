@@ -6,7 +6,7 @@ type User {
   id: ID!
   email: String!
   password: String!
-  role: [UserRole!]!
+  role: [UserRole!]
   customerId: String
   createAt: DateTime!
   updateAt: DateTime!
@@ -386,25 +386,6 @@ type Product {
   provider: Provider
 }
 
-type ProductDeleteResponse {
-  id: ID
-  name: String
-  description: String
-  price: Float
-  stock: Float
-  image: String
-  providerId: String
-  createdBy: String
-  createdById: String
-  updatedBy: String
-  updatedById: String
-  deletedBy: String
-  deletedById: String
-  createdAt: DateTime
-  updatedAt: DateTime
-  deletedAt: DateTime
-}
-
 type ProductConnection {
   """Paging information"""
   pageInfo: OffsetPageInfo!
@@ -499,17 +480,6 @@ type ProductAggregateResponse {
   max: ProductMaxAggregate
 }
 
-type UserDeleteResponse {
-  id: ID
-  email: String
-  password: String
-  role: [UserRole!]
-  customerId: String
-  createAt: DateTime
-  updateAt: DateTime
-  deleteAt: DateTime
-}
-
 type UserConnection {
   """Paging information"""
   pageInfo: OffsetPageInfo!
@@ -554,23 +524,6 @@ type UserAggregateResponse {
   count: UserCountAggregate
   min: UserMinAggregate
   max: UserMaxAggregate
-}
-
-type ProviderDeleteResponse {
-  id: ID
-  contactName: String
-  email: String
-  phone: String
-  direction: String
-  createdBy: String
-  createdById: String
-  updatedBy: String
-  updatedById: String
-  deletedBy: String
-  deletedById: String
-  createdAt: DateTime
-  updatedAt: DateTime
-  deletedAt: DateTime
 }
 
 type ProviderConnection {
@@ -1039,8 +992,6 @@ type Mutation {
   createManyProducts(input: CreateManyProductsInput!): [Product!]!
   updateOneProduct(input: UpdateOneProductInput!): Product!
   updateManyProducts(input: UpdateManyProductsInput!): UpdateManyResponse!
-  deleteOneProduct(input: DeleteOneProductInput!): ProductDeleteResponse!
-  deleteManyProducts(input: DeleteManyProductsInput!): DeleteManyResponse!
   restoreOneCustomer(input: ID!): Customer!
   restoreManyCustomers(input: CustomerFilter!): UpdateManyResponse!
   setUserOnCustomer(input: SetUserOnCustomerInput!): Customer!
@@ -1061,8 +1012,6 @@ type Mutation {
   createManyUsers(input: CreateManyUsersInput!): [User!]!
   updateOneUser(input: UpdateOneUserInput!): User!
   updateManyUsers(input: UpdateManyUsersInput!): UpdateManyResponse!
-  deleteOneUser(input: DeleteOneUserInput!): UserDeleteResponse!
-  deleteManyUsers(input: DeleteManyUsersInput!): DeleteManyResponse!
   addProductsToProvider(input: AddProductsToProviderInput!): Provider!
   setProductsOnProvider(input: SetProductsOnProviderInput!): Provider!
   removeProductsFromProvider(input: RemoveProductsFromProviderInput!): Provider!
@@ -1070,8 +1019,6 @@ type Mutation {
   createManyProviders(input: CreateManyProvidersInput!): [Provider!]!
   updateOneProvider(input: UpdateOneProviderInput!): Provider!
   updateManyProviders(input: UpdateManyProvidersInput!): UpdateManyResponse!
-  deleteOneProvider(input: DeleteOneProviderInput!): ProviderDeleteResponse!
-  deleteManyProviders(input: DeleteManyProvidersInput!): DeleteManyResponse!
   login(input: LoginInputDTO!): LoginResponse!
 }
 
@@ -1139,34 +1086,6 @@ input UpdateManyProductsInput {
 input ProductUpdateFilter {
   and: [ProductUpdateFilter!]
   or: [ProductUpdateFilter!]
-  id: IDFilterComparison
-  name: StringFieldComparison
-  description: StringFieldComparison
-  price: NumberFieldComparison
-  stock: NumberFieldComparison
-  image: StringFieldComparison
-  providerId: StringFieldComparison
-  createdBy: StringFieldComparison
-  createdById: StringFieldComparison
-  updatedBy: StringFieldComparison
-  updatedById: StringFieldComparison
-  deletedBy: StringFieldComparison
-  deletedById: StringFieldComparison
-}
-
-input DeleteOneProductInput {
-  """The id of the record to delete."""
-  id: ID!
-}
-
-input DeleteManyProductsInput {
-  """Filter to find records to delete"""
-  filter: ProductDeleteFilter!
-}
-
-input ProductDeleteFilter {
-  and: [ProductDeleteFilter!]
-  or: [ProductDeleteFilter!]
   id: IDFilterComparison
   name: StringFieldComparison
   description: StringFieldComparison
@@ -1311,7 +1230,7 @@ input CreateOneUserInput {
 input UserInput {
   email: String!
   password: String!
-  role: [UserRole!]!
+  role: [UserRole!]
 }
 
 input CreateManyUsersInput {
@@ -1344,25 +1263,6 @@ input UpdateManyUsersInput {
 input UserUpdateFilter {
   and: [UserUpdateFilter!]
   or: [UserUpdateFilter!]
-  id: IDFilterComparison
-  email: StringFieldComparison
-  password: StringFieldComparison
-  customerId: StringFieldComparison
-}
-
-input DeleteOneUserInput {
-  """The id of the record to delete."""
-  id: ID!
-}
-
-input DeleteManyUsersInput {
-  """Filter to find records to delete"""
-  filter: UserDeleteFilter!
-}
-
-input UserDeleteFilter {
-  and: [UserDeleteFilter!]
-  or: [UserDeleteFilter!]
   id: IDFilterComparison
   email: StringFieldComparison
   password: StringFieldComparison
@@ -1437,35 +1337,6 @@ input UpdateManyProvidersInput {
 input ProviderUpdateFilter {
   and: [ProviderUpdateFilter!]
   or: [ProviderUpdateFilter!]
-  id: IDFilterComparison
-  contactName: StringFieldComparison
-  email: StringFieldComparison
-  phone: StringFieldComparison
-  direction: StringFieldComparison
-  createdBy: StringFieldComparison
-  createdById: StringFieldComparison
-  updatedBy: StringFieldComparison
-  updatedById: StringFieldComparison
-  deletedBy: StringFieldComparison
-  deletedById: StringFieldComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input DeleteOneProviderInput {
-  """The id of the record to delete."""
-  id: ID!
-}
-
-input DeleteManyProvidersInput {
-  """Filter to find records to delete"""
-  filter: ProviderDeleteFilter!
-}
-
-input ProviderDeleteFilter {
-  and: [ProviderDeleteFilter!]
-  or: [ProviderDeleteFilter!]
   id: IDFilterComparison
   contactName: StringFieldComparison
   email: StringFieldComparison

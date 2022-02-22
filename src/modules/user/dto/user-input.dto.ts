@@ -14,8 +14,8 @@ export class UserInputDTO {
   @IsNotEmpty()
   password!: string;
 
-  @Field(() => [UserRole])
+  @Field(() => [UserRole], { nullable: true })
   @IsOptional()
   @IsNotEmpty()
-  role!: string;
+  role?: string;
 }

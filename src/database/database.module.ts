@@ -15,9 +15,9 @@ import config from '../config';
           url: database,
           synchronize: true,
           autoLoadEntities: true,
-            ssl: {
-              rejectUnauthorized: false,
-            },
+            // ssl: {
+            //   rejectUnauthorized: false,
+            // },
         };
       },
     }),
