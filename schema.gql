@@ -1230,7 +1230,6 @@ input CreateOneUserInput {
 input UserInput {
   email: String!
   password: String!
-  role: [UserRole!]
 }
 
 input CreateManyUsersInput {
