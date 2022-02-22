@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, UseGuards } from '@nestjs/common';
 import { NestjsQueryGraphQLModule } from '@nestjs-query/query-graphql';
 import { NestjsQueryTypeOrmModule } from '@nestjs-query/query-typeorm';
 import { ProductEntity } from './entities/product.entity';
@@ -26,11 +26,30 @@ import { UserRole } from '../user/entities/user.entity';
           enableAggregate: true,
           enableTotalCount: true,
           enableSubscriptions: false,
-          guards: [JwtAuthGuard, RolesGuard],
-          create: { decorators: [Role(UserRole.ADMIN)] },
-          read: { decorators: [Role(UserRole.ADMIN)] },
-          update: { decorators: [Role(UserRole.ADMIN)] },
-          aggregate: { decorators: [Role(UserRole.ADMIN)] },
+          create: {
+            decorators: [
+              UseGuards(JwtAuthGuard, RolesGuard),
+              Role(UserRole.ADMIN),
+            ],
+          },
+          read: {
+            decorators: [
+              UseGuards(JwtAuthGuard, RolesGuard),
+              Role(UserRole.ADMIN, UserRole.USER),
+            ],
+          },
+          update: {
+            decorators: [
+              UseGuards(JwtAuthGuard, RolesGuard),
+              Role(UserRole.ADMIN),
+            ],
+          },
+          aggregate: {
+            decorators: [
+              UseGuards(JwtAuthGuard, RolesGuard),
+              Role(UserRole.ADMIN),
+            ],
+          },
           delete: { disabled: true },
         },
       ],
