@@ -30,6 +30,8 @@ export class UserEntity {
   @Column({
     name: 'email',
     type: 'text',
+    unique: true,
+    comment: 'Email unique'
   })
   email!: string;
 

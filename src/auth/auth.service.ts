@@ -6,6 +6,7 @@ import { UserDTO } from 'src/modules/user/dto/user.dto';
 import { UserEntity } from 'src/modules/user/entities/user.entity';
 import { LoginResponseDto } from './dto/login-response.dto';
 import { AuthenticatedUser, JwtPayload } from './interface/auth.interface';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AuthService {
@@ -22,9 +23,15 @@ export class AuthService {
     const [user] = await this.userService.query({
       filter: { email: { eq: email } },
     });
-    if (user && user.password === password) {
-      const { password, ...result } = user;
-      return result;
+    console.log(user);
+    if (user) {
+      const isMatch = await bcrypt.compare(password, user.password);
+
+      if (isMatch) {
+        const { password, ...result } = user;
+
+        return result;
+      }
     }
 
     return null;
