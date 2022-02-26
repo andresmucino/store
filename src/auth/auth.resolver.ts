@@ -19,7 +19,7 @@ export class AuthResolver {
       input.password,
     );
     if (!user) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException('The email or password your entered is incorrect.');
     }
     return this.authService.login(user);
   }

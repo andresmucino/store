@@ -1,7 +1,7 @@
 import { registerEnumType } from '@nestjs/graphql';
-import { Exclude } from 'class-transformer';
 import { CustomerEntity } from 'src/modules/customers/entities/customer.entity';
 import {
+  BeforeInsert,
   Column,
   CreateDateColumn,
   DeleteDateColumn,
@@ -11,6 +11,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import * as bcrypt from 'bcrypt';
 
 export enum UserRole {
   ADMIN = 'admin',
@@ -76,4 +77,14 @@ export class UserEntity {
     type: 'timestamp with time zone',
   })
   deleteAt?: Date;
+
+  @BeforeInsert()
+  emailToLowerCase() {
+    this.email = this.email.toLowerCase();
+  }
+
+  @BeforeInsert()
+  async hashPassword() {
+    this.password = await bcrypt.hash(this.password, 10); // hashed password
+  }
 }
