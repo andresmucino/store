@@ -8,13 +8,20 @@ import { JwtModule } from '@nestjs/jwt';
 import { NestjsQueryGraphQLModule } from '@nestjs-query/query-graphql';
 import { NestjsQueryTypeOrmModule } from '@nestjs-query/query-typeorm';
 import { UserEntity } from 'src/modules/user/entities/user.entity';
+import config from 'src/config';
+import { ConfigType } from '@nestjs/config';
 
 @Module({
   imports: [
     PassportModule,
-    JwtModule.register({
-      secret: 'jwtConstantsecret',
-      signOptions: { expiresIn: '1d' },
+    JwtModule.registerAsync({
+      inject: [config.KEY],
+      useFactory: (configService: ConfigType<typeof config>) => {
+        return {
+          secret: configService.jwtSecret,
+          signOptions: { expiresIn: '1d' },
+        };
+      },
     }),
     NestjsQueryGraphQLModule.forFeature({
       imports: [NestjsQueryTypeOrmModule.forFeature([UserEntity]), UserModule],
