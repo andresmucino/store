@@ -23,7 +23,7 @@ export class AuthService {
     const [user] = await this.userService.query({
       filter: { email: { eq: email } },
     });
-    console.log(user);
+
     if (user) {
       const isMatch = await bcrypt.compare(password, user.password);
 

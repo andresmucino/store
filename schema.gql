@@ -1249,7 +1249,7 @@ input UserUpdate {
   email: String
   password: String
   customerId: String
-  role: String
+  role: [UserRole!]
 }
 
 input UpdateManyUsersInput {

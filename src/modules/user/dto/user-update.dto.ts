@@ -1,11 +1,17 @@
 import { Field, InputType } from '@nestjs/graphql';
-import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import {
+  IsEmail,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+} from 'class-validator';
+import { UserRole } from '../entities/user.entity';
 
 @InputType('UserUpdate')
 export class UserUpdateDTO {
   @Field({ nullable: true })
   @IsOptional()
-  @IsString()
+  @IsEmail()
   @IsNotEmpty()
   email?: string;
 
@@ -21,10 +27,8 @@ export class UserUpdateDTO {
   @IsNotEmpty()
   customerId?: string;
 
-  @Field({ nullable: true })
+  @Field(() => [UserRole], { nullable: true })
   @IsOptional()
-  @IsString()
   @IsNotEmpty()
-  role?: string;
-
+   role?: string;
 }
