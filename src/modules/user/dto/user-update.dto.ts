@@ -20,4 +20,11 @@ export class UserUpdateDTO {
   @IsString()
   @IsNotEmpty()
   customerId?: string;
+
+  @Field({ nullable: true })
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
+  role?: string;
+
 }
